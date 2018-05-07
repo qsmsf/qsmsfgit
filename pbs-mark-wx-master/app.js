@@ -1,5 +1,5 @@
 //app.js
-
+const util = require("./utils/util.js");
 App({
   onLaunch: function () {
     //调用API从本地缓存中获取数据
@@ -29,6 +29,7 @@ App({
             that.globalData.openId = res.data.openid;//获取到的openid  
             that.globalData.sessionKey = res.data.session_key;//获取到session_key    
             that.globalData.unionId = ''            
+            this.fetchLoginInfo()
           }
         })        
       }
@@ -45,8 +46,6 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-              console.log(res.userInfo)
-              this.fetchLoginInfo()
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -81,15 +80,21 @@ App({
   fetchLoginInfo: function () {
     util.showLoading();
     var that = this;
-    var parameters = '';
+    var parameters = '/Auth/WxLogin?openId=' + that.globalData.openId;
+    var header={
+      username: '',
+      userfullname: '',
+      avatarUrl: ''
+    }
     console.log("parameters = " + parameters);
     util.request(parameters, function (res) {
-      page = 1;
+      //page = 1;
+      console.log(res)
       setTimeout(function () {
         util.hideToast();
         wx.stopPullDownRefresh();
       }, 1000);
-    })
+    }, "GET", header)
   },
   globalData:{
     userInfo: null,
