@@ -1,0 +1,37 @@
+<!--个人中心-->
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <text class="userinfo-nickname">警号: {{police.jh}}</text>
+      <text class="userinfo-nickname">姓名: {{police.name}}</text>
+      <text class="userinfo-nickname">单位: {{police.unitName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    
+    <button type="primary" disabled="{{sbdisabled}}" bindtap="showModal" hover-class="other-button-hover"> 使用许可申报 </button>
+  </view>  
+</view>
+<view class="modal" style="{{modalShowStyle}}">
+      <view class="dialog">
+          <view class="modal-item" style="display:flex;justify-content:center;align-items:center;">
+          使用许可申请
+          </view>
+          <view class="modal-item" style="margin:0 auto;width:90%;">
+              <input type="text" bindinput="jhInput" style="background-color:white;border-radius:2px; height:30px;" value="{{policeInfo.jh}}" placeholder="请输入警号"></input>
+          </view>
+          <view class="modal-item" style="margin:0 auto;width:90%;">
+              <input type="text" bindinput="nameInput" style="background-color:white;border-radius:2px; height:30px;" value="{{policeInfo.name}}" placeholder="请输入姓名"></input>
+          </view>
+          <view class="modal-item" style="margin:0 auto;width:90%;">
+              <input type="text" bindinput="unitNameInput" style="background-color:white;border-radius:2px; height:30px;" value="{{policeInfo.unitName}}" placeholder="请输入单位"></input>
+          </view>
+          <view class="modal-button" style="width:100%">
+              <view style="color:green;border-right:1px solid #E5E7ED;" bindtap="touchAddNew">确定</view>
+              <view bindtap="touchCancel">取消</view>
+          </view>
+      </view>
+  </view>

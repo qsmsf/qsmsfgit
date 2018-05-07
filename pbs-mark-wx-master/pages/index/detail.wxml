@@ -1,0 +1,121 @@
+<import src="commentCell.wxml" />
+<import src="../common/head.wxml" />
+<import src="../common/foot.wxml" />
+
+<view class="top-tab">
+  <view class="top-tab-item {{currentTopItem==idx ? 'active' : ''}}" wx:for="{{topTabItems}}" wx:for-index="idx" data-idx="{{idx}}" bindtap="switchTab">
+    {{item}}
+  </view>
+</view>
+<swiper class="swiper" duration="300" current="{{currentTopItem}}" bindchange="bindChange" style="height:{{swiperHeight}}px" >
+<swiper-item>
+    <scroll-view class="scrollView" scroll-y="true" >
+      <view class="mainTabCell">
+          <!--顶部-->
+          <view class="top">
+          
+              <!--头像-->
+              <image class="avator" src="{{item.avatarUrl}}" mode="aspectFit"></image>
+
+              <!--标题、时间-->
+              <view class="title-time">
+                  <text class="title">{{item.creatorName}}</text>
+                  <text class="time">{{item.createTime}}</text>
+              </view>
+              
+              <!--更多按钮-->
+              <image class="morebtnnormal" src="../../images/index/scan.png" bindtap='addTrace' ></image>        
+          </view>
+              
+          <!--内容-->
+          <view class="content" data-item='{{item}}'>
+              <text class="content-text">{{item.title}}</text>
+              <text class="content-text">{{item.content}}</text>
+              
+              <!--大图-->
+              <view class="content-multimedia" hidden="{{(item.image1 && (!item.videouri && !item.voiceuri))  ? false : true}}" >
+                  <image hidden="{{true}}" src="{{item.image1}}" mode="scaleToFill" style="width:{{item.width}}rpx;height:{{item.height}}rpx;"></image>
+              </view>
+              
+          </view>
+          
+      </view>
+      <scroll-view class="scrollview" scroll-y="true">
+          <view class="containt hotcomment" hidden="{{hotcomemnt_hidden}}">
+              <text class="comment_text" >痕迹列表</text>
+              <block wx:for="{{traceList}}" wx:for-item="traceItem">
+                <template is="commentCell" data="{{traceItem}}"/>
+              </block>
+              <view class="divide_view"></view>
+          </view>
+      </scroll-view>
+    </scroll-view>
+  </swiper-item>
+
+  <swiper-item>
+    <scroll-view class="scrollView" scroll-y="true" >
+      <view >
+        <template is="head" data="{{item}}"/>
+        <view class="page-body">
+          <view class="page-section">
+            <view class="weui-cells__title">案件信息</view>
+            <view class="weui-cells weui-cells_after-title">
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                  <view class="weui-label">案件类别</view>
+                </view>
+                <view class="weui-cell__bd">                
+                  <picker name="type" bindchange="bindPickerChange" value="1001" range="{{recordType}}" range-key="msg">
+                    <view class="weui-input">{{recordType[index].msg}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="page-section">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">案件标题</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" type="text" disabled="{{true}}" value="{{item.title}}" name="itemtitle"></input>
+              </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">案件描述</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" type="text" disabled="{{true}}" name="itemDesc" value="{{item.content}}" ></input>
+              </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">现场位置</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" type="text" disabled="{{true}}" name="locName" value="{{item.locName}}" ></input>
+              </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">位置描述</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" type="text" disabled="{{true}}" name="locDesp" value="{{item.locDesp}}" ></input>
+              </view>
+            </view>
+
+            <view class="btn-area" id="buttonContainer">
+              <button type="info" bindtap="relocate" loading="{{loading}}">获取定位</button>
+            </view>
+          </view>
+          <view class="btn-area" id="buttonContainer">
+            <button formType="submit" type="primary">修改</button>
+          </view>
+        </view>
+      </view>      
+    </scroll-view>
+  </swiper-item> 
+
+</swiper>

@@ -1,0 +1,42 @@
+<!--评论列表cell模板-->
+<template name="commentCell">
+    <view class="commentCell">
+      <view class="top">    
+          <!--头像-->
+          <image class="avator" src="{{traceItem.avatarUrl}}" mode="aspectFit"></image>
+          <!--标题、时间-->
+          <view class="title-time">
+              <text class="title">{{traceItem.creatorName}}</text>
+              <text class="time">{{traceItem.createTime}}</text>
+          </view>      
+      </view>        
+      <!--内容-->
+      <view class="content" data-item='{{traceItem}}' >
+          <text class="content-text">{{traceItem.traceType}}</text>
+          <text class="content-text">采集器二维码：{{traceItem.barcode}}</text>
+          <input class="content-text" placeholder="请输入提取部位">{{traceItem.tqbw}}</input>
+          <input class="content-text" placeholder="请输入备注说明">{{traceItem.disp}}</input>
+          <!--大图-->
+          <view class="content-multimedia" hidden="{{(traceItem.image1 && (!traceItem.videouri && !traceItem.voiceuri))  ? false : true}}" >
+              <image hidden="{{true}}" src="{{traceItem.image1}}" mode="scaleToFill" style="width:{{traceItem.width}}rpx;height:{{traceItem.height}}rpx;"></image>
+          </view>
+      </view>            
+      <!--底部-->
+      <view class="bottom">          
+          <!--上传图片-->
+          <view class="bottom-item" bindtap='choosePic'>
+              <view class="bottom-item-content">
+              <image src="../../images/index/photo.png" mode="aspectFit"></image>
+              <text class="bottom-item-zan-text">上传图片</text>
+              </view>                
+          </view>
+          <!--扫码-->
+          <view class="bottom-item" bindtap='reScan'>
+              <view class="bottom-item-content">
+              <image src="../../images/index/scan.png" mode="aspectFit"></image>
+              <text class="bottom-item-zan-text">重新扫码</text>
+              </view>                
+          </view>
+        </view>
+    </view>
+</template>

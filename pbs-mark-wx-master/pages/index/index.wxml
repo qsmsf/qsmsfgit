@@ -1,0 +1,54 @@
+<!--index.wxml-->
+<import src="../common/mainTabCell.wxml" />
+
+<view class="top-tab">
+  <view class="top-tab-item {{currentTopItem==idx ? 'active' : ''}}" wx:for="{{topTabItems}}" wx:for-index="idx" data-idx="{{idx}}" bindtap="switchTab">
+    {{item}}
+  </view>
+</view>
+
+<view class="modal" style="{{modalShowStyle}}">
+      <view class="dialog">
+          <view class="modal-item" style="display:flex;justify-content:center;align-items:center;">
+          新增案件
+          </view>
+          <view class="modal-item" style="margin:0 auto;width:90%;">
+              <input type="text" bindinput="titleInput" style="background-color:white;border-radius:2px; height:30px;" value="{{title}}" placeholder="请输入标题"></input>
+          </view>
+          <view class="modal-item" style="margin:0 auto;width:90%;">
+              <input type="text" bindinput="contentInput" style="background-color:white;border-radius:2px; height:30px;" value="{{content}}" placeholder="请输入内容描述"></input>
+          </view>
+          <view class="modal-button" style="width:100%">
+              <view style="color:green;border-right:1px solid #E5E7ED;" bindtap="touchAddNew">确定</view>
+              <view bindtap="touchCancel">取消</view>
+          </view>
+      </view>
+  </view>
+<swiper class="swiper" current="{{currentTopItem}}" bindchange="bindChange" duration="300" style="height:{{swiperHeight}}px" >
+
+  <!--全部-->
+  <swiper-item>
+    <scroll-view class="scrollView" scroll-y="true" bindscrolltolower="loadMoreData" >
+      
+      <block wx:for="{{allDataList}}" wx:for-item="item">
+          <template is="mainTabCell" data="{{item}}" />
+      </block>
+
+    </scroll-view>
+  </swiper-item>
+
+  <!--视频-->
+  <swiper-item>
+    <scroll-view class="scrollView" scroll-y="true" bindscrolltolower="loadMoreData" bindscrolltoupper="refreshData" >
+      
+      <block wx:for="{{myDataList}}" wx:for-item="item">
+          
+            <template is="mainTabCell" data="{{item}}" />
+          
+      </block>
+      
+    </scroll-view>
+  </swiper-item> 
+
+</swiper>
+<button class="themeBtn" bindtap="showModal"></button>
