@@ -1,0 +1,100 @@
+/* Section块
+--------------------------------------------------------------------
+//section_container       19
+//section                 16
+//section.active          18
+//section.animating       17
+//section_container_mask  20
+//swipeListview           29
+//aside                   30
+//aside reveal            10
+*/
+#section_container{
+    position: absolute;
+    overflow: hidden;
+    top:0;
+    left:0;
+    right:0;
+    bottom: 0;
+    z-index: 19;
+}
+#section_container_mask{
+    position: absolute;
+    overflow: hidden;
+    top:0;
+    left:0;
+    right:0;
+    bottom: 0;
+    z-index: 20;
+    display: none;
+}
+section{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 16;
+    overflow:hidden;
+    display: none;
+}
+section.anim:after {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0
+}
+section.active{
+    z-index: 18 ;
+    display: block;
+}
+section.animating{
+    z-index: 17 ;
+    display: block;
+}
+
+
+aside{
+    position: absolute;
+    width: 264px;
+    top:0;
+    bottom:0;
+    -webkit-transform : translateX(-100%);
+    transform : translateX(-100%);
+    z-index: 30;
+
+}
+
+aside[data-position="left"]{
+    left:0;
+    -webkit-transform:translateX(-100%);
+    transform:translateX(-100%);
+}
+aside[data-position="right"]{
+    right:0;
+    -webkit-transform:translateX(100%);
+    transform:translateX(100%);
+}
+
+aside[data-transition="reveal"]{
+   z-index: 10;
+}
+
+aside[data-position][data-transition="reveal"]{
+    -webkit-transform:translateX(0);
+    transform:translateX(0);
+}
+aside{
+    display: none;
+    font-size: 1.1em;
+    box-orient:vertical;
+    -webkit-box-orient:vertical;
+}
+aside.active{
+    display: -webkit-box;
+    display: box;
+}

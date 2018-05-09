@@ -1,0 +1,88 @@
+/* for dialog */
+/* 公共样式 */
+.common-dialog .ui-dialog-content p{
+    padding-left: 4%;
+    padding-right: 4%;
+    font-size:22px;
+}
+.common-dialog .ui-dialog-content span{
+    display:inline-block;
+    width:19%;
+    text-align:right;
+}
+.common-dialog .ui-dialog-content textarea{
+    width:95%;
+}
+/* 皮肤， 黑色炫酷 */
+.dialog-dark {
+    background-color: #343A41;
+    color: #A3A3A3;
+    -webkit-border-radius: 3px;
+}
+.dialog-dark .ui-dialog-btns .ui-btn {
+    color: #A3A3A3;
+    background-color: #282c32;
+    border-color: #202327;
+}
+.dialog-dark .ui-dialog-title h3{
+    padding-left:4%;
+}
+.dialog-dark .ui-dialog-content input{
+    width:100%;
+}
+
+/* 皮肤， 蓝色简洁 */
+.dialog-blue {
+    background-color: #E0E0E0;
+    color: #1D1A1A;
+    -webkit-border-radius: 3px;
+}
+.dialog-blue  h3{
+    text-align: center;
+    color: rgb(96, 167, 223);
+}
+.dialog-blue .ui-dialog-btns .ui-btn {
+    color: #FAF2F2;
+    background-color: #6092DA;
+    border-color: #F4F6FA;
+}
+
+/* dialog for BingoTouch */
+.dialog-btstyle {
+    border-radius:5px;
+    font-family: "微软雅黑", "宋体", Arial;
+}
+.dialog-btstyle .ui-dialog-title{
+    background: #278cca;
+    background-image: url(../../../../css/images/header-bg.png);
+    border-top: 1px solid #72B9F8;
+    border-bottom: 1px solid #1F85D2;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px #333;
+    border-radius:5px 5px 0 0;
+}
+.dialog-btstyle .ui-dialog-title h3{
+    text-indent:15px;
+}
+.dialog-btstyle .ui-dialog-close{
+    top:2px;
+}
+.dialog-btstyle .ui-dialog-close .ui-icon {
+    background-image: url(../css/images/icons/white/x_21x21.png);
+}
+.dialog-btstyle .ui-dialog-btns .ui-btn{
+    color: #ffffff;
+    text-shadow: 1px 1px 2px #32353A;
+    background-image: url(../css/images/header-bg.png);
+    height:39px;
+    line-height: 39px
+}
+/* 圆角按钮 */
+.dialog-btstyle-button .ui-dialog-btns .ui-btn{
+    border-radius: 12px;
+    border: none;
+    display: inline-block;
+    width: 40%;
+    margin-left: 6%;
+    margin-bottom: 12px;
+}

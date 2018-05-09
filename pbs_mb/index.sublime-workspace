@@ -1,0 +1,237 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 310.0,
+		"last_filter": "view",
+		"selected_items":
+		[
+			[
+				"view",
+				"View: Toggle Menu"
+			],
+			[
+				"js",
+				"Set Syntax: javascript_enhancements"
+			],
+			[
+				"jq",
+				"Snippet: jQuery(document).ready"
+			],
+			[
+				"vue",
+				"Set Syntax: Vue Component"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package→安装插件"
+			],
+			[
+				"in",
+				"Package Control: Install Package→安装插件"
+			],
+			[
+				"i",
+				"Package Control: Install Package→安装插件"
+			]
+		],
+		"width": 567.0
+	},
+	"console":
+	{
+		"height": 180.0,
+		"history":
+		[
+			"import urllib2,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), 'wb' ).write(by) if dh == h else None; print('Error validating download (got %s instead of %s), please try manual install' % (dh, h) if dh != h else 'Please restart Sublime Text to finish installation') "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/E/Work/vs2013/PTA/PTA_View/src/components/ActivityContent.vue",
+		"/C/Users/Administrator.AFODY-605221204/Desktop/svn用户.txt",
+		"/E/Work/vs2013/PTA/PTA_View/src/components/ActivityList.vue",
+		"/E/Work/vs2013/PTA/PTA_View/src/components/ActivityResult.vue",
+		"/E/Work/vs2013/PTA/PTA_View/src/components/HelloFromVux.vue",
+		"/E/Work/RSS/baselines/RCSoft(B)_IC/RCSoft(B)_IC_test/config.xml",
+		"/E/Work/RSS/RCSoft/RSS_ATDPS_Gateway/FineUIMvc.EmptyProject/pre.xml",
+		"/E/Work/vs2013/pbs/pbs_v1.1.0/FineUIMvc.QuickStart/Models/investigate_info.cs",
+		"/E/Work/vs2013/PTA/PTA_View/src/fonts/iconfont.js",
+		"/D/Program Files (x86)/Sublime Text3/Data/Packages/Package Control/Package Control.sublime-settings",
+		"/D/Program Files (x86)/Sublime Text3/Data/Packages/LESS/LESS.sublime-settings",
+		"/C/Users/Administrator.AFODY-605221204/Desktop/深圳市.json",
+		"/D/Program Files (x86)/Sublime Text3/Data/Packages/Default/Preferences.sublime-settings",
+		"/D/Program Files (x86)/Sublime Text3/Data/Packages/ColorPicker/ColorPicker.sublime-settings",
+		"/D/Program Files (x86)/Sublime Text3/Data/Packages/User/ColorPicker.sublime-settings",
+		"/C/Users/Administrator.AFODY-605221204/Desktop/深圳市.js",
+		"/E/Work/RSS/RCSoft/RSS_ATDPS_Gateway/FineUIMvc.EmptyProject/dept.xml",
+		"/E/Work/RSS/tags/深圳市第二人民医院/NEWNetGate_T/config.xml",
+		"/E/Work/RSS/RCSoft/RSS_ATDPS_Gateway/FineUIMvc.EmptyProject/FineUIMvc.EmptyProject.csproj",
+		"/E/Work/vs2013/pbs/pbs_v1.1.0/FineUIMvc.QuickStart/Views/Users/ChangePwd.cshtml",
+		"/E/Work/vs2013/pbs/pbs_v1.1.0/FineUIMvc.QuickStart/Views/Login/Index.cshtml",
+		"/C/Users/Administrator.AFODY-605221204/Documents/WeChat Files/qsmsfmgl/Files/rdis.log.1",
+		"/C/Users/Administrator.AFODY-605221204/Documents/WeChat Files/qsmsfmgl/Files/rdis.log.2",
+		"/E/Work/MyGitHub/hybrid-h5plus-rayapp/src/showcase.dcloud.rayapp/manifest.json",
+		"/E/Work/RSS/RCSoft/RSS_ATDPS/RSS_ATDPS.v12.suo",
+		"/E/Work/RSS/RCSoft/RSS_ATDPS/RSS_ATDPS.v12.suo.r1865",
+		"/E/Work/RSS/tags/南京鼓楼医院/hctest/Web References/RDHWebReference/Service1.wsdl",
+		"/E/Work/RSS/tags/南京鼓楼医院/hctest/Web References/RDHWebReference/Service1.disco",
+		"/E/Work/vs2013/RSSGlobalServer/RSS.RSSGlobalServer.sln",
+		"/E/Work/RSS/RCSoft/RSS_ATDPS_Gateway/FineUIMvc.EmptyProject/Views/Drug_Query/index.cshtml",
+		"/E/Work/RSS/RCSoft/RSS_ATDPS_Gateway/FineUIMvc.EmptyProject/Models/ATDPS.Context.cs",
+		"/E/Work/RSS/RCSoft/RSS_ATDPS_Gateway/FineUIMvc.EmptyProject/Models/ATDPS.Context.cs.mine",
+		"/C/Users/Administrator.AFODY-605221204/Desktop/rdis.log.6",
+		"/C/Users/Administrator.AFODY-605221204/Desktop/广州二院片机5.26/config.xml",
+		"/E/Work/workspace/spring-framework-4.3.8.RELEASE/build.gradle",
+		"/E/Work/workspace/spring-framework-4.3.8.RELEASE/gradle/ide.gradle",
+		"/E/Work/workspace/spring-framework-4.3.8.RELEASE/.classpath",
+		"/C/Users/Administrator.AFODY-605221204/Desktop/BLANK.Design",
+		"/E/Work/Nahoo/Nahoo SoftWare.exe.config",
+		"/E/games/pcsx2-1.2.1-r5875-binaries/Cheats/31DAE5A7.pnach",
+		"/E/games/pcsx2-1.2.1-r5875-binaries/Cheats/使用说明.txt",
+		"/E/games/pcsx2-1.2.1-r5875-binaries/Cheats/跑跑车主机频道-跑跑车电视游戏下载基地.url",
+		"/D/Program Files (x86)/Sublime Text3/Data/Packages/User/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"eclipse"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 36.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "index.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 206.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

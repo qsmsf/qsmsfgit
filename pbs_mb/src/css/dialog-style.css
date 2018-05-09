@@ -1,0 +1,280 @@
+﻿/* for slider */
+.ui-slider {
+    height: 148px;
+}
+
+.ui-slider-item img {
+    background:#E7E7E7 url(images/ui-slider-imgbg.png) center center no-repeat;
+}
+
+.ui-slider-item > p {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 6px 0;
+    text-indent: 10px;
+    margin-bottom: 0;
+}
+
+/* for dialog */
+/* 公共样式 */
+.common-dialog .ui-dialog-content p{
+    padding-left: 4%;
+	padding-right: 4%;
+	font-size:22px;
+}
+.common-dialog .ui-dialog-content span{
+    display:inline-block;
+    width:19%;
+	text-align:right;
+}
+.common-dialog .ui-dialog-content input{
+    width:80%;
+	height:42px;
+}
+/* 皮肤， 黑色炫酷 */
+.dialog-dark {
+	background-color: #343A41;
+	color: #A3A3A3;
+	-webkit-border-radius: 3px;
+}
+.dialog-dark .ui-dialog-btns .ui-btn {
+	color: #A3A3A3;
+	background-color: #282c32;
+	border-color: #202327;
+}
+.dialog-dark .ui-dialog-title h3{
+	padding-left:4%;
+}
+.dialog-dark .ui-dialog-content input{
+    width:100%;
+}
+
+/* 皮肤， 蓝色简洁 */
+.dialog-blue {
+	background-color: #E0E0E0;
+	color: #1D1A1A;
+	-webkit-border-radius: 3px;
+}
+.dialog-blue  h3{
+	text-align: center;
+	color: rgb(96, 167, 223);
+}
+.dialog-blue .ui-dialog-btns .ui-btn {
+	color: #FAF2F2;
+	background-color: #6092DA;
+	border-color: #F4F6FA;
+}
+
+/* dialog for BingoTouch */
+.dialog-btstyle {
+	border-radius:5px;
+	font-family: "微软雅黑", "宋体", Arial;
+}
+.dialog-btstyle .ui-dialog-title{
+	background: #278cca;
+	background-image: url(images/header-bg.png);
+	border-top: 1px solid #72B9F8;
+	border-bottom: 1px solid #1F85D2;
+	color: #ffffff;
+	text-shadow: 1px 1px 2px #333;
+	border-radius:5px 5px 0 0;
+}
+.dialog-btstyle .ui-dialog-title h3{
+	text-indent:15px;
+}
+.dialog-btstyle .ui-dialog-close{
+	top:2px;
+}
+.dialog-btstyle .ui-dialog-close .ui-icon {
+	background-image: url(images/icons/white/x_21x21.png);
+}
+.dialog-btstyle .ui-dialog-btns .ui-btn{
+	color: #ffffff;
+	text-shadow: 1px 1px 2px #32353A;
+	background-image: url(images/header-bg.png);
+	height:39px;
+	line-height: 39px
+}
+/* 圆角按钮 */
+.dialog-btstyle-button .ui-dialog-btns .ui-btn{
+	border-radius: 12px;
+	border: none;
+	display: inline-block;
+	width: 40%;
+	margin-left: 6%;
+	margin-bottom: 12px;
+}
+
+/* for navigator */
+.ui-navigator {
+    border-top: 1px solid #2468c9;
+    border-bottom: 1px solid #0145a5;
+    background:#2773dc;
+}
+.ui-navigator .ui-navigator-list li a, .ui-navigator .ui-navigator-fix{
+    color: #ffffff;
+    font-family: "微软雅黑" "黑体" ;
+    font-weight: bold;
+	font-size:22px;  /* 设置字体大小即可改变导航栏的大小 */
+}
+.ui-navigator .ui-navigator-list li a.cur, .ui-navigator .ui-navigator-fix.cur{
+    background:#0c4da8;
+}
+
+/* for suggestion */
+.ui-suggestion{
+	font-size: 18px;
+	border: 1px solid #b1b1b1;
+	background-color:#fff;
+}
+
+.ui-suggestion ul{
+	background: #fff;
+}
+
+.ui-suggestion ul li{
+	border-bottom: 1px solid #e7e7e7;
+}
+
+.ui-suggestion .ui-suggestion-result:active, .ui-suggestion-result-highlight{
+	background: #ededed;
+}
+
+.ui-suggestion .ui-suggestion-result span{
+	color: #878787;
+}
+
+.ui-suggestion .ui-suggestion-button{
+	border-top: 1px solid #e7e7e7;
+	background: #f7f7f7;
+}
+
+.ui-suggestion-button span{
+	color: #4B4B4B;
+	font-size: 14px;
+}
+
+.ui-suggestion-button span:first-child{
+	border-right: 1px solid #e7e7e7;
+}
+
+.ui-suggestion-button span:last-child{
+ 	border-left: 1px solid #e7e7e7;
+}
+@media all and (min-device-width: 768px) and (max-device-width: 1024px){
+    .ui-suggestion{
+        font-size: 22px;
+    }
+    .ui-suggestion .ui-suggestion-button{
+        height: 40px;
+        line-height: 40px;
+    }
+}
+
+/* for tabs */
+.ui-tabs-nav {
+    width: 100%;
+}
+.ui-tabs-nav li {
+    border: solid #d4d4d4;
+    border-width: 1px 0 1px 1px;
+    color: #4a4a4a;
+    font-size: 16px;
+    background-color: #f4f4f4;
+}
+.ui-tabs-nav li a {
+    color: #4a4a4a;
+}
+.ui-tabs-nav li:last-child {
+    border-width: 1px;
+}
+.ui-tabs-nav li.ui-state-active{
+    background-color: #fff;
+    border-bottom-color:#fff;
+}
+.ui-tabs-content {
+    border: solid #d4d4d4;
+    border-width: 0 1px 1px;
+}
+.ui-tabs-panel .ui-load-error {
+    color: red;
+}
+
+/* for panel*/
+/*分为两个部分，一个是主体内容，一个是弹出panel*/
+/*panel内容部分*/
+.paneldemo{
+	position:relative;
+}
+.paneldemo .ui-panel{
+	width: 15em;
+	height: 100%;
+	top: 0;
+	padding: 10px;
+	background: -webkit-gradient(linear, left top, left bottom, from(#444444), to(#222222));
+	color: #ffffff;
+}
+.paneldemo .cont{
+	background: #ffffff;
+	padding:10px;
+}
+
+.paneldemo .option{
+	width:95%;
+
+}
+.paneldemo .option h2, .panel h2{
+	font-weight: bold;
+	font-size: 16px;
+	height: 28px;
+	line-height: 28px;
+	font-family: '微软雅黑';
+}
+.paneldemo .option .panel-des{
+	font-size: 14px;
+	margin-bottom: 10px;
+	line-height: 22px;
+}
+.paneldemo .option .panel-opt{
+	background: #f6feff;
+	border:1px solid #cccccc;
+	-webkit-box-shadow: 2px 2px 2px #cccccc;
+	-webkit-border-radius: 3px;
+	padding:10px;
+	list-style-type: none;
+}
+.paneldemo .option .panel-opt li{
+	font-size: 14px;
+	padding:10px 0;
+}
+.paneldemo .option .panel-opt .opt-name{
+	font-weight: bold;
+}
+/*panel弹出部分*/
+.paneldemo .panel{
+	height: 100% !important;
+}
+.paneldemo .panel h2{
+	color: #9dd6fe;
+}
+.paneldemo .panel .panel-des{
+	color: #ffffff;
+	font-size: 14px;
+	line-height: 22px;
+}
+.paneldemo .panel .panel-dir{
+	list-style-type: none;			 
+}
+.paneldemo .panel .panel-dir li{
+	padding:10px;
+}
+.paneldemo .panel .panel-dir a{
+	text-decoration: none;
+	color: #ffffff;
+	font-size: 14px;
+}
+.paneldemo .panel .panel-dir a:hover{
+	text-decoration: underline;
+	color: #fc5401;
+}
+
