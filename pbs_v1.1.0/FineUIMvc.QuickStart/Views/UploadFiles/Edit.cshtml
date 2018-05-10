@@ -1,0 +1,53 @@
+﻿@model FineUIMvc.QuickStart.Models.sys_upload_file
+
+@{
+    ViewBag.Title = "Edit";
+    var F = @Html.F();
+}
+
+@section body {
+
+@(F.Panel()
+        .ID("Panel1")
+        .ShowBorder(false)
+        .ShowHeader(false)
+        .BodyPadding(10)
+        .AutoScroll(true)
+        .IsViewPort(true)
+        .Toolbars(
+            F.Toolbar()
+                .Items(
+                    F.Button()
+                        .Icon(Icon.SystemClose)
+                        .Text("关闭")
+                        .Listener("click", "F.activeWindow.hide();"),
+                    F.ToolbarSeparator(),
+                    F.Button()
+                        .ValidateForms("SimpleForm1")
+                        .Icon(Icon.SystemSaveClose)
+                        .OnClick(Url.Action("btnEdit_Click"), "SimpleForm1")
+                        .Text("保存后关闭")
+                )
+        )
+        .Items(
+            F.SimpleForm()
+                .ID("SimpleForm1")
+                .ShowBorder(false)
+                .ShowHeader(false)
+                .Items(
+                   F.HiddenFieldFor(m =>m.file_id),
+                   F.HiddenFieldFor(m => m.rec_uuid),
+                    F.TextBoxFor(m => m.file_hint),
+                    F.DropDownListFor(m => m.file_type)
+                        .Items(
+                            F.ListItem().Text("现场方位").Value("2001"),
+                            F.ListItem().Text("现场概貌").Value("2002"),
+                            F.ListItem().Text("重点部位").Value("2003"),
+                            F.ListItem().Text("现场制图").Value("2004"),
+                            F.ListItem().Text("其他").Value("2005")
+                        )
+                )
+)
+    )
+
+}

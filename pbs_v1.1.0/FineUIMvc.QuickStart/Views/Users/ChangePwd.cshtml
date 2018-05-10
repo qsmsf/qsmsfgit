@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "ChangePwd";
+    var F = @Html.F();
+}
+
+@section body {
+
+    @(F.Panel().ID("Panel1").ShowBorder(false).ShowHeader(false).BodyPadding(10).AutoScroll(true).IsViewPort(true)
+        .Toolbars(
+            F.Toolbar()
+                .Items(
+                    F.Button().Icon(Icon.SystemClose).Text("放弃修改").Listener("click", "F.activeWindow.hide();"),
+                    F.ToolbarSeparator(),
+                            F.Button().ValidateForms("SimpleForm1").Icon(Icon.SystemSaveClose).Text("修改后关闭").OnClientClick("onEditPwd()")
+                    
+                )
+        )
+        .Items(
+            F.SimpleForm().ID("SimpleForm1").ShowBorder(false).ShowHeader(false)
+                .Items(
+                    F.HiddenField().ID("userId").Text(ViewBag.userId),
+                    F.TextBox().ID("curPwd").Label("当前密码").Required(true).TextMode(TextMode.Password),
+                    F.TextBox().ID("newPwd").Label("新密码").Required(true).TextMode(TextMode.Password),
+                    F.TextBox().ID("newPwdConfirm").Label("确认新密码").Required(true)
+                        .CompareControl("newPwd").CompareOperator(Operator.Equal)
+                        .CompareMessage("新密码两次输入不同").TextMode(TextMode.Password)
+                )
+        )
+    )
+}
+
+@section script {
+    <script>
+        function onEditPwd() {
+            F.confirm({
+                message: '你确定要修改密码？',
+                target: '_top',
+                ok: function () {
+                    editPwd();
+                }
+            });
+        }
+        function editPwd() {
+            F.doPostBack('@Url.Action("btnChangePwd_Click")', {
+                'userId': F.ui.userId.getValue(),
+                'oPwd': F.ui.curPwd.getValue(),
+                'newPwd': F.ui.newPwd.getValue()
+            });
+        }
+    </script>
+}

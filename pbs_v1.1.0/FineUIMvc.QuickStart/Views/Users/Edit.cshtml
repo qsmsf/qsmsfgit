@@ -1,0 +1,70 @@
+﻿@model FineUIMvc.QuickStart.Models.sys_user
+
+@{
+    ViewBag.Title = "Edit";
+    var F = @Html.F();
+}
+
+@section body {
+
+    @(F.Panel()
+        .ID("Panel1")
+        .ShowBorder(false)
+        .ShowHeader(false)
+        .BodyPadding(10)
+        .AutoScroll(true)
+        .IsViewPort(true)
+        .Toolbars(
+            F.Toolbar()
+                .Items(
+                    F.Button().Icon(Icon.SystemClose).Text("关闭").Listener("click", "F.activeWindow.hide();"),
+                    F.ToolbarSeparator(),
+                    F.Button().ValidateForms("SimpleForm1").Icon(Icon.SystemSaveClose).OnClick(Url.Action("btnEdit_Click"), "SimpleForm1").Text("保存后关闭"),
+                    F.ToolbarSeparator(),
+                    F.Button().Icon(Icon.GroupEdit).Listener("click", "onEditPwd").Text("修改密码"),
+                    F.ToolbarSeparator(),
+                    F.Button().Icon(Icon.GroupEdit).Listener("click", "onEditRoles").Text("编辑角色").Hidden(!ViewBag.showRoleBtn),
+                    F.ToolbarSeparator(),
+                    F.Button().Icon(Icon.BulletKey).Listener("click", "onEditPrivilege").Text("编辑权限").Hidden(!ViewBag.showPrivBtn)
+                )
+        )
+        .Items(
+            F.SimpleForm().ID("SimpleForm1").ShowBorder(false).ShowHeader(false)
+                .Items(
+                    F.HiddenFieldFor(m => m.user_id),
+                    F.TextBoxFor(m => m.user_name),
+                    F.TextBoxFor(m => m.user_fullname),
+                    F.TextBoxFor(m => m.user_zw),
+                    F.RadioButtonListFor(m => m.user_state)
+                    .Items(
+                        F.RadioItem().Text("启用").Value("1").Selected(true),
+                        F.RadioItem().Text("停用").Value("0")
+                    ),
+                    F.DropDownListFor(m => m.unit_id).Items(ViewBag.UnitList)
+                )
+        )
+     )
+
+    @(F.Window().ID("Window1").Width(800).Height(600).IsModal(false).Hidden(true).Target(Target.Top)
+            .EnableMaximize(true).EnableIFrame(true).IFrameUrl(Url.Content("about:blank"))
+    )
+    @(F.Window().ID("Window2").Width(400).Height(200).IsModal(false).Hidden(true).Target(Target.Top)
+            .EnableMaximize(true).EnableIFrame(true).IFrameUrl(Url.Content("about:blank"))
+    )
+}
+
+@section script {
+    <script>
+        function onEditRoles(event) {
+            F.ui.Window1.show('@Url.Content("~/UserRole/Index/")'+F.ui.user_id.value, '编辑所属角色');
+        }
+
+        function onEditPrivilege(event) {
+            F.ui.Window1.show('@Url.Content("~/Privileges/Index?tgtId=")' + F.ui.user_id.value+"&type=user", '编辑用户权限');
+        }
+
+        function onEditPwd(event) {
+            F.ui.Window2.show('@Url.Content("~/Users/ChangePwd/")' + F.ui.user_id.value , '修改密码');
+        }
+    </script>
+}

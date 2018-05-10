@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Edit";
+    var F = @Html.F();
+}
+@model  FineUIMvc.QuickStart.Models.pbs_record
+@section body {
+
+    @(F.Panel()
+            .ID("Panel1")
+            .Width(750)
+            .Height(400)
+            .ShowBorder(false)
+            .ShowHeader(false)
+            .BodyPadding(2)
+            .Layout(LayoutType.Fit)
+            .IsViewPort(true)
+            .AutoScroll(true)
+            .Toolbars(
+                F.Toolbar()
+                    .Items(
+                        F.Button().Icon(Icon.SystemClose).Text("关闭").Listener("click", "F.activeWindow.hide();"),
+                        F.ToolbarSeparator(),
+                        F.Button().ValidateForms("TabStrip1").Icon(Icon.SystemSaveNew).Hidden(!ViewBag.showOutputBtn)
+                            .OnClick(Url.Action("btnOutputWord_Click"), "record_id").Text("导出到word")
+                    )
+            )
+            .Items(
+                F.TabStrip().ID("TabStrip1").Width(700).Layout(LayoutType.Container).ShowBorder(true).TabPosition(TabPosition.Top)
+                    .EnableTabCloseMenu(false).ActiveTabIndex(0)
+                    .Tabs(
+                        F.Tab().Title("基本信息").BodyPadding(5).Layout(LayoutType.Container).AutoScroll(true)
+                            .Items(
+                                F.SimpleForm().ID("baseForm").ShowBorder(false).ShowHeader(false).AutoScroll(true)
+                                    .Items(
+                                        F.HyperLink().ID("doc_url").Enabled(true).Text("尚未生成文档").Target("_blank").NavigateUrl("#").Hidden(true),
+                                        F.HiddenFieldFor(m => m.record_id),
+                                        F.LabelFor(m => m.record_no),
+                                        F.LabelFor(m => m.xz),
+                                        F.DropDownListFor(m => m.bg_unit).Enabled(false).Items(ViewBag.UnitList),
+                                        F.DropDownListFor(m => m.ky_unit).Enabled(false).Items(ViewBag.UnitList),
+                                        F.LabelFor(m => m.ky_date),
+                                        F.LabelFor(m => m.bj_time),
+                                        F.LabelFor(m => m.kyks_time),
+                                        F.LabelFor(m => m.kyjs_time),
+                                        F.DropDownListFor(m => m.dest_unit).Items(ViewBag.UnitList).Enabled(false),
+                                        F.LabelFor(m => m.fs_loc),
+                                        F.LabelFor(m => m.xc_loc),
+                                        F.LabelFor(m => m.xc_locpt),
+                                        F.LabelFor(m => m.weather_info),
+                                        F.LabelFor(m => m.trend_info),
+                                        F.LabelFor(m => m.temper_info),
+                                        F.LabelFor(m => m.humidity_info),
+                                        F.LabelFor(m => m.light_info),
+                                        F.RadioButtonListFor(m => m.bh_flag).Enabled(false)
+                                            .Items(
+                                                F.RadioItem().Text("是").Value("1"),
+                                                F.RadioItem().Text("否").Value("0")
+                                            ),
+                                        F.Panel().ShowHeader(false).Hidden(!ViewBag.showBhPanel)
+                                            .Items(
+                                                F.LabelFor(m => m.bhr_name),
+                                                F.LabelFor(m => m.bhr_unit_name),
+                                                F.LabelFor(m => m.bhr_pos),
+                                                F.LabelFor(m => m.bh_function),
+                                                F.LabelFor(m => m.xc_info),
+                                                F.LabelFor(m => m.bd_reason)
+                                        ),
+                                        F.LabelFor(m => m.jzr),
+                                        F.LabelFor(m => m.jzr_sex),
+                                        F.LabelFor(m => m.jzr_birth),
+                                        F.LabelFor(m => m.jzr_address),
+                                        F.LabelFor(m => m.zhr_name),
+                                        F.LabelFor(m => m.zhr_unit_name),
+                                        F.LabelFor(m => m.zhr_pos),
+                                        F.LabelFor(m => m.blr_name),
+                                        F.LabelFor(m => m.ztr_name),
+                                        F.LabelFor(m => m.zxr_name),
+                                        F.LabelFor(m => m.lxr_name),
+                                        F.LabelFor(m => m.lyr_name),
+                                        F.TextAreaFor(m =>m.record_reason).Enabled(false).Height(150),
+                                        F.TextAreaFor(m => m.xc_disp).Enabled(false).Height(300)
+                                                
+                                    )
+                                ),
+                                F.Tab().Title("制图信息").BodyPadding(5).ID("fileTab1").Layout(LayoutType.Fit)
+                                    .EnableIFrame(true).IFrameUrl(Url.Content("~/UploadFiles/Index/?type=zt&modifyFlag=0&uuid=" + Model.uuid)),
+                                F.Tab().Title("照片信息").BodyPadding(5).ID("fileTab2").Layout(LayoutType.Fit)
+                                    .EnableIFrame(true).IFrameUrl(Url.Content("~/UploadFiles/Index/?type=photo&modifyFlag=0&uuid=" + Model.uuid))
+                        )
+                )
+    )
+}

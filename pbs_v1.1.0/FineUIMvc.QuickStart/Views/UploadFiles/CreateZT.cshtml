@@ -1,0 +1,83 @@
+﻿@model FineUIMvc.QuickStart.Models.sys_upload_file
+
+@{
+    ViewBag.Title = "Create";
+    var F = @Html.F();
+}
+
+@section head {
+
+    <style>
+        .photo {
+            height: 150px;
+            line-height: 150px;
+            overflow: hidden;
+        }
+
+            .photo img {
+                height: 150px;
+                vertical-align: middle;
+            }
+    </style>
+
+}
+
+
+@section body {
+    @(F.Panel()
+        .ID("Panel1")
+        .ShowBorder(false)
+        .ShowHeader(false)
+        .BodyPadding(10)
+        .AutoScroll(true)
+        .IsViewPort(true)
+        .Toolbars(
+            F.Toolbar()
+                .Items(
+                    F.Button()
+                        .Icon(Icon.SystemClose)
+                        .Text("关闭")
+                        .Listener("click", "F.activeWindow.hide();"),
+                    F.ToolbarSeparator(),
+                    F.Button()
+                        .ValidateForms("SimpleForm1")
+                        .Icon(Icon.SystemSaveClose)
+                        .OnClick(Url.Action("btnCreate_Click"), "SimpleForm1")
+                        .Text("提交后关闭")
+                )
+        )
+        .Items(
+            F.SimpleForm()
+                .ID("SimpleForm1")
+                .ShowBorder(false)
+                .ShowHeader(false)
+                .Items(
+                    F.Image()
+                        .ID("photoPrev")
+                        .CssClass("photo")
+                        .ImageUrl(Url.Content("~/res/images/blank.png"))
+                        .ShowEmptyLabel(true),
+                    F.FileUpload()
+                        .ID("filePhoto")
+                        .ShowRedStar(false)
+                        .ShowEmptyLabel(true)
+                        .ButtonText("上传图像")
+                        .ButtonOnly(true)
+                        .Required(false)
+                        .ButtonIcon(Icon.ImageAdd)
+                        .OnFileSelected(Url.Action("filePhoto_FileSelected"), "filePhoto"),
+                    
+                    F.TextBoxFor(m => m.file_hint),
+                    F.DropDownListFor(m => m.file_type)
+                        .Items(
+                            F.ListItem().Text("现场制图").Value("2004")
+                        ),                    
+                    F.HiddenFieldFor(m => m.file_url),
+                    F.HiddenFieldFor(m => m.rec_uuid)
+                        .Text(ViewBag.uuid)
+                        )
+                )
+    )
+    )
+
+}

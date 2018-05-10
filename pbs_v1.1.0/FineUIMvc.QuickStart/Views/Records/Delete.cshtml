@@ -1,0 +1,291 @@
+﻿@model FineUIMvc.QuickStart.Models.pbs_record
+
+@{
+    Layout = null;
+}
+@section body {
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>pbs_record</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.record_title)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.record_title)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ky_unit)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ky_unit)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.bg_unit)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.bg_unit)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ky_date)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ky_date)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.bj_time)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.bj_time)
+            </dd>
+    
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.fs_loc)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fs_loc)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.xz)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.xz)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.kyks_time)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.kyks_time)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.kyjs_time)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.kyjs_time)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.xc_loc)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.xc_loc)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.xc_locpt)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.xc_locpt)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.bh_flag)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.bh_flag)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.bh_function)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.bh_function)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.xc_info)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.xc_info)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.bd_reason)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.bd_reason)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.weather_info)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.weather_info)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.temper_info)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.temper_info)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.humidity_info)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.humidity_info)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.trend_info)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.trend_info)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.light_info)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.light_info)
+            </dd>
+    
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.xc_disp)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.xc_disp)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.blr)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.blr)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ztr)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ztr)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.zxr)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.zxr)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.lxr)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.lxr)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.lyr)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.lyr)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.creater_id)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.creater_id)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.record_state)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.record_state)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.update_time)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.update_time)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.create_time)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.create_time)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.check_hint)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.check_hint)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.jzr)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.jzr)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>
+    }

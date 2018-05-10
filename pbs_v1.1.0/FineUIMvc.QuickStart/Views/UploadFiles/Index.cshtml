@@ -1,0 +1,210 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    var F = @Html.F();
+}
+@model IEnumerable<FineUIMvc.QuickStart.Models.sys_upload_file>
+
+@section head {
+
+    <style>
+        .mywnd {
+            top: auto !important;
+            left: auto !important;
+            bottom: 2px !important;
+            right: 2px !important;
+        }
+    </style>
+
+}
+
+@section body {
+    @(F.HiddenField().Text(ViewBag.uuid).ID("R_uuid"))
+    @(F.HiddenField().Text(ViewBag.type).ID("type"))
+    @(F.HiddenField().Text(ViewBag.apiUrl).ID("apiUrl"))
+    @(F.Grid()
+        .IsViewPort(true)
+        .ShowHeader(false)
+        .ShowBorder(false)
+        .ID("Grid1")
+        .DataIDField("file_id")
+        .DataTextField("file_url")
+        .EnableCheckBoxSelect(true)
+        .Toolbars(
+            F.Toolbar()
+                .Items(
+                    F.Button()
+                        .ID("btnDeleteFileSelected")
+                                .Icon(Icon.Delete).Hidden(!ViewBag.EnableModify)
+                        .Text("删除选中文件")
+                        .Listener("click", "onDeleteFileSelectedClick"),
+                    F.ToolbarFill(),
+                    F.Button()
+                        .ID("btnCreateFile")
+                                .Icon(Icon.Add).Hidden(!ViewBag.EnableModify)
+                        .Text("上传新文件")
+                        .Listener("click", "onCreateFileClick")
+                )
+        )
+        .Columns(
+            F.RowNumberField(),
+            F.RenderField().HeaderText("文件说明").DataField("file_hint").Width(100).ExpandUnusedSpace(true),
+            F.RenderField().HeaderText("上传人").DataField("file_uploader").RendererFunction("renderUser").Width(100),
+            F.RenderField().HeaderText("文件类型").DataField("file_type").RendererFunction("renderState").Width(100),
+            F.RenderField().DataField("file_url").Hidden(true),
+            F.RenderField().DataField("rec_uuid").Hidden(true),
+            F.RenderField().HeaderText("上传时间").DataField("file_upload_time").FieldType(FieldType.Date)
+                .Renderer(Renderer.Date).RendererArgument("yyyy-MM-dd").Width(200),
+            F.RenderField().HeaderText("").DataField("file_url").RendererFunction("renderDownload").TextAlign(TextAlign.Center),
+            F.RenderField().HeaderText("编辑属性").Width(60).Hidden(!ViewBag.EnableModify).RendererFunction("renderFileEditField")
+                .TextAlign(TextAlign.Center),
+            F.RenderField().HeaderText("删除").Width(60).Hidden(!ViewBag.EnableModify)
+                .RendererFunction("renderFileDeleteField").TextAlign(TextAlign.Center)
+        )
+        .Listener("rowclick", "onGrid1RowClick")
+        .DataSource(Model)
+        
+    )    
+    @(F.Window()
+        .ID("WindowFile")
+        .Width(500)
+        .Height(500)
+        .IsModal(true)
+        .Hidden(true)
+        .Target(Target.Top)
+        .EnableResize(true)
+        .EnableMaximize(true)
+        .EnableIFrame(true)
+        .IFrameUrl(Url.Content("about:blank"))
+        .Listener("close","onClose")
+        //.OnClose(Url.Action("WindowFile_Close2"),"Grid1",new Parameter("uuid","F.ui.R_uuid.getValue()"))
+    )
+    @(F.Window()
+            .IsModal(false)
+            .Hidden(true)
+            .Target(Target.Top)
+            .EnableMaximize(true).EnableResize(true)
+            .Icon(Icon.TagBlue)
+            .Height(300)
+            .Width(400)
+            .CssClass("mywnd")
+            .ID("WindowPreView")
+            .Items(
+                F.Image()
+                .ID("ImagePreView")
+                .ImageWidth(380)
+                .ImageHeight(290)
+                .ImageCssStyle("border:solid 1px #ccc;padding:5px;")
+                .ImageUrl("~/res/images/logo/favicon.gif")
+            )
+            //.Content("<img id=\"mylogo\" src=\"" + Url.Content("~/res/images/logo/logo3.png") + "\" alt=\"Logo\">")
+    )
+}
+
+
+
+@section script {
+
+    <script>
+        @Html.Raw(ViewBag.StartupScript)
+
+    function renderFileDeleteField(value, params) {
+        return '<a href="javascript:;" class="deletefield"><img class="f-grid-cell-icon" src="@Url.Content("~/res/icon/delete.png")"></a>';
+    }
+
+    function renderFileEditField(value, params) {
+        return '<a href="javascript:;" class="editfield"><img class="f-grid-cell-icon" src="@Url.Content("~/res/icon/pencil.png")"></a>';
+    }
+        function renderDownload(value, params) {
+            //alert(F.ui.apiUrl.getValue().replace('[name]',value));
+            return '<a href="'+F.ui.apiUrl.getValue().replace('[name]',value)+'" class="downfield" target="_blank">下载</a>';
+        }
+
+        function onCreateFileClick(event) {
+            var type = '@ViewBag.type';
+            if (type == 'zt') {
+                F.ui.WindowFile.show('@Url.Content("~/UploadFiles/CreateZT?uuid=" + ViewBag.uuid)', '新增文件');
+            } else {
+                F.ui.WindowFile.show('@Url.Content("~/UploadFiles/Create?uuid=" + ViewBag.uuid)', '新增文件');
+            }
+        }
+        function onClose(event) {
+            F.doPostBack('@Url.Action("WindowFile_Close2")', {
+                'Grid1_fields': F.ui.Grid1.fields,
+                'uuid': F.ui.R_uuid.getValue(),
+                'type': F.ui.type.getValue()
+            });
+        }
+        function onGrid1RowClick(event, rowId) {
+
+            var grid1 = F.ui.Grid1;
+            var rowData = grid1.getRowData(rowId);
+            //var column = grid1.getColumn(grid1.getSelectedCell()[1]);
+
+            //alert(rowData.text);
+            // 触发后台事件
+            F.doPostBack('@Url.Action("Grid1_RowClick")', {
+            file_url: rowData.text,
+            uuid: F.ui.R_uuid.getValue()
+        });
+
+        F.ui.WindowPreView.show();
+    }
+
+    function deleteFileSelectedRows(selectedRows) {
+        // 触发后台事件
+        F.doPostBack('@Url.Action("Grid1_Delete")', {
+            'selectedRows': selectedRows,
+            'Grid1_fields': F.ui.Grid1.fields,
+            'uuid': F.ui.R_uuid.getValue(),
+            'type': F.ui.type.getValue()
+        });
+    }
+
+    function onDeleteFileSelectedClick(event) {
+        var grid1 = F.ui.Grid1;
+
+        if (!grid1.hasSelection()) {
+            F.alert('请至少选择一项！');
+            return;
+        }
+
+        var selectedRows = grid1.getSelectedRows();
+        F.confirm({
+            message: '你确定要删除选中的&nbsp;<b>' + selectedRows.length + '</b>&nbsp;行数据吗？',
+            target: '_top',
+            ok: function () {
+                deleteFileSelectedRows(selectedRows);
+            }
+        });
+    }
+    F.ready(function () {
+
+        var grid1 = F.ui.Grid1;
+
+        grid1.el.on('click', 'a.deletefield', function (event) {
+            var rowEl = $(this).closest('.f-grid-row');
+            var rowData = grid1.getRowData(rowEl);
+
+            F.confirm({
+                message: '你确定要删除选中的行数据吗？',
+                target: '_top',
+                ok: function () {
+                    deleteFileSelectedRows([rowData.id]);
+                }
+            });
+        });
+
+        grid1.el.on('click', 'a.editfield', function (event) {
+            var rowEl = $(this).closest('.f-grid-row');
+            var rowData = grid1.getRowData(rowEl);
+
+            F.ui.WindowFile.show('@Url.Content("~/UploadFiles/Edit/")' + rowData.id, '编辑文件');
+        });
+
+    });
+
+
+    </script>
+    <script src="~/res/js/Utils.js"></script>
+}

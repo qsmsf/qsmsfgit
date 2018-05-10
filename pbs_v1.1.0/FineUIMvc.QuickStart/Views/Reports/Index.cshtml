@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "Reports";
+    var F = @Html.F();
+}
+@section head {
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="~/res/js/echarts.js"></script>
+}
+@section body {
+    @(F.Form()
+        .ID("queryForm").BodyPadding(10).IsViewPort(false).ShowBorder(true).Layout(LayoutType.Container).ShowHeader(false)
+        .FormRowItemSpace(20)
+        .Rows(
+            F.FormRow()
+                .ColumnWidths("50% 50%")
+                .Items(
+                    F.DropDownList().ID("qKyUnit").SelectedValue(ViewBag.unitId).Label("勘验单位").Items(ViewBag.unitList),
+                    F.DropDownList().ID("qCreator").SelectedValue(ViewBag.userId).Label("提交人").Items(ViewBag.userList)
+                ),
+            F.FormRow()
+                .ColumnWidths("50% 50%")
+                .Items(
+                    F.DatePicker().ID("qKyDate1").Label("勘验日期起始").DateFormatString("yyyy-MM-dd")
+                        .SelectedDate(DateTime.Now.AddMonths(-1)),
+                    F.DatePicker().ID("qKyDate2").Label("勘验日期终止").DateFormatString("yyyy-MM-dd")
+                        .SelectedDate(DateTime.Now)
+                ),
+            F.FormRow()
+                .ColumnWidths("50% 50%")
+                .Items(
+                    F.Button().Icon(Icon.ChartBar).Text("性质分类报表").Listener("click", "getReportData(1)"),
+                    F.Button().Icon(Icon.ChartBar).Text("接警单位分类报表").Listener("click", "getReportData(2)"),
+                    F.Button().Icon(Icon.ChartCurve).Text("接警人员分类报表").Listener("click", "getReportData(3)"),
+                    F.Button().Icon(Icon.ChartCurve).Text("日均案件报表").Listener("click", "getReportData(4)"),
+                    F.Button().Icon(Icon.ChartCurve).Text("月均案件报表").Listener("click", "getReportData(5)"),
+                    F.Button().Icon(Icon.World).Text("地图报表").Listener("click", "onMapReport")
+                ),
+            F.FormRow()
+                .ColumnWidths("30% 30%").Hidden(true)
+                .Items(
+                    F.HiddenField().ID("userId").Text(ViewBag.userID),
+                    F.HiddenField().ID("unitId").Text(ViewBag.unitId),
+                    F.HiddenField().ID("dataType").Text(ViewBag.dataType)
+                )
+            
+        )
+    )
+
+    <table style='table-layout:inherit' width="800">
+        <tr>
+            <td width="100%">
+                <div id="reportview" style="width: 100%;height:400px;"></div>
+            </td>
+            
+        </tr>        
+    </table>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    
+    @(F.Window()
+        .IsModal(false)
+        .Hidden(true)
+        .Target(Target.Top)
+        .EnableMaximize(true).EnableResize(true)
+        .Icon(Icon.TagBlue)
+        .Height(600)
+        .Width(1000)
+        .EnableIFrame(true)
+        .CssClass("mywnd")
+        .ID("MapView")
+        .IFrameUrl(Url.Content("about:blank"))
+    )
+}
+@section script {
+    <script type="text/javascript">
+        function onMapReport(event) {
+            var param = '?qKyUnit=' + F.ui.qKyUnit.value;
+            param += '&qCreator=' + F.ui.qCreator.value;
+            param += '&qKyDate1=' + F.ui.qKyDate1.getValue();
+            param += '&qKyDate2=' + F.ui.qKyDate2.getValue();
+            param += '&userId=' + F.ui.userId.getValue();
+            param += '&unitId=' + F.ui.unitId.getValue();
+            param += '&dataType=' + F.ui.dataType.getValue();
+            F.ui.MapView.show('@Url.Content("~/Reports/MapReport")' + param, '地图报表');
+        }
+        function getReportData(type) {
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('reportview'));
+            myChart.showLoading();
+
+            //var myChart = F.ui.reportview2;
+            var url = '@Url.Content("~/Reports/GetReportData")' + '?type=' + type;
+            url += '&qKyUnit=' + F.ui.qKyUnit.value;
+            url += '&qCreator=' + F.ui.qCreator.value;
+            url += '&qKyDate1=' + F.ui.qKyDate1.getValue();
+            url += '&qKyDate2=' + F.ui.qKyDate2.getValue();
+            url += '&userId=' + F.ui.userId.getValue();
+            url += '&unitId=' + F.ui.unitId.getValue();
+            url += '&dataType=' + F.ui.dataType.getValue();
+
+            // 直接调用 jQuery 的 ajax 函数
+            $.ajax({
+                dataType: 'json',
+                cache: false,
+                url: url,
+                method: 'GET',
+                success: function (data) {
+                    myChart.hideLoading();
+                    myChart.clear();
+                    myChart.setOption(data);
+                }
+            });
+            // 使用刚指定的配置项和数据显示图表。
+
+        }
+    </script>
+}

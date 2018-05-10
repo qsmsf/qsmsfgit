@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "Create";
+    var F = @Html.F();
+}
+@model  FineUIMvc.QuickStart.Models.pbs_record
+@section body {
+
+@(F.Panel()
+        .ID("Panel1").Width(750).Height(400).ShowBorder(false).ShowHeader(false).BodyPadding(2).Layout(LayoutType.Fit)
+        .AutoScroll(true).IsViewPort(true)
+        .Toolbars(
+            F.Toolbar()
+                .Items(
+                    F.Button().Icon(Icon.SystemClose).Text("关闭").Listener("click", "F.activeWindow.hide();"),
+                    F.ToolbarSeparator(),
+                    F.Button().ValidateForms("TabStrip1").Icon(Icon.SystemSaveClose).OnClick(Url.Action("btnCreate_Click"), "TabStrip1")
+                        .Text("保存后关闭"),
+                    F.ToolbarSeparator(),
+                    F.Button().ValidateForms("TabStrip1").Icon(Icon.SystemSaveClose).OnClick(Url.Action("btnCreateSubmit_Click"), "TabStrip1")
+                        .Text("提交后关闭")
+                )
+        )
+        .Items(
+            F.TabStrip().ID("TabStrip1").Width(700).Layout(LayoutType.Fit).ShowBorder(true).TabPosition(TabPosition.Top)
+                .EnableTabCloseMenu(false).ActiveTabIndex(0)
+                .Tabs(
+                    F.Tab().Title("基本信息").BodyPadding(5).Layout(LayoutType.Container).AutoScroll(true)
+                        .Items(
+                            F.SimpleForm().ID("baseForm").ShowBorder(false).ShowHeader(false)
+                                .Items(
+                                    F.HiddenFieldFor(m => m.uuid).Readonly(true).Text(ViewBag.uuid),
+                                    F.TextBoxFor(m => m.xz).Label("案件标题"),
+                                    F.DropDownListFor(m => m.dest_unit).AutoSelectFirstItem(false).ShowRedStar(true).Items(ViewBag.UnitList),
+                                    F.DropDownListFor(m => m.bg_unit)
+                                                        .Items(ViewBag.UnitList),
+                                    F.DropDownListFor(m => m.ky_unit)
+                                                        .Items(ViewBag.UnitList),
+                                    F.DatePickerFor(m => m.ky_date)
+                                                        .DateFormatString("yyyy-MM-dd"),
+                                    F.TextBoxFor(m => m.bj_time),
+                                    F.TextBoxFor(m => m.kyks_time),
+                                    F.TextBoxFor(m => m.kyjs_time),
+                                    F.TextBoxFor(m => m.fs_loc),
+                                    F.TextBoxFor(m => m.xc_loc),
+                                    F.TextBoxFor(m => m.xc_locpt),
+                                    F.DropDownList().ID("weather_info").AutoSelectFirstItem(false).Label("天气")
+                                            .Items(
+                                                F.ListItem().Text("晴").Value("晴"),
+                                                F.ListItem().Text("雨").Value("雨"),
+                                                F.ListItem().Text("阴").Value("阴"),
+                                                F.ListItem().Text("多云").Value("多云")
+                                            ),
+                                    F.DropDownList().ID("trend_info").AutoSelectFirstItem(false).Label("风向")
+                                            .Items(
+                                                F.ListItem().Text("无").Value("无"),
+                                                F.ListItem().Text("东").Value("东"),
+                                                F.ListItem().Text("南").Value("南"),
+                                                F.ListItem().Text("西").Value("西"),
+                                                F.ListItem().Text("北").Value("北")
+                                            ),
+                                    F.TextBoxFor(m => m.temper_info),
+                                    F.TextBoxFor(m => m.humidity_info),
+                                    F.TextBoxFor(m => m.light_info),
+                                    F.RadioButtonListFor(m => m.bh_flag).ID("bhFlag").Listener("change", "onChangeBhFlag")
+                                        .Items(
+                                            F.RadioItem().Text("是").Value("1"),
+                                            F.RadioItem().Text("否").Value("0").Selected(true)
+                                        ),
+                                    F.Panel().ID("bh_panel").ShowHeader(false).Hidden(true)
+                                            .Items(
+                                            F.TextBoxFor(m => m.bhr_name),
+                                            F.TextBoxFor(m => m.bhr_unit_name),
+                                            F.TextBoxFor(m => m.bhr_pos),
+                                            F.DropDownList().ID("bh_function").AutoSelectFirstItem(false).Label("保护方式")
+                                                .Items(
+                                                    F.ListItem().Text("专人看护现场，防止他人进入").Value("专人看护现场，防止他人进入"),
+                                                    F.ListItem().Text("设立警戒带，划定禁行区域").Value("设立警戒带，划定禁行区域"),
+                                                    F.ListItem().Text("封锁出入口").Value("封锁出入口")
+                                                ),
+                                            F.DropDownList().ID("xc_info").AutoSelectFirstItem(false).Label("现场情况")
+                                                .Items(
+                                                    F.ListItem().Text("原始现场").Value("原始现场"),
+                                                    F.ListItem().Text("变动现场").Value("变动现场")
+                                                ),
+                                            F.DropDownList().ID("bd_reason").AutoSelectFirstItem(false).Label("变动原因")
+                                                .Items(
+                                                    F.ListItem().Text("事主进入").Value("事主进入"),
+                                                    F.ListItem().Text("报案人进入").Value("报案人进入"),
+                                                    F.ListItem().Text("公共区域").Value("公共区域"),
+                                                    F.ListItem().Text("补勘现场").Value("补勘现场")
+                                                )
+                                            ),
+                                    F.TextBoxFor(m => m.jzr),
+                                    F.TextBoxFor(m => m.jzr_sex),
+                                    F.TextBoxFor(m => m.jzr_birth),
+                                    F.TextBoxFor(m => m.jzr_address),
+                                    F.TextBoxFor(m => m.zhr_name),
+                                    F.TextBoxFor(m => m.zhr_unit_name),
+                                    F.TextBoxFor(m => m.zhr_pos),
+                                    F.TextBoxFor(m => m.blr_name),
+                                    F.TextBoxFor(m => m.ztr_name),
+                                    F.TextBoxFor(m => m.zxr_name),
+                                    F.TextBoxFor(m => m.lxr_name),
+                                    F.TextBoxFor(m => m.lyr_name),
+
+                                    F.TextAreaFor(m => m.record_reason).Height(150),
+                                    F.TextAreaFor(m => m.xc_disp).Height(300)
+                                )
+                        ),
+                    F.Tab().Title("制图信息").BodyPadding(5).ID("fileTab1").Layout(LayoutType.Fit)
+                            .EnableIFrame(true).IFrameUrl(Url.Content("~/UploadFiles/Index/?type=zt&modifyFlag=1&uuid=" + ViewBag.uuid)),
+                    F.Tab().Title("照片信息").BodyPadding(5).ID("fileTab2").Layout(LayoutType.Fit)
+                            .EnableIFrame(true).IFrameUrl(Url.Content("~/UploadFiles/Index/?type=photo&modifyFlag=1&uuid=" + ViewBag.uuid))
+                )
+        )
+    )
+}
+@section script {
+    <script>
+        function onChangeBhFlag(event, item, checked) {
+            var value = F.ui.bhFlag.getValue();
+            if (value == "1") {
+                F.ui.bh_panel.show();
+            } else {
+                F.ui.bh_panel.hide();
+            }
+        }
+
+    </script>
+}

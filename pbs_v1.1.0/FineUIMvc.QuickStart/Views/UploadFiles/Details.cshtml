@@ -1,0 +1,82 @@
+﻿@model FineUIMvc.QuickStart.Models.sys_upload_file
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>sys_upload_file</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.file_name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.file_name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.file_hint)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.file_hint)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.file_url)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.file_url)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.file_uploader)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.file_uploader)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.file_upload_time)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.file_upload_time)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.record_id)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.record_id)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.file_type)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.file_type)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.file_id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Investigate";
+    var F = @Html.F();
+}
+@model  FineUIMvc.QuickStart.Models.pbs_record
+@section body {
+
+    @(F.Panel()
+            .ID("Panel1")            
+            .ShowBorder(false)
+            .ShowHeader(false)
+            .BodyPadding(2)
+            .Layout(LayoutType.Fit)
+                    .IsViewPort(true)
+            .Toolbars(
+                F.Toolbar()
+                    .Items(
+                        F.Button()
+                            .Icon(Icon.SystemClose)
+                            .Text("关闭")
+                            .Listener("click", "F.activeWindow.hide();"),
+                        F.ToolbarSeparator(),                       
+                        F.Button()
+                                    .ValidateForms("SimpleForm1")
+                            .Icon(Icon.SystemSaveClose)
+                                    .OnClick(Url.Action("btnInvestigate_Click"), "SimpleForm1")
+                            .Text("提交后关闭")
+                    )
+            )
+            .Items(
+                     F.SimpleForm()
+                        .ID("SimpleForm1")
+                        .ShowBorder(false)
+                        .ShowHeader(false)
+                        .Items(
+                            F.HiddenFieldFor(m => m.record_id),                      
+                            F.DropDownListFor(m => m.record_state)
+                                            .Items(
+                                            F.ListItem()
+                                                .Text("审核通过")
+                                                .Value("1004")
+                                                .Selected(true),
+                                            F.ListItem()
+                                                .Text("审核失败")
+                                                .Value("1003")),
+                            F.TextAreaFor(m => m.check_hint)
+                        )
+                )
+        )
+}

@@ -1,0 +1,243 @@
+﻿
+@model IEnumerable<FineUIMvc.QuickStart.Models.pbs_record>
+@{
+    ViewBag.Title = "Index";
+    var F = @Html.F();
+}
+    @section body {
+        @(F.Form()
+            .ID("queryForm").BodyPadding(10).IsViewPort(false).ShowBorder(false).Layout(LayoutType.Container).ShowHeader(false)
+            .Items(
+                F.Panel().ID("Panel1").Layout(LayoutType.Column).ShowHeader(false).ShowBorder(false)
+                    .Items(
+                        F.DropDownList().ID("qKyUnit").SelectedValue(ViewBag.unitId).Label("勘验单位").Items(ViewBag.unitList).ColumnWidth("33%"),
+                        F.DropDownList().ID("qCreator").SelectedValue(ViewBag.userId).Label("提交人").Items(ViewBag.userList).ColumnWidth("33%"),
+                        F.DropDownList().ID("qKyState").Label("状态").ColumnWidth("33%")
+                            .Items(
+                                F.ListItem().Text("全部").Value("0"),
+                                F.ListItem().Text("未提交").Value("1001"),
+                                F.ListItem().Text("待审核").Value("1002"),
+                                F.ListItem().Text("审核失败").Value("1003"),
+                                F.ListItem().Text("审核成功").Value("1004")
+                            )
+                    ),
+                 F.Panel().ID("Panel2").Layout(LayoutType.Column).ShowHeader(false).ShowBorder(false)
+                    .Items(                                                            
+                        F.DatePicker().ID("qKyDate1").Label("勘验日期起始").DateFormatString("yyyy-MM-dd")
+                            .ColumnWidth("50%").SelectedDate(DateTime.Now.AddMonths(-1)),
+                        F.DatePicker().ID("qKyDate2").Label("勘验日期终止").DateFormatString("yyyy-MM-dd")
+                            .ColumnWidth("50%").SelectedDate(DateTime.Now)
+                    ),
+                F.Panel().ID("Panel2").Layout(LayoutType.Column).ShowHeader(false).ShowBorder(false)
+                    .Items(
+                        F.TextBox().ID("qTitle").Label("案件编号").ColumnWidth("50%"),
+                        F.TextBox().ID("qTitle2").Label("案件标题").ColumnWidth("50%")
+                    ),
+                
+                F.Button().ID("btnQuery").Icon(Icon.Zoom).Text("查询").Listener("click", "queryRecords"),
+                F.HiddenField().ID("userId").Text(ViewBag.userID),
+                F.HiddenField().ID("unitId").Text(ViewBag.unitId),
+                F.HiddenField().ID("dataType").Text(ViewBag.dataType)
+            )
+        )
+        @(F.Grid().IsViewPort(false).ShowHeader(false).ShowBorder(true).ID("Grid1").DataIDField("record_id")
+        .DataTextField("record_title").AllowPaging(true).PageSize(10).IsDatabasePaging(true).BodyPadding(10)
+        .OnPageIndexChanged(Url.Action("Grid1_PageIndexChanged"),"Grid1").EnableCheckBoxSelect(true)
+        .Toolbars(
+            F.Toolbar()
+                .Items(
+                    F.Button().ID("btnDeleteSelected").Icon(Icon.Delete).Text("删除选中记录")
+                        .Hidden(!ViewBag.showDeleteBtn).Listener("click", "onDeleteSelectedClick"),
+                    F.ToolbarFill(),
+                    F.Button().ID("btnCreate").Icon(Icon.Add).Text("新增记录")
+                        .Hidden(!ViewBag.showAddBtn).Listener("click", "onCreateClick")
+                )
+        )
+        .Columns(
+            F.RenderField().HeaderText("案件编号").DataField("record_no").Width(160),
+            F.RenderField().HeaderText("案件名称").DataField("record_title").ExpandUnusedSpace(true).Width(100),
+            F.RenderField().HeaderText("提交人").DataField("creater_id").RendererFunction("renderUser").Width(100),
+            F.RenderField().HeaderText("勘验单位").DataField("ky_unit").Width(100).RendererFunction("renderUnit"),
+            F.RenderField().HeaderText("勘验日期").DataField("ky_date").FieldType(FieldType.Date)
+                .Renderer(Renderer.Date).RendererArgument("yyyy-MM-dd").Width(100),
+            F.RenderField().HeaderText("状态").DataField("record_state").RendererFunction("renderState").Width(100),
+            F.RenderField().HeaderText("查看").Width(60).RendererFunction("renderDetailField")
+                .Hidden(!ViewBag.showDetailBtn).TextAlign(TextAlign.Center).EnableHeaderMenu(false),
+            F.RenderField().HeaderText("编辑").Width(60).RendererFunction("renderEditField").DataField("record_state")
+                .TextAlign(TextAlign.Center).Hidden(!ViewBag.showEditBtn).EnableHeaderMenu(false),
+            F.RenderField().HeaderText("删除").Width(60).RendererFunction("renderDeleteField")
+                .TextAlign(TextAlign.Center).Hidden(!ViewBag.showDeleteBtn).EnableHeaderMenu(false) ,
+            F.RenderField().HeaderText("审核").Width(60).RendererFunction("renderInvestigateField").DataField("record_state")
+                .TextAlign(TextAlign.Center).Hidden(!ViewBag.showInvestigateBtn).EnableHeaderMenu(false),
+            F.RenderField().HeaderText("反审核").Width(60).RendererFunction("renderAntiInvestField").DataField("record_state")
+                .TextAlign(TextAlign.Center).Hidden(!ViewBag.showAntiInvestBtn).EnableHeaderMenu(false)
+        )
+        .RecordCount(ViewBag.Grid1RecordCount)
+        .DataSource(ViewBag.Grid1DataSource)
+        .ShowPagingMessage(true)
+        )
+
+
+        @(F.Window().ID("Window1").Width(1000).Height(650).IsModal(true).Hidden(true).Target(Target.Parent)
+            .EnableResize(true).EnableMaximize(true).EnableIFrame(true).IFrameUrl(Url.Content("about:blank"))
+            .OnClose(Url.Action("Window1_Close"),"Grid1")
+        )
+        @(F.Window().ID("Window2").Width(400).Height(300).IsModal(true).Hidden(true).Target(Target.Top).EnableResize(false)
+            .EnableMaximize(false).EnableIFrame(true).IFrameUrl(Url.Content("about:blank")).OnClose(Url.Action("Window1_Close"), "Grid1")
+        )
+    }
+
+
+    @section script {
+
+    <script>
+    @Html.Raw(ViewBag.StartupScript)
+
+        function renderDeleteField(value, params) {
+            return '<a href="javascript:;" class="deletefield"><img class="f-grid-cell-icon" src="@Url.Content("~/res/icon/delete.png")"></a>';
+        }
+
+        function renderDetailField(value, params) {
+            return '<a href="javascript:;" class="detailfield"><img class="f-grid-cell-icon" src="@Url.Content("~/res/icon/zoom.png")"></a>';
+        }
+
+        function renderEditField(value, params) {
+            if (value == 1001 || value == 1003) {
+                return '<a href="javascript:;" class="editfield"><img class="f-grid-cell-icon" src="@Url.Content("~/res/icon/pencil.png")"></a>';
+            } else {
+                return '';
+            }
+        }
+
+        function renderInvestigateField(value, params) {
+            if (value == 1002) {
+                return '<a href="javascript:;" class="investigatefield"><img class="f-grid-cell-icon" src="@Url.Content("~/res/icon/check_error.png")"></a>';
+            } else {
+                return '';
+            }
+        }
+        function renderAntiInvestField(value, params) {
+            if (value == 1004) {
+                return '<a href="javascript:;" class="antiInvestfield"><img class="f-grid-cell-icon" src="@Url.Content("~/res/icon/check_error.png")"></a>';
+            } else {
+                return '';
+            }
+        }
+        function onCreateClick(event) {
+            F.ui.Window1.show('@Url.Content("~/Records/Create")', '新增记录');
+        }
+        function refreshView() {
+            F.doPostBack('@Url.Action("Window1_Close")',{
+                'Grid1_fields': F.ui.Grid1.fields,
+            })
+        }
+
+    function queryRecords() {
+        F.doPostBack('@Url.Action("Grid1_Query")', {
+            'userId': F.ui.userId.getValue(),
+            'unitId': F.ui.unitId.getValue(),
+            'dataType': F.ui.dataType.getValue(),
+            'Grid1_fields': F.ui.Grid1.fields,
+            'qKyUnit': F.ui.qKyUnit.value,
+            'qCreator': F.ui.qCreator.value,
+            'qKyState': F.ui.qKyState.value,
+            'qKyDate1': F.ui.qKyDate1.getValue(),
+            'qKyDate2': F.ui.qKyDate2.getValue(),
+            'qTitle': F.ui.qTitle.getValue(),
+            'qTitle2': F.ui.qTitle2.getValue()
+        });
+    }
+
+    function deleteSelectedRows(selectedRows) {
+        // 触发后台事件
+        F.doPostBack('@Url.Action("Grid1_Delete")', {
+            'userId': F.ui.userId.getValue(),
+            'unitId': F.ui.unitId.getValue(),
+            'dataType': F.ui.dataType.getValue(),
+            'selectedRows': selectedRows,
+            'Grid1_fields': F.ui.Grid1.fields
+        });
+    }
+
+        function antiInvestRows(rowId) {
+        // 触发后台事件
+        F.doPostBack('@Url.Action("btnAntiInvest_Click")', {
+            'userId': F.ui.userId.getValue(),
+            'unitId': F.ui.unitId.getValue(),
+            'dataType': F.ui.dataType.getValue(),
+            'rowId': rowId,
+            'Grid1_fields': F.ui.Grid1.fields
+        });
+    }
+
+    function onDeleteSelectedClick(event) {
+        var grid1 = F.ui.Grid1;
+
+        if (!grid1.hasSelection()) {
+            F.alert('请至少选择一项！');
+            return;
+        }
+
+        var selectedRows = grid1.getSelectedRows();
+        F.confirm({
+            message: '你确定要删除选中的&nbsp;<b>' + selectedRows.length + '</b>&nbsp;行数据吗？',
+            target: '_top',
+            ok: function () {
+                deleteSelectedRows(selectedRows);
+            }
+        });
+    }
+
+    F.ready(function () {
+
+        var grid1 = F.ui.Grid1;
+
+        grid1.el.on('click', 'a.deletefield', function (event) {
+            var rowEl = $(this).closest('.f-grid-row');
+            var rowData = grid1.getRowData(rowEl);
+
+            F.confirm({
+                message: '你确定要删除选中的行数据吗？',
+                target: '_top',
+                ok: function () {
+                    deleteSelectedRows([rowData.id]);
+                }
+            });
+        });
+
+        grid1.el.on('click', 'a.editfield', function (event) {
+            var rowEl = $(this).closest('.f-grid-row');
+            var rowData = grid1.getRowData(rowEl);
+
+            F.ui.Window1.show('@Url.Content("~/Records/Edit/")' + rowData.id, '编辑记录');
+        });
+        grid1.el.on('click', 'a.detailfield', function (event) {
+            var rowEl = $(this).closest('.f-grid-row');
+            var rowData = grid1.getRowData(rowEl);
+
+            F.ui.Window1.show('@Url.Content("~/Records/Details/")' + rowData.id, '查看记录');
+        });
+
+        grid1.el.on('click', 'a.investigatefield', function (event) {
+            var rowEl = $(this).closest('.f-grid-row');
+            var rowData = grid1.getRowData(rowEl);
+
+            F.ui.Window2.show('@Url.Content("~/Records/Investigate/")' + rowData.id, '审核记录');
+        });
+        grid1.el.on('click', 'a.antiInvestfield', function (event) {
+            var rowEl = $(this).closest('.f-grid-row');
+            var rowData = grid1.getRowData(rowEl);
+            F.confirm({
+                message: '你确定要反审核选中的行数据吗？',
+                target: '_top',
+                ok: function () {
+                    antiInvestRows(rowData.id);
+                }
+            });
+        });
+    });
+
+
+        </script>
+        <script src="~/res/js/Utils.js"></script>
+    }

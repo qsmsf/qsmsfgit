@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "MapReport";
+    var F = @Html.F();
+}
+@section head {
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        html {
+            height: 100%
+        }
+
+        body {
+            height: 100%;
+            margin: 0px;
+            padding: 0px
+        }
+
+        #container {
+            height: 90%
+        }
+    </style>
+    <script src="~/res/js/echarts.js"></script>
+    <script src="~/res/js/shenzhen.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Z7g5hqhlkpShrdb4ph4znpdGAj2OPE3w">
+    //v2.0版本的引用方式：src="http://api.map.baidu.com/api?v=2.0&ak=您的密钥"
+    //v1.4版本及以前版本的引用方式：src="http://api.map.baidu.com/api?v=1.4&key=您的密钥&callback=initialize"
+    </script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+
+}
+@section body {
+    <br>
+    <div>
+        <div id="reportview" style="width: 100%;height:400px;"></div>
+    </div>
+    <div style="display:none">
+        <div id="container"></div>
+        <div id="r-result">
+            <input type="button" onclick="add_overlay();" value="添加覆盖物" />
+            <input type="button" onclick="remove_overlay();" value="删除覆盖物" />
+            <input type="button" onclick="setPanoramaByLocation();" value="按经纬度展示全景" />
+        </div>
+    </div>
+}
+
+
+@section script {
+    <script type="text/javascript">
+        
+        function getReportData(type) {
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('reportview'));
+            myChart.showLoading();
+
+            //var myChart = F.ui.reportview2;
+            var url = '@Url.Content("~/Reports/GetMapData")';
+            url += '?qKyUnit=' + "@ViewBag.qKyUnit";
+            url += '&qCreator=' + "@ViewBag.qCreator";
+            url += '&qKyDate1=' + "@ViewBag.qKyDate1";
+            url += '&qKyDate2=' + "@ViewBag.qKyDate2";
+            url += '&userId=' + "@ViewBag.userId";
+            url += '&unitId=' + "@ViewBag.unitId";
+            url += '&dataType=' + "@ViewBag.dataType";
+
+            // 直接调用 jQuery 的 ajax 函数
+            $.ajax({
+                dataType: 'json',
+                cache: false,
+                url: url,
+                method: 'GET',
+                success: function (data) {
+                    var datas = [[120.14322240845, 30.236064370321, 21], [120.14342240845, 30.236164370321, 25]];
+                    myChart.hideLoading();
+                    myChart.clear();
+                    myChart.setOption(option = {
+                        animation: false,
+                        bmap: {
+                            center: [120.13066322374, 30.240018034923],
+                            zoom: 14,
+                            roam: true
+                        },
+                        visualMap: {
+                            show: false,
+                            top: 'top',
+                            min: 0,
+                            max: 5,
+                            seriesIndex: 0,
+                            calculable: true,
+                            inRange: {
+                                color: ['blue', 'blue', 'green', 'yellow', 'red']
+                            }
+                        },
+                        series: [{
+                            type: 'heatmap',
+                            coordinateSystem: 'bmap',
+                            data: datas,
+                            pointSize: 5,
+                            blurSize: 6
+                        }]
+                    });
+
+                    // 添加百度地图插件
+                    var bmap = myChart.getModel().getComponent('bmap').getBMap();
+                    bmap.addControl(new BMap.MapTypeControl());                   
+                }
+            });
+            // 使用刚指定的配置项和数据显示图表。
+        }
+
+        F.ready(function () {
+
+            var myChart = echarts.init(document.getElementById('reportview'));
+            myChart.showLoading();
+            getReportData();          
+            
+        });
+    </script>
+}

@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "权限编辑";
+    var F = @Html.F();
+}
+@section head {
+
+    <style>
+        .mytable td.f-layout-table-cell {
+            padding: 5px;
+        }
+    </style>
+
+}
+
+@section body {
+
+    @(F.Panel()
+        .ID("Panel5").ShowBorder(true).CssClass("mytable")
+        .AutoScroll(true).ShowHeader(false).BoxConfigChildMargin("0 5 0 0").BodyPadding(5).IsViewPort(true)
+        .Toolbars(
+            F.Toolbar()
+                .Items(
+                    F.Button().Icon(Icon.SystemClose).Text("关闭").Listener("click", "F.activeWindow.hide();"),
+                    F.ToolbarSeparator(),                   
+                    F.Button().Icon(Icon.GroupEdit).Listener("click", "onSubPrivilege").Text("保存")
+                )
+        )
+        .Items(
+            F.HiddenField().ID("tgtId").Text(ViewBag.tgtId),
+            F.HiddenField().ID("type").Text(ViewBag.type),
+            F.Grid().ShowBorder(true).ID("Grid1").DataIDField("privilege_id").DataTextField("privilege_operation").ShowHeader(true).Title("菜单类")
+                .AllowCellEditing(true).ClicksToEdit(1)
+                .Columns(
+                    F.RenderField().HeaderText("权限名称").DataField("priv_name").Width(120),
+                    F.RenderField().HeaderText("描述").DataField("priv_disp").Width(80).ExpandUnusedSpace(true),
+                    F.RenderCheckField().HeaderText("允许").DataField("privilege_operation").Width(80).EnableColumnEdit(true)
+                )
+                .DataSource(ViewBag.ds1),
+            F.Grid().ShowBorder(true).ID("Grid2").DataIDField("privilege_id").DataTextField("privilege_operation").ShowHeader(true).Title("功能类")
+                .AllowCellEditing(true).ClicksToEdit(1)
+                .Columns(
+                    F.RenderField().HeaderText("权限名称").DataField("priv_name").Width(120),
+                    F.RenderField().HeaderText("描述").DataField("priv_disp").Width(80).ExpandUnusedSpace(true),
+                    F.RenderCheckField().HeaderText("允许").DataField("privilege_operation").Width(80).EnableColumnEdit(true)
+                )
+                .DataSource(ViewBag.ds2),
+            F.Grid().ShowBorder(true).ID("Grid3").DataIDField("privilege_id").DataTextField("privilege_operation").ShowHeader(true).Title("数据类")
+                .AllowCellEditing(true).ClicksToEdit(1)
+                .Columns(
+                    F.RenderField().HeaderText("权限名称").DataField("priv_name").Width(120).EnableColumnEdit(false),
+                    F.RenderField().HeaderText("描述").DataField("priv_disp").Width(80).ExpandUnusedSpace(true).EnableColumnEdit(false),
+                    F.RenderCheckField().HeaderText("允许").DataField("privilege_operation").Width(80)
+                )
+                .DataSource(ViewBag.ds3)
+        )
+    )
+}
+
+@section script{
+    <script src="~/res/js/grid.js"></script>
+    <script>
+        function subPrivilege() {
+            // 触发后台事件
+            console.log(F.ui.Grid3);
+            F.doPostBack('@Url.Action("ModifyPriv")', {
+                'tgtId': F.ui.tgtId.value,
+                'type': F.ui.type.value,
+                'Grid1Data': F.ui.Grid1.data,
+                'Grid2Data': F.ui.Grid2.data,
+                'Grid3Data': F.ui.Grid3.data,
+                'Grid_fields': F.ui.Grid1.fields
+            });
+        }
+
+        function onSubPrivilege(event) {
+            
+            F.confirm({
+                message: '确定提交所配置的权限？',
+                target: '_top',
+                ok: function () {
+                    subPrivilege();
+                }
+            });
+        }
+
+    </script>
+}
