@@ -2,9 +2,15 @@
   <div>
     <group>
       <x-input title="案件名称" v-model="xz" text-align='right'></x-input>
+      <x-input title="案件编号" v-model="record_aj_no" text-align='right'></x-input>
+      <x-input title="接警编号" v-model="record_jj_no" text-align='right'></x-input>
+      <x-input title="现场勘验号" v-model="record_ky_no" text-align='right'></x-input>
+      <cell title="现场方位"  is-link @click.native="fetchXct" ></cell>
+      <img src=""  id="xctImg" width="0" height="0">
+      <cell title="现场平面"  is-link @click.native="fetchPmt" ></cell>
+      <img src=""  id="pmtImg" width="0" height="0">
       <x-input title="发生区域" v-model="fsqy" text-align='right'></x-input>
-      <x-input title="现场位置" v-model='xcwz' text-align='right'></x-input>
-      <cell title="现场坐标" v-bind:inline-desc="xcwzzb" is-link @click.native="fetchMapLoc" ></cell>
+      <x-input title="现场位置" v-model='xcwz' text-align='right'></x-input>      
       <popup-picker title="勘验单位" :data="unitList" v-model="kyUnit"
         @on-show="onShow" @on-hide="onHide" @on-change="onChange" show-name></popup-picker>
       <popup-picker title="接警人" :data='userList' v-model="jjr" show-name></popup-picker>
@@ -140,7 +146,7 @@ export default {
     }
   },
   methods: {
-    fetchMapLoc () {
+    saveInfo () {
       let lightInfo = ''
       if (this.lightList.length !== 0) {
         this.lightList.forEach(function (item) {
@@ -176,8 +182,109 @@ export default {
         xc_info: this.xczk.length === 0 ? '' : this.xczk[0],
         bd_reason: this.bdyy.length === 0 ? '' : this.bdyy[0]
       }
-      this.$store.commit(SET_RECORDBASE, entity)
-      this.$router.push('/FetchMapLoc')
+      this.$store.commit(SET_RECORDBASE, entity)      
+    },
+    fetchXct () {
+      Cordova.exec(this.onSuccessXct, this.onError, 'Interactive', 'shotMapInfo', [])
+    },
+    fetchPmt () {
+      Cordova.exec(this.onSuccessPmt, this.onError, 'Interactive', 'shotMapInfo', [])
+    },
+    onSuccessXct: function (result) {
+      var res = JSON.parse(result)
+      
+      var image = document.getElementById('xctImg')
+      image.src = res.shot_picture_path
+      image.width = 200
+      image.height = 200
+      
+      var canvas = this.convertImageToCanvas(image)
+      var blob = canvas.toDataURL('image/png')
+      var fileName = this.$store.getters.GetterEntity.uuid + '_xct.png'
+
+      this.uploadZT(blob, fileName)
+      //alert(res.shot_picture_path)
+    },
+    onSuccessPmt: function (result) {
+      var res = JSON.parse(result)
+      
+      var image = document.getElementById('pmtImg')
+      image.src = res.shot_picture_path
+      image.width = 200
+      image.height = 200
+
+      var canvas = this.convertImageToCanvas(image)
+      var blob = canvas.toDataURL('image/png')
+      var fileName = this.$store.getters.GetterEntity.uuid + '_pmt.png'
+
+      this.uploadZT(blob, fileName)
+      //alert(res.shot_picture_path)
+    },
+    onError: function (result) {
+      this.$vux.toast.show({
+        text: result,
+        type: 'warn'
+      })
+    },
+    dataURItoBlob: function (base64Data) {  
+      var byteString;  
+      if (base64Data.split(',')[0].indexOf('base64') >= 0)  
+          byteString = atob(base64Data.split(',')[1])
+      else  
+          byteString = unescape(base64Data.split(',')[1])
+      var mimeString = base64Data.split(',')[0].split(':')[1].split(';')[0] 
+      var ia = new Uint8Array(byteString.length)
+      for (var i = 0; i < byteString.length; i++) {  
+          ia[i] = byteString.charCodeAt(i)
+      }  
+      return new Blob([ia], {type: mimeString})
+    },
+    convertImageToCanvas(image){
+      var canvas = document.createElement("canvas")
+      canvas.width = image.width;
+      canvas.height = image.height;
+      // 坐标(0,0) 表示从此处开始绘制，相当于偏移。
+      canvas.getContext("2d").drawImage(image, 0, 0)
+
+      return canvas
+    },
+    uploadZT (blob, fileName) {
+      //const canvas = document.querySelector('#canvas')
+      //var src = canvas.toDataURL('image/png')
+      //var blob = this.dataURItoBlob(src)
+    
+      //var req = new XMLHttpRequest()
+
+      //req.open("POST", this.$store.getters.GetterBaseUrl + 'api/Files/singleUpload')
+
+      //req.send(form)
+      //var fileName = this.$store.getters.GetterEntity.uuid + '.png'
+      var fd = new FormData();
+      fd.append(fileName, blob);//fileData为自定义    
+      
+      this.$http({
+        url: this.$store.getters.GetterBaseUrl + 'api/Files/singleUpload',
+        method: 'POST',
+        body: fd,
+        headers: {
+          contentType: 'application/x-www-form-urlencoded',
+          token: this.$store.getters.GetterToken
+        }
+      }).then(function (res) {
+        if (res.status === 200) {
+          alert("上传成功")
+        } else {
+          this.$vux.toast.show({
+            text: res.data.message,
+            type: 'warn'
+          })          
+        }
+      }).catch(err => {
+        this.$vux.toast.show({
+          text: err,
+          type: 'warn'
+        })
+      })
     },
     onChangeBhrName (value) {
       this.bhrName = value[0]
@@ -211,6 +318,11 @@ export default {
       bhrUnitPickerName: [''],
       bhfsPicker: [''],
       bdyyPicker: [''],
+      record_ky_no: this.$store.getters.GetterEntity.record_ky_no,
+      record_jj_no: this.$store.getters.GetterEntity.record_jj_no,
+      record_aj_no: this.$store.getters.GetterEntity.record_aj_no,
+      xctSrc: this.$store.getters.GetterEntity.xct_src,
+      pmtSrc: this.$store.getters.GetterEntity.pmt_src,
       kyUnit: this.$store.getters.GetterEntity.ky_unit === 0 ? [] : [this.$store.getters.GetterEntity.ky_unit + ''],
       bjTime: this.$store.getters.GetterEntity.bj_time,
       bjUnit: this.$store.getters.GetterEntity.bg_unit === 0 ? [] : [this.$store.getters.GetterEntity.bg_unit + ''],

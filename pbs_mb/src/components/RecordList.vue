@@ -83,11 +83,15 @@ export default {
     },
     onChooseRec (rec) {
       let entity1 = {
+        record_ky_no: rec.record_ky_no,
+        record_jj_no: rec.record_jj_no,
+        record_aj_no: rec.record_aj_no,
         ky_unit: rec.ky_unit,
         jjr: rec.jjr,
         jjr_other: rec.jjr_other,
         bg_unit: rec.bg_unit,
         ky_date: rec.ky_date === null ? '' : rec.ky_date.substring(0, 10),
+        af_time: rec.af_time === null ? '' : rec.af_time.substring(0, 16).replace('T', ' '),
         bj_time: rec.bj_time === null ? '' : rec.bj_time.substring(0, 16).replace('T', ' '),
         bjr: rec.bjr,
         bjr_sex: rec.bjr_sex,

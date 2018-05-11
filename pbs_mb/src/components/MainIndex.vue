@@ -3,6 +3,7 @@
     <div class="vux-demo">
       <img class="logo" src="../assets/gongan.png">
       <h1>深圳E勘查</h1>
+      <h2>深圳市南山公安分局</h2>
       <h2>{{myName}}</h2>
     </div>
     <grid>
@@ -72,7 +73,8 @@ export default {
         bg_unit: this.$store.getters.GetterMe.member.unit_id,
         ky_date: curDate,
         jjr: this.$store.getters.GetterMe.member.user_id,
-        fs_loc: '广东省深圳市南山区',
+        fs_loc: '',
+        af_time: curDate + ' 00:00',
         bj_time: curDate + ' 00:00',
         kyks_time: curTime,
         weather_info: '晴',

@@ -7,11 +7,7 @@
     <group>
       <cell title="本次已上传图像:  ">{{alreadyPicNum}}  张</cell>
     </group>
-    <x-hr></x-hr>
-    <group>
-      <cell title="现场图"  is-link @click.native="fetchXcT" ></cell>
-      <cell title="中心现场图"  is-link @click.native="fetchZxxcT" ></cell>
-    </group>
+    <x-hr></x-hr>    
     <vue-file-upload v-bind:url="renderUrl()" ref="vueFileUploader1" v-bind:filters = "filters" label ='选择现场方位'
     v-bind:events = 'cbEvents'
     v-bind:request-options = "reqopts" v-on:onAdd = "onAddFile1"  class='uploadbutton' ></vue-file-upload>

@@ -7,7 +7,8 @@ import {
   SET_RECORDFILES,
   SET_MAPZB,
   CLR_RECORDINFO,
-  SET_LOC
+  SET_LOC,
+  SET_XCT
 } from '../mutationTypes'
 
 const state = {
@@ -16,12 +17,18 @@ const state = {
     record_id: 0,
     uuid: '',
     record_no: '',
+    record_ky_no: '',
+    record_jj_no: '',
+    record_aj_no: '',
     record_title: '',
+    xct_src: '',
+    pmt_src: '',
     ky_unit: 0,
     bg_unit: 0,
     ky_date: '',
     jjr: 0,
     jjr_other: '',
+    af_time: '',
     bj_time: '',
     kyks_time: '',
     kyjs_time: '',
@@ -79,11 +86,17 @@ const mutations = {
   [SET_RECORDBASE] (state, data) {
     try {
       state.entity.record_title = data.xc_loc + '-' + data.xz
+      state.entity.record_ky_no = data.record_ky_no
+      state.entity.record_jj_no = data.record_jj_no
+      state.entity.record_aj_no = data.record_aj_no
+      state.entity.xct_src = data.xct_src
+      state.entity.pmt_src = data.pmt_src 
       state.entity.ky_unit = data.ky_unit
       state.entity.bg_unit = data.bg_unit
       state.entity.ky_date = data.ky_date
       state.entity.jjr = data.jjr
       state.entity.jjr_other = data.jjr_other
+      state.entity.af_time = data.af_time
       state.entity.bj_time = data.bj_time
       state.entity.kyks_time = data.kyks_time
       state.entity.kyjs_time = data.kyjs_time
@@ -175,17 +188,31 @@ const mutations = {
       console.log(err)
     }
   },
+  [SET_XCT] (state, data) {
+    try{
+      state.entity.xct_src = data.xct_src
+      state.entity.pmt_src = data.pmt_src
+    }catch (err) {
+      console.log(err)
+    }
+  }
   [CLR_RECORDINFO] (state, data) {
     state.entity = {
       record_id: 0,
       uuid: '',
       record_title: '',
       record_no: '',
+      record_ky_no: '',
+      record_jj_no: '',
+      record_aj_no: '',
+      xct_src: '',
+      pmt_src: '',
       ky_unit: data.ky_unit,
       bg_unit: data.bg_unit,
       ky_date: data.ky_date,
       jjr: data.jjr,
       jjr_other: '',
+      af_time: data.af_time,
       bj_time: data.bj_time,
       bjr: '',
       bjr_sex: 0,

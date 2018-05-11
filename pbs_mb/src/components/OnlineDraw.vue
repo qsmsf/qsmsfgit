@@ -336,21 +336,7 @@ import { XButton, XHeader, Flexbox, FlexboxItem, Divider, Confirm } from 'vux'
         var fileName = this.$store.getters.GetterEntity.uuid + '.png'
         var fd = new FormData();
         fd.append(fileName, blob);//fileData为自定义    
-        //ajax上传，ajax的形式随意，JQ的写法也没有问题  
-        //需要注意的是服务端需要设定，允许跨域请求。数据接收的方式和<input type="file"/> 上传的文件没有区别  
-        /*
-        //var xmlHttp = new XMLHttpRequest();  
-        //xmlHttp.open("POST", this.$store.getters.GetterBaseUrl + 'api/Files/singleUpload');  
-        //xmlHttp.setRequestHeader("token", this.$store.getters.GetterToken);//设置请求header,按需设定，非必须  
-        //xmlHttp.send(fd);  
-        //ajax回调  
-        xmlHttp.onreadystatechange = () => { 
-          console.log(xmlHttp)
-          if(xmlHttp.readyState == 4){
-            this.$router.push({name: 'Step4',query: {isAdd: this.isAdd, curStep: 4}})
-          }
-        }
-        */
+        
         this.$http({
           url: this.$store.getters.GetterBaseUrl + 'api/Files/singleUpload',
           method: 'POST',
