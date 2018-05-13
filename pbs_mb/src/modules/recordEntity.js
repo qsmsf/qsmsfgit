@@ -7,7 +7,9 @@ import {
   SET_RECORDFILES,
   SET_MAPZB,
   CLR_RECORDINFO,
-  SET_LOC
+  SET_LOC,
+  SET_XCT,
+  SET_QMBASE64
 } from '../mutationTypes'
 
 const state = {
@@ -20,6 +22,8 @@ const state = {
     record_jj_no: '',
     record_aj_no: '',
     record_title: '',
+    xct_src: '',
+    pmt_src: '',
     ky_unit: 0,
     bg_unit: 0,
     ky_date: '',
@@ -73,7 +77,8 @@ const state = {
     east: '',
     west: '',
     north: '',
-    south: ''
+    south: '',
+    qmBase64Data: ''
   },
   fileList: []
 }
@@ -86,6 +91,8 @@ const mutations = {
       state.entity.record_ky_no = data.record_ky_no
       state.entity.record_jj_no = data.record_jj_no
       state.entity.record_aj_no = data.record_aj_no
+      state.entity.xct_src = data.xct_src
+      state.entity.pmt_src = data.pmt_src 
       state.entity.ky_unit = data.ky_unit
       state.entity.bg_unit = data.bg_unit
       state.entity.ky_date = data.ky_date
@@ -183,6 +190,17 @@ const mutations = {
       console.log(err)
     }
   },
+  [SET_XCT] (state, data) {
+    try{
+      state.entity.xct_src = data.xct_src
+      state.entity.pmt_src = data.pmt_src
+    }catch (err) {
+      console.log(err)
+    }
+  },
+  [SET_QMBASE64] (state, base64data) {
+    state.entity.qmBase64Data = base64data
+  },
   [CLR_RECORDINFO] (state, data) {
     state.entity = {
       record_id: 0,
@@ -192,6 +210,8 @@ const mutations = {
       record_ky_no: '',
       record_jj_no: '',
       record_aj_no: '',
+      xct_src: '',
+      pmt_src: '',
       ky_unit: data.ky_unit,
       bg_unit: data.bg_unit,
       ky_date: data.ky_date,
@@ -249,7 +269,8 @@ const mutations = {
       east: '',
       west: '',
       north: '',
-      south: ''
+      south: '',
+      qmBase64Data: ''
     }
     state.fileList = []
   }

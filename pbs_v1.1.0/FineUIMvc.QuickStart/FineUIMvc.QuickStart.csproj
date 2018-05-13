@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode>true</IISExpressUseClassicPipelineMode>
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,20 +70,20 @@
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+    <Reference Include="MySql.Data, Version=6.9.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+      <HintPath>..\packages\MySql.Data.6.9.11\lib\net45\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.11\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Fabric.Plugin, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+    <Reference Include="MySql.Fabric.Plugin, Version=6.9.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.9.9\Assemblies\v4.5\MySql.Fabric.Plugin.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.9.11\Assemblies\v4.5\MySql.Fabric.Plugin.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Web, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+    <Reference Include="MySql.Web, Version=6.9.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.9.9\Assemblies\v4.5\MySql.Web.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.9.11\Assemblies\v4.5\MySql.Web.dll</HintPath>
     </Reference>
     <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
@@ -242,6 +243,9 @@
     <Compile Include="Models\privilege.cs">
       <DependentUpon>PBS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\record_info.cs">
+      <DependentUpon>PBS.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_showChildUnits_Result.cs">
       <DependentUpon>PBS.tt</DependentUpon>
     </Compile>
@@ -280,13 +284,25 @@
     <Compile Include="Models\ticketauth.cs">
       <DependentUpon>PBS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\trace_info.cs">
+      <DependentUpon>PBS.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\view_record2word.cs">
+      <DependentUpon>PBS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\view_recordinfo.cs">
       <DependentUpon>PBS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_report.cs">
       <DependentUpon>PBS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\view_trace_info.cs">
+      <DependentUpon>PBS.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\view_userhasrole.cs">
+      <DependentUpon>PBS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\wx_user.cs">
       <DependentUpon>PBS.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -217,56 +217,108 @@ namespace PbsApi.Controllers
 
                 if (File.Exists(qmPicPath))
                 {
-                    sys_upload_file tmp = new sys_upload_file();
-                    tmp.rec_uuid = rar.entity.uuid;
-                    tmp.file_type = 2005;
-                    tmp.file_name = rar.entity.uuid + ".png";
-                    tmp.file_uploader = rar.entity.creater_id;
-                    tmp.file_url = rar.entity.uuid + ".png";
-                    tmp.file_upload_time = DateTime.Now;
-                    tmp.file_hint = "见证人签名";
+                    sys_upload_file tmp = db.sys_upload_file.Where(p => p.file_name.Equals(rar.entity.uuid + ".png")).FirstOrDefault();
+                    if (tmp == null)
+                    {
+                        tmp = new sys_upload_file();
+                        tmp.rec_uuid = rar.entity.uuid;
+                        tmp.file_type = 2005;
+                        tmp.file_name = rar.entity.uuid + ".png";
+                        tmp.file_uploader = rar.entity.creater_id;
+                        tmp.file_url = rar.entity.uuid + ".png";
+                        tmp.file_upload_time = DateTime.Now;
+                        tmp.file_hint = "见证人签名";
 
-                    db.sys_upload_file.Add(tmp);
+                        db.sys_upload_file.Add(tmp);
+                    }
+                    else
+                    {
+                        tmp.file_uploader = rar.entity.creater_id;
+                        tmp.file_upload_time = DateTime.Now;
+                        db.sys_upload_file.Attach(tmp);
+                        var stateEntity2 = ((IObjectContextAdapter)db).ObjectContext.ObjectStateManager.GetObjectStateEntry(tmp);
+                        stateEntity2.SetModifiedProperty("file_uploader");
+                        stateEntity2.SetModifiedProperty("file_upload_time");
+                    }
                     string path2 = desPath + "\\" + tmp.file_url;
+                    if (File.Exists(path2))
+                    {
+                        File.Delete(path2);
+                    }
                     File.Move(qmPicPath, path2);
                 }
-                string fwPicPath = path + "upload\\" + rar.entity.uuid + "_fw.png";
+                string fwPicPath = path + "upload\\" + rar.entity.uuid + "_xct.jpeg";
                 if (File.Exists(fwPicPath))
                 {
-                    sys_upload_file tmp = new sys_upload_file();
-                    tmp.rec_uuid = rar.entity.uuid;
-                    tmp.file_type = 2004;
-                    tmp.file_name = rar.entity.uuid + "_fw.png";
-                    tmp.file_uploader = rar.entity.creater_id;
-                    tmp.file_url = rar.entity.uuid + "_fw.png";
-                    tmp.file_upload_time = DateTime.Now;
-                    tmp.file_hint = "方位示意图";
+                    sys_upload_file tmp = db.sys_upload_file.Where(p => p.file_name.Equals(rar.entity.uuid + "_xct.jpeg")).FirstOrDefault();
+                    if(tmp == null)
+                    {
+                        tmp = new sys_upload_file();
+                        tmp.rec_uuid = rar.entity.uuid;
+                        tmp.file_type = 2004;
+                        tmp.file_name = rar.entity.uuid + "_xct.jpeg";
+                        tmp.file_uploader = rar.entity.creater_id;
+                        tmp.file_url = rar.entity.uuid + "_xct.jpeg";
+                        tmp.file_upload_time = DateTime.Now;
+                        tmp.file_hint = "方位示意图";
 
-                    db.sys_upload_file.Add(tmp);
+                        db.sys_upload_file.Add(tmp);
+                    }
+                    else
+                    {
+                        tmp.file_uploader = rar.entity.creater_id;
+                        tmp.file_upload_time = DateTime.Now;
+                        db.sys_upload_file.Attach(tmp);
+                        var stateEntity2 = ((IObjectContextAdapter)db).ObjectContext.ObjectStateManager.GetObjectStateEntry(tmp);
+                        stateEntity2.SetModifiedProperty("file_uploader");
+                        stateEntity2.SetModifiedProperty("file_upload_time");
+                    }
+                    
                     string path2 = desPath + "\\" + tmp.file_url;
+                    if (File.Exists(path2))
+                    {
+                        File.Delete(path2);
+                    }
                     File.Move(fwPicPath, path2);
                 }
 
-                string pmPicPath = path + "upload\\" + rar.entity.uuid + "_pm.png";
+                string pmPicPath = path + "upload\\" + rar.entity.uuid + "_pmt.png";
                 if (File.Exists(pmPicPath))
                 {
-                    sys_upload_file tmp = new sys_upload_file();
-                    tmp.rec_uuid = rar.entity.uuid;
-                    tmp.file_type = 2004;
-                    tmp.file_name = rar.entity.uuid + "_pm.png";
-                    tmp.file_uploader = rar.entity.creater_id;
-                    tmp.file_url = rar.entity.uuid + "_pm.png";
-                    tmp.file_upload_time = DateTime.Now;
-                    tmp.file_hint = "平面示意图";
+                    sys_upload_file tmp = db.sys_upload_file.Where(p => p.file_name.Equals(rar.entity.uuid + "_pmt.jpeg")).FirstOrDefault();
+                    if (tmp == null)
+                    {
+                        tmp = new sys_upload_file();
+                        tmp.rec_uuid = rar.entity.uuid;
+                        tmp.file_type = 2004;
+                        tmp.file_name = rar.entity.uuid + "_pmt.jpeg";
+                        tmp.file_uploader = rar.entity.creater_id;
+                        tmp.file_url = rar.entity.uuid + "_pmt.jpeg";
+                        tmp.file_upload_time = DateTime.Now;
+                        tmp.file_hint = "平面示意图";
 
-                    db.sys_upload_file.Add(tmp);
+                        db.sys_upload_file.Add(tmp);
+                    }
+                    else
+                    {
+                        tmp.file_uploader = rar.entity.creater_id;
+                        tmp.file_upload_time = DateTime.Now;
+                        db.sys_upload_file.Attach(tmp);
+                        var stateEntity2 = ((IObjectContextAdapter)db).ObjectContext.ObjectStateManager.GetObjectStateEntry(tmp);
+                        stateEntity2.SetModifiedProperty("file_uploader");
+                        stateEntity2.SetModifiedProperty("file_upload_time");
+                    }
                     string path2 = desPath + "\\" + tmp.file_url;
+                    if (File.Exists(path2))
+                    {
+                        File.Delete(path2);
+                    }
                     File.Move(pmPicPath, path2);
                 }
 
                 db.SaveChanges();
                 rdi.recNo = rar.entity.record_no;
-                rdi.recNo = rdi.recNo.Substring(rdi.recNo.Length - 5);
+                rdi.recNo = rdi.recNo.Substring(rdi.recNo.Length - 6);
                 rdi.code = 100;
                 return Ok(rdi);
             }
@@ -274,6 +326,7 @@ namespace PbsApi.Controllers
             {
                 rdi.code = 104;
                 rdi.msg = "更新记录失败: " + e.Message;
+                log.Error(e.Message + " -- " + e.InnerException.Message);
                 return Ok(rdi);
             }
         }
@@ -429,13 +482,21 @@ namespace PbsApi.Controllers
                 }
                 for (int i = 0; i < rar.fileList.Count; i++)
                 {
+                    log.Debug("begin to move file. name = " + rar.fileList[i].file_name);
                     sys_upload_file tmp = new sys_upload_file();
                     tmp = rar.fileList[i];
                     tmp.rec_uuid = rar.entity.uuid;
                     db.sys_upload_file.Add(tmp);
                     string path1 = path + "upload\\" + tmp.file_url;
                     string path2 = desPath + "\\" + tmp.file_url;
-                    File.Move(path1, path2);
+                    if (File.Exists(path1))
+                    {
+                        File.Move(path1, path2);
+                    }
+                    else
+                    {
+                        log.Error("file is exist. name = " + path1);
+                    }
                 }
 
                 string qmPicPath = path + "upload\\" + rar.entity.uuid + ".png";
@@ -456,15 +517,15 @@ namespace PbsApi.Controllers
                     File.Move(qmPicPath, path2);
                 }
 
-                string fwPicPath = path + "upload\\" + rar.entity.uuid + "_fw.png";
+                string fwPicPath = path + "upload\\" + rar.entity.uuid + "_xct.jpeg";
                 if (File.Exists(fwPicPath))
                 {
                     sys_upload_file tmp = new sys_upload_file();
                     tmp.rec_uuid = rar.entity.uuid;
                     tmp.file_type = 2004;
-                    tmp.file_name = rar.entity.uuid + "_fw.png";
+                    tmp.file_name = rar.entity.uuid + "_xct.jpeg";
                     tmp.file_uploader = rar.entity.creater_id;
-                    tmp.file_url = rar.entity.uuid + "_fw.png";
+                    tmp.file_url = rar.entity.uuid + "_xct.jpeg";
                     tmp.file_upload_time = DateTime.Now;
                     tmp.file_hint = "方位示意图";
 
@@ -473,15 +534,15 @@ namespace PbsApi.Controllers
                     File.Move(fwPicPath, path2);
                 }
 
-                string pmPicPath = path + "upload\\" + rar.entity.uuid + "_pm.png";
+                string pmPicPath = path + "upload\\" + rar.entity.uuid + "_pmt.jpeg";
                 if (File.Exists(pmPicPath))
                 {
                     sys_upload_file tmp = new sys_upload_file();
                     tmp.rec_uuid = rar.entity.uuid;
                     tmp.file_type = 2004;
-                    tmp.file_name = rar.entity.uuid + "_pm.png";
+                    tmp.file_name = rar.entity.uuid + "_pmt.jpeg";
                     tmp.file_uploader = rar.entity.creater_id;
-                    tmp.file_url = rar.entity.uuid + "_pm.png";
+                    tmp.file_url = rar.entity.uuid + "_pmt.jpeg";
                     tmp.file_upload_time = DateTime.Now;
                     tmp.file_hint = "平面示意图";
 
@@ -491,12 +552,14 @@ namespace PbsApi.Controllers
                 }
 
                 db.SaveChanges();
-                string recNo = DateTime.Now.Year.ToString() + " ";
-                for (int i = 0; i < 5 - rar.entity.record_id.ToString().Length;i++ )
-                {
-                    recNo += "0";
-                }
-                recNo += rar.entity.record_id.ToString();
+                string recNo = "440300"+DateTime.Now.Year.ToString();
+                string unitNo = rar.entity.ky_unit.ToString().PadLeft(3,'0');
+                recNo += unitNo;
+                recNo += "9";
+                DateTime toYear = Convert.ToDateTime(DateTime.Now.Year.ToString()+"-01-01");
+                int num = db.pbs_record.Where(p => p.ky_unit == rar.entity.ky_unit && p.ky_date >= toYear).Count()+1;
+                
+                recNo += num.ToString().PadLeft(5,'0');
                 rar.entity.record_no = recNo;
                 db.pbs_record.Attach(rar.entity);
                 var stateEntity = ((IObjectContextAdapter)db).ObjectContext.ObjectStateManager.GetObjectStateEntry(rar.entity);
@@ -511,6 +574,7 @@ namespace PbsApi.Controllers
             {
                 rdi.code = 105;
                 rdi.msg = "新增记录失败: " + e.Message;
+                log.Error(e.Message + " -- " + e.InnerException.Message);
                 return Ok(rdi);
             }
         }

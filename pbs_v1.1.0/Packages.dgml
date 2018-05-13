@@ -22,8 +22,8 @@
     <Node Id="Microsoft.AspNet.WebPages.zh-Hans 3.2.3" Label="Microsoft.AspNet.WebPages.zh-Hans 3.2.3" Category="包" />
     <Node Id="Microsoft.jQuery.Unobtrusive.Validation 3.0.0" Label="Microsoft.jQuery.Unobtrusive.Validation 3.0.0" Category="包" />
     <Node Id="Microsoft.Web.Infrastructure 1.0.0.0" Label="Microsoft.Web.Infrastructure 1.0.0.0" Category="包" />
-    <Node Id="MySql.Data 6.9.9" Label="MySql.Data 6.9.9" Category="包" />
-    <Node Id="MySql.Data.Entity 6.9.9" Label="MySql.Data.Entity 6.9.9" Category="包" />
+    <Node Id="MySql.Data 6.9.11" Label="MySql.Data 6.9.11" Category="包" />
+    <Node Id="MySql.Data.Entity 6.9.11" Label="MySql.Data.Entity 6.9.11" Category="包" />
     <Node Id="Newtonsoft.Json 6.0.4" Label="Newtonsoft.Json 6.0.4" Category="包" />
     <Node Id="PagedList 1.17.0.0" Label="PagedList 1.17.0.0" Category="包" />
     <Node Id="PagedList.Mvc 4.5.0.0" Label="PagedList.Mvc 4.5.0.0" Category="包" />
@@ -47,8 +47,8 @@
     <Link Source="Microsoft.AspNet.WebPages 3.2.3" Target="Microsoft.AspNet.Razor 3.2.3" Category="程序包依赖项" />
     <Link Source="Microsoft.AspNet.WebPages.zh-Hans 3.2.3" Target="Microsoft.AspNet.WebPages 3.2.3" Category="程序包依赖项" />
     <Link Source="Microsoft.jQuery.Unobtrusive.Validation 3.0.0" Target="jQuery.Validation 1.11.1" Category="程序包依赖项" />
-    <Link Source="MySql.Data.Entity 6.9.9" Target="MySql.Data 6.9.9" Category="程序包依赖项" />
-    <Link Source="MySql.Data.Entity 6.9.9" Target="EntityFramework 6.1.3" Category="程序包依赖项" />
+    <Link Source="MySql.Data.Entity 6.9.11" Target="MySql.Data 6.9.11" Category="程序包依赖项" />
+    <Link Source="MySql.Data.Entity 6.9.11" Target="EntityFramework 6.1.3" Category="程序包依赖项" />
     <Link Source="PagedList.Mvc 4.5.0.0" Target="PagedList 1.17.0.0" Category="程序包依赖项" />
     <Link Source="FineUIMvc.QuickStart" Target="EntityFramework.zh-Hans 6.0.0" Category="安装的程序包" />
     <Link Source="FineUIMvc.QuickStart" Target="log4net 2.0.8" Category="安装的程序包" />
@@ -59,7 +59,7 @@
     <Link Source="FineUIMvc.QuickStart" Target="Microsoft.AspNet.WebApi.Cors 5.2.3" Category="安装的程序包" />
     <Link Source="FineUIMvc.QuickStart" Target="Microsoft.AspNet.WebPages.zh-Hans 3.2.3" Category="安装的程序包" />
     <Link Source="FineUIMvc.QuickStart" Target="Microsoft.jQuery.Unobtrusive.Validation 3.0.0" Category="安装的程序包" />
-    <Link Source="FineUIMvc.QuickStart" Target="MySql.Data.Entity 6.9.9" Category="安装的程序包" />
+    <Link Source="FineUIMvc.QuickStart" Target="MySql.Data.Entity 6.9.11" Category="安装的程序包" />
     <Link Source="FineUIMvc.QuickStart" Target="PagedList.Mvc 4.5.0.0" Category="安装的程序包" />
   </Links>
   <Categories>

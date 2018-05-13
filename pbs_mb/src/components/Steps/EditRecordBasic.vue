@@ -37,7 +37,7 @@
 
 <script>
 import { Group, XInput, XButton, ButtonTab, ButtonTabItem, XHr, FlexboxItem, Confirm, Alert, XHeader, Tabbar, TabbarItem, ViewBox, Loading } from 'vux'
-import { SET_RECORDFILES, SET_RECORDBASE, SET_RECORDDISP, SET_RECORDPERSON, SET_RECORDOTHER, SET_LOC } from '../../mutationTypes'
+import { SET_RECORDFILES, SET_RECORDBASE, SET_RECORDDISP, SET_RECORDPERSON, SET_RECORDOTHER, SET_LOC, SET_XCT, SET_QMBASE64 } from '../../mutationTypes'
 var uuid = require('node-uuid')
 
 export default {
@@ -86,6 +86,7 @@ export default {
     },
     onConfirm () {
       this.saveCurrentStep(this.currentStep)
+      this.$store.commit(SET_QMBASE64, '')
       if (this.isAdd === '1') {
         
         let data = JSON.stringify(this.$store.getters.GetterRecord)
@@ -172,11 +173,15 @@ export default {
             lightInfo = lightInfo.substring(0, lightInfo.length - 1)
           }
           let entity = {
+            record_ky_no : this.$refs.chiledContent.record_ky_no,
+            record_jj_no : this.$refs.chiledContent.record_jj_no,
+            record_aj_no : this.$refs.chiledContent.record_aj_no,
             ky_unit: this.$refs.chiledContent.kyUnit.length === 0 ? 0 : parseInt(this.$refs.chiledContent.kyUnit[0]),
             jjr: this.$refs.chiledContent.jjr.length === 0 ? 0 : parseInt(this.$refs.chiledContent.jjr[0]),
             jjr_other: this.$refs.chiledContent.jjrOther,
             bg_unit: this.$refs.chiledContent.bjUnit.length === 0 ? 0 : parseInt(this.$refs.chiledContent.bjUnit[0]),
             ky_date: this.$refs.chiledContent.kyDate,
+            af_time: this.$refs.chiledContent.afTime,
             bj_time: this.$refs.chiledContent.bjTime,
             kyks_time: this.$refs.chiledContent.kyksTime,
             kyjs_time: this.$refs.chiledContent.kyjsTime,
@@ -200,6 +205,11 @@ export default {
             bd_reason: this.$refs.chiledContent.bdyy
           }
           this.$store.commit(SET_RECORDBASE, entity)
+          let entity6 = {
+            xct_src: this.$refs.chiledContent.xctSrc,
+            pmt_src: this.$refs.chiledContent.pmtSrc
+          }
+          this.$store.commit(SET_XCT, entity6)
           break
         case 2:
           let entity2 = {

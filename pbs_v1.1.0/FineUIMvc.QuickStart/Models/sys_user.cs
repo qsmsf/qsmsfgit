@@ -11,30 +11,19 @@ namespace FineUIMvc.QuickStart.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class sys_user
     {
         public int user_id { get; set; }
-
-        [Display(Name = "登录名")]
-        [Required]
         public string user_name { get; set; }
-
-        [Display(Name = "姓名")]
-        [Required]
         public string user_fullname { get; set; }
-        [Display(Name = "密码")]
         public string user_pwd { get; set; }
-        [Display(Name = "状态")]
-        [Required]
         public Nullable<int> user_state { get; set; }
         public Nullable<System.DateTime> update_time { get; set; }
         public Nullable<System.DateTime> create_time { get; set; }
-        [Display(Name = "所属单位")]        
         public Nullable<int> unit_id { get; set; }
-
-		[Display(Name = "职位")]
         public string user_zw { get; set; }
+        public string openId { get; set; }
+        public string avatar_url { get; set; }
     }
 }

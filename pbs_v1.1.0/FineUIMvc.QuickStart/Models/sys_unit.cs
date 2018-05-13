@@ -11,22 +11,14 @@ namespace FineUIMvc.QuickStart.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class sys_unit
     {
         public int unit_id { get; set; }
-        [Display(Name = "名称")]
-        [Required]
         public string unit_name { get; set; }
-        [Display(Name = "是否顶层单位")]
-        [Required]
         public Nullable<sbyte> is_top { get; set; }
-        [Display(Name = "上级单位")]
         public Nullable<int> father_unit_id { get; set; }
-        [Display(Name = "单位全称")]
         public string unit_full_name { get; set; }
-        [Display(Name = "模板名称")]
         public string bg_dot_name { get; set; }
     }
 }

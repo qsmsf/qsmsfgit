@@ -13,9 +13,7 @@
       <grid-item label="查询案件" link="/RecordList">
         <img slot="icon" src="../assets/date_magnify.png">
       </grid-item>
-      <grid-item label="test" link="/Test">
-        <img slot="icon" src="../assets/date_magnify.png">
-      </grid-item>
+      
       <grid-item label="退出登录" link="/">
         <img slot="icon" src="../assets/status_offline.png">
       </grid-item>
@@ -68,7 +66,8 @@ export default {
       }
       let curDate = date.getFullYear() + seperator1 + month + seperator1 + strDate
       let curTime = curDate + ' ' + hour + seperator2 + minitue
-      let entity = {
+      
+      let entity = {        
         ky_unit: this.$store.getters.GetterMe.member.unit_id,
         bg_unit: this.$store.getters.GetterMe.member.unit_id,
         ky_date: curDate,
@@ -91,7 +90,7 @@ export default {
         xc_info: '原始现场',
         bd_reason: '',
         jzr: '',
-        jzr_sex: '',
+        jzr_sex: '男',
         jzr_birth: '',
         jzr_address: '',
         zhr: this.$store.getters.GetterMe.member.user_id,

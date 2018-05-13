@@ -19,6 +19,8 @@ export const SET_RECORDFILES = 'SET_RECORDFILES'
 export const SET_MAPZB = 'SET_MAPZB'
 export const CLR_RECORDINFO = 'CLR_RECORDINFO'
 export const SET_LOC = 'SET_LOC'
+export const SET_XCT = 'SET_XCT'
+export const SET_QMBASE64 = 'SET_QMBASE64'
 
 // sysInfo
 export const SET_SYSINFO = 'SET_SYSINFO'

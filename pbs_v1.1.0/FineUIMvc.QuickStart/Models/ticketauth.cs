@@ -19,5 +19,8 @@ namespace FineUIMvc.QuickStart.Models
         public string token { get; set; }
         public Nullable<System.DateTime> create_time { get; set; }
         public Nullable<System.DateTime> expire_time { get; set; }
+        public Nullable<int> state { get; set; }
+        public string client_ip { get; set; }
+        public Nullable<int> user_type { get; set; }
     }
 }

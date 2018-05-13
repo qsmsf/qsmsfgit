@@ -25,10 +25,8 @@ namespace PbsApi.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<pbs_record> pbs_record { get; set; }
         public virtual DbSet<sys_code> sys_code { get; set; }
         public virtual DbSet<sys_unit> sys_unit { get; set; }
-        public virtual DbSet<sys_upload_file> sys_upload_file { get; set; }
         public virtual DbSet<sys_user> sys_user { get; set; }
         public virtual DbSet<login_info> login_info { get; set; }
         public virtual DbSet<ticketauth> ticketauth { get; set; }
@@ -48,5 +46,7 @@ namespace PbsApi.Models
         public virtual DbSet<trace_info> trace_info { get; set; }
         public virtual DbSet<view_recordinfo> view_recordinfo { get; set; }
         public virtual DbSet<view_trace_info> view_trace_info { get; set; }
+        public virtual DbSet<pbs_record> pbs_record { get; set; }
+        public virtual DbSet<sys_upload_file> sys_upload_file { get; set; }
     }
 }

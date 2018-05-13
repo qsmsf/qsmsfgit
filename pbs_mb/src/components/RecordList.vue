@@ -22,7 +22,7 @@
 
 <script>
 import { Group, Spinner, XButton, Scroller, Cell, XHeader } from 'vux'
-import { SET_RECORDBASE, SET_RECORDDISP, SET_RECORDPERSON, SET_RECORDOTHER, SET_RECORDFILES, SET_LOC } from '../mutationTypes'
+import { SET_RECORDBASE, SET_RECORDDISP, SET_RECORDPERSON, SET_RECORDOTHER, SET_RECORDFILES, SET_LOC, SET_QMBASE64 } from '../mutationTypes'
 
 export default {
   components: {
@@ -101,6 +101,8 @@ export default {
         kyjs_time: rec.kyjs_time === null ? '' : rec.kyjs_time.substring(0, 16).replace('T', ' '),
         dest_unit: rec.dest_unit,
         xz: rec.xz,
+        xct_src: this.$store.getters.GetterBaseUrl + 'api/GetFile?fileName=' + rec.uuid + '_xct.jpeg&uuid='+rec.uuid,
+        pmt_src: this.$store.getters.GetterBaseUrl + 'api/GetFile?fileName=' + rec.uuid + '_pmt.jpeg&uuid='+rec.uuid,
         fs_loc: rec.fs_loc,
         xc_loc: rec.xc_loc,
         xc_locpt: rec.xc_locpt,
@@ -164,6 +166,7 @@ export default {
         south: rec.south
       }
       this.$store.commit(SET_LOC, loc)
+      this.$store.commit(SET_QMBASE64, '')
       this.$store.commit(SET_RECORDFILES, [])
 
       this.$router.push({name: 'Step1', query: {isAdd: '0', curStep: 1}})

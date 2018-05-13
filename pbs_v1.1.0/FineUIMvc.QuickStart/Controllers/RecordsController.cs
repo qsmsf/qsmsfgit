@@ -293,7 +293,7 @@ namespace FineUIMvc.QuickStart.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult btnCreate_Click([Bind(Include = "uuid,bg_unit,ky_unit,ky_date,bj_time,bjr,bjr_sex,bjr_idcard,bjr_phoneNo,kyks_time,kyjs_time,dest_unit,xz,fs_loc,xc_loc,xc_locpt,weather_info,trend_info,temper_info,humidity_info,light_info,bh_flag,bhr,bhr_pos,bh_function,xc_info,bd_reason,jzr,jzr_sex,jzr_birth,jzr_address,zhr_name,zhr_unit_name,zhr_pos,bhr_name,blr_name,ztr_name,zxr_name,lxr_name,lyr_name,xc_disp,record_reason")] pbs_record record)
+        public ActionResult btnCreate_Click([Bind(Include = "uuid,record_aj_no,record_jj_no,record_ky_no,bg_unit,ky_unit,ky_date,af_time,bj_time,bjr,bjr_sex,bjr_idcard,bjr_phoneNo,kyks_time,kyjs_time,dest_unit,xz,fs_loc,xc_loc,xc_locpt,weather_info,trend_info,temper_info,humidity_info,light_info,bh_flag,bhr,bhr_pos,bh_function,xc_info,bd_reason,jzr,jzr_sex,jzr_birth,jzr_address,zhr_name,zhr_unit_name,zhr_pos,bhr_name,blr_name,ztr_name,zxr_name,lxr_name,lyr_name,xc_disp,record_reason")] pbs_record record)
         {
             if (ModelState.IsValid)
             {
@@ -304,7 +304,7 @@ namespace FineUIMvc.QuickStart.Controllers
                 record.record_title = record.fs_loc + record.xc_loc + "-" + record.xz;
                 db.pbs_record.Add(record);
                 db.SaveChanges();
-                string recNo = "K440305 " + DateTime.Now.Year.ToString() + " ";
+                string recNo = "440300 " + DateTime.Now.Year.ToString() + " 9";
                 for (int i = 0; i < 5 - record.record_id.ToString().Length; i++)
                 {
                     recNo += "0";
@@ -324,7 +324,7 @@ namespace FineUIMvc.QuickStart.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult btnCreateSubmit_Click([Bind(Include = "uuid,bg_unit,ky_unit,ky_date,bj_time,bjr,bjr_sex,bjr_idcard,bjr_phoneNo,kyks_time,kyjs_time,dest_unit,xz,fs_loc,xc_loc,xc_locpt,weather_info,trend_info,temper_info,humidity_info,light_info,bh_flag,bhr_name,bhr_unit_name,bhr_pos,bh_function,xc_info,bd_reason,jzr,jzr_sex,jzr_birth,jzr_address,zhr_name,zhr_unit_name,zhr_pos,bhr_name,blr_name,ztr_name,zxr_name,lxr_name,lyr_name,xc_disp,record")] pbs_record record)
+        public ActionResult btnCreateSubmit_Click([Bind(Include = "uuid,record_aj_no,record_jj_no,record_ky_no,bg_unit,ky_unit,ky_date,af_time,bj_time,bjr,bjr_sex,bjr_idcard,bjr_phoneNo,kyks_time,kyjs_time,dest_unit,xz,fs_loc,xc_loc,xc_locpt,weather_info,trend_info,temper_info,humidity_info,light_info,bh_flag,bhr_name,bhr_unit_name,bhr_pos,bh_function,xc_info,bd_reason,jzr,jzr_sex,jzr_birth,jzr_address,zhr_name,zhr_unit_name,zhr_pos,bhr_name,blr_name,ztr_name,zxr_name,lxr_name,lyr_name,xc_disp,record")] pbs_record record)
         {
             if (ModelState.IsValid)
             {
@@ -335,7 +335,7 @@ namespace FineUIMvc.QuickStart.Controllers
                 record.record_title = record.fs_loc + record.xc_loc + "-" + record.xz;
                 db.pbs_record.Add(record);
                 db.SaveChanges();
-                string recNo = "440305 " + DateTime.Now.Year.ToString() + " ";
+                string recNo = "440300 " + DateTime.Now.Year.ToString() + " 9";
                 for (int i = 0; i < 5 - record.record_id.ToString().Length; i++)
                 {
                     recNo += "0";
@@ -481,7 +481,7 @@ namespace FineUIMvc.QuickStart.Controllers
                 word.InsertText(record.ky_date.Value.Year.ToString());
 
                 word.GotoBookMark("ky_no");
-                word.InsertText(record.record_no.Substring(record.record_no.Count()-5));
+                word.InsertText(record.record_no.Substring(record.record_no.Count()-6));
 
                 word.GotoBookMark("ky_unit");
                 word.SetFont("Underlined");
@@ -492,7 +492,7 @@ namespace FineUIMvc.QuickStart.Controllers
                 word.InsertText(record.ky_date.Value.Year.ToString());
 
                 word.GotoBookMark("ky_no2");
-                word.InsertText(record.record_no.Substring(record.record_no.Count() - 5));
+                word.InsertText(record.record_no.Substring(record.record_no.Count() - 6));
 
                 word.GotoBookMark("ky_unit2");
                 word.InsertText(record.ky_unit_name);
@@ -518,10 +518,8 @@ namespace FineUIMvc.QuickStart.Controllers
                 {
                     reason = "";
                 }
-                for(int k = reason.Length; k < 320; k++)
-                {
-                    reason += " ";
-                }
+                reason = reason.PadRight(340);
+                
                 word.InsertText(reason);
 
                 word.GotoBookMark("kykssj");
@@ -557,10 +555,8 @@ namespace FineUIMvc.QuickStart.Controllers
                 {
                     loc = record.fs_loc + record.xc_loc;
                 }
-                for (int k = loc.Length; k < 160; k++)
-                {
-                    loc += " ";
-                }
+                loc = loc.PadRight(182);
+                
                 word.InsertText(loc);
 
                 word.GotoBookMark("bh_flag");
@@ -697,32 +693,16 @@ namespace FineUIMvc.QuickStart.Controllers
                 word.GotoBookMark("zhr_pos");
                 word.InsertText(record.zhr_pos);
 
-                word.GotoBookMark("xc_disp");
-                /*
-                string xc_disp = record.xc_disp;
-                for (int k = xc_disp.Length; k < 900; k++)
-                {
-                    xc_disp += " ";
-                }*/
-                word.InsertText(record.xc_disp);
-
-                word.GotoBookMark("kyyear3");
-                word.InsertText(record.ky_date.Value.Year.ToString());
-
-                word.GotoBookMark("ky_no3");
-                word.InsertText(record.record_no.Substring(record.record_no.Count() - 5));
-
+                word.GotoBookMark("xc_disp");             
+                word.InsertText(record.xc_disp.PadRight(1330));
+                                
                 word.GotoBookMark("blr");
                 string blr = record.blr_name;
                 if (blr == null)
                 {
                     blr = "";
                 }
-                for (int k = blr.Length; k < 70; k++)
-                {
-                    blr += " ";
-                }
-                word.InsertText(blr);
+                word.InsertText(blr.PadRight(70));
 
                 word.GotoBookMark("ztr");
                 string ztr = record.ztr_name;
@@ -730,11 +710,7 @@ namespace FineUIMvc.QuickStart.Controllers
                 {
                     ztr = "";
                 }
-                for (int k = ztr.Length; k < 70; k++)
-                {
-                    ztr += " ";
-                }
-                word.InsertText(ztr);
+                word.InsertText(ztr.PadRight(70));
 
                 word.GotoBookMark("zxr");
                 string zxr = record.zxr_name;
@@ -742,11 +718,7 @@ namespace FineUIMvc.QuickStart.Controllers
                 {
                     zxr = "";
                 }
-                for (int k = zxr.Length; k < 70; k++)
-                {
-                    zxr += " ";
-                }
-                word.InsertText(zxr);
+                word.InsertText(zxr.PadRight(70));
 
                 word.GotoBookMark("lxr");
                 string lxr = record.lxr_name;
@@ -754,23 +726,33 @@ namespace FineUIMvc.QuickStart.Controllers
                 {
                     lxr = "";
                 }
-                for (int k = lxr.Length; k < 70; k++)
-                {
-                    lxr += " ";
-                }
-                word.InsertText(lxr);
+                word.InsertText(lxr.PadRight(70));
 
                 word.GotoBookMark("lyr");
                 string lyr = record.lyr_name;
                 if (lyr == null)
                 {
                     lyr = "";
-                }
-                for (int k = lyr.Length; k < 70; k++)
-                {
-                    lyr += " ";
-                }
-                word.InsertText(lyr);
+                }                
+                word.InsertText(lyr.PadRight(70));
+
+                word.GotoBookMark("jzrsex");
+                word.InsertText(record.jzr_sex);
+
+                word.GotoBookMark("jzrbirth");
+                word.InsertText(record.jzr_birth);
+
+                word.GotoBookMark("jzraddress");
+                word.InsertText(record.jzr_address);
+
+                word.GotoBookMark("jzrqm");
+                System.Drawing.Image qmImg = System.Drawing.Image.FromFile(path + record.uuid + "\\" + record.uuid+".png");
+                qmImg = UtilsTool.RotateImg(qmImg, -90);
+                string rotatePath = path + "tmp\\" + record.uuid + "_tmp.png";
+                qmImg.Save(rotatePath);
+                word.InsertPictureStatic(rotatePath, 100, 100);
+                word.GotoBookMark("jzrqm2");
+                word.InsertPictureStatic(rotatePath, 100, 100);
 
                 word.GotoBookMark("bg_date1_year");
                 word.InsertText(UtilsTool.NumtoUpper(DateTime.Now.Year%10));
@@ -808,14 +790,26 @@ namespace FineUIMvc.QuickStart.Controllers
                         Font titlefont = new Font("宋体", 65);
                         Font contentfont = new Font("宋体", 40);
                         SolidBrush sbrush = new SolidBrush(Color.Black);
-                        string title = record.record_title;
+                        string title = record.af_time.Value.ToString("yyyyMMdd")+" "+record.fs_loc+record.xc_loc+record.xz;
+                        string markHint = "";
+                        if (pic.file_url.Substring(pic.file_url.Length - 8).Equals("xct.jpeg"))
+                        {
+                            title += "中心现场方位示意图";
+                            markHint = "中心现场";
+                        }
+                        else if(pic.file_url.Substring(pic.file_url.Length - 8).Equals("pmt.jpeg"))
+                        {
+                            title += "中心现场方位示意图";
+                            markHint = "案发位置";
+                        }                        
 
-                        g.DrawString(title, titlefont, sbrush, new PointF(500, 200));
+                        g.DrawString(title, titlefont, sbrush, new PointF(300, 200));
+                        g.DrawString(markHint, titlefont, sbrush, new PointF(2600, 1300));
                         g.DrawString(record.xc_loc, contentfont, sbrush, new PointF(2600, 1800));
-                        g.DrawString(record.bj_time.ToString(), contentfont, sbrush, new PointF(2600, 1900));
-                        g.DrawString(record.bg_unit_name, contentfont, sbrush, new PointF(2600, 2030));
+                        g.DrawString(record.bj_time.Value.ToString("yyyy年MM月dd日 HH时mm分"), contentfont, sbrush, new PointF(2600, 1900));
+                        g.DrawString(record.unit_full_name, contentfont, sbrush, new PointF(2600, 2030));
                         g.DrawString(record.ztr_name, contentfont, sbrush, new PointF(2600, 2150));
-                        g.DrawString(DateTime.Now.ToString(), contentfont, sbrush, new PointF(2600, 2270));
+                        g.DrawString(DateTime.Now.ToString("yyyy年MM月dd日 HH时mm分"), contentfont, sbrush, new PointF(2600, 2270));
 
                         System.Drawing.Image mapImg = System.Drawing.Image.FromFile(path + record.uuid + "\\" + pic.file_url);
 
@@ -899,7 +893,7 @@ namespace FineUIMvc.QuickStart.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult btnEdit_Click([Bind(Include = "record_id,bg_unit,ky_unit,ky_date,bj_time,bjr,bjr_sex," +
+        public ActionResult btnEdit_Click([Bind(Include = "record_id,record_aj_no,record_jj_no,record_ky_no,bg_unit,ky_unit,ky_date,af_time,bj_time,bjr,bjr_sex," +
             "bjr_idcard,bjr_phoneNo,kyks_time,kyjs_time,dest_unit,xz,fs_loc,xc_loc,xc_locpt,weather_info,trend_info,temper_info," +
             "humidity_info,light_info,bh_flag,bhr_name,bhr_unit_name,bhr_pos,bh_function,xc_info,bd_reason,jzr,jzr_sex,jzr_birth,jzr_address,zhr_name,zhr_unit_name,zhr_pos,bhr_name,blr_name,ztr_name,zxr_name,lxr_name,lyr_name,xc_disp,record_reason")] pbs_record record)
         {
@@ -912,6 +906,10 @@ namespace FineUIMvc.QuickStart.Controllers
                 db.pbs_record.Attach(record);
                 var stateEntity = ((IObjectContextAdapter)db).ObjectContext.ObjectStateManager.GetObjectStateEntry(record);
                 stateEntity.SetModifiedProperty("record_title");
+                stateEntity.SetModifiedProperty("record_aj_no");
+                stateEntity.SetModifiedProperty("record_jj_no");
+                stateEntity.SetModifiedProperty("record_ky_no");
+                stateEntity.SetModifiedProperty("af_time");
                 stateEntity.SetModifiedProperty("bg_unit");
                 stateEntity.SetModifiedProperty("ky_unit");
                 stateEntity.SetModifiedProperty("ky_date");
@@ -965,7 +963,7 @@ namespace FineUIMvc.QuickStart.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult btnEditSubmit_Click([Bind(Include = "record_id,bg_unit,ky_unit,ky_date,bj_time,bjr,bjr_sex,bjr_idcard,bjr_phoneNo,kyks_time,kyjs_time,dest_unit,xz,fs_loc,xc_loc,xc_locpt,weather_info,trend_info,temper_info,humidity_info,light_info,bh_flag,bhr_name,bhr_unit_name,bhr_pos,bh_function,xc_info,bd_reason,jzr,jzr_sex,jzr_birth,jzr_address,zhr_name,zhr_unit_name,zhr_pos,bhr_name,blr_name,ztr_name,zxr_name,lxr_name,lyr_name,xc_disp,record_reason")] pbs_record record)
+        public ActionResult btnEditSubmit_Click([Bind(Include = "record_id,record_aj_no,record_jj_no,record_ky_no,bg_unit,ky_unit,ky_date,af_time,bj_time,bjr,bjr_sex,bjr_idcard,bjr_phoneNo,kyks_time,kyjs_time,dest_unit,xz,fs_loc,xc_loc,xc_locpt,weather_info,trend_info,temper_info,humidity_info,light_info,bh_flag,bhr_name,bhr_unit_name,bhr_pos,bh_function,xc_info,bd_reason,jzr,jzr_sex,jzr_birth,jzr_address,zhr_name,zhr_unit_name,zhr_pos,bhr_name,blr_name,ztr_name,zxr_name,lxr_name,lyr_name,xc_disp,record_reason")] pbs_record record)
         {
 
             if (ModelState.IsValid)
@@ -975,6 +973,10 @@ namespace FineUIMvc.QuickStart.Controllers
                 db.pbs_record.Attach(record);
                 var stateEntity = ((IObjectContextAdapter)db).ObjectContext.ObjectStateManager.GetObjectStateEntry(record);
                 stateEntity.SetModifiedProperty("record_title");
+                stateEntity.SetModifiedProperty("record_aj_no");
+                stateEntity.SetModifiedProperty("record_jj_no");
+                stateEntity.SetModifiedProperty("record_ky_no");
+                stateEntity.SetModifiedProperty("af_time");
                 stateEntity.SetModifiedProperty("bg_unit");
                 stateEntity.SetModifiedProperty("ky_unit");
                 stateEntity.SetModifiedProperty("ky_date");

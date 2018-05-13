@@ -45,6 +45,11 @@ namespace FineUIMvc.QuickStart.Models
         public virtual DbSet<investigate_info> investigate_info { get; set; }
         public virtual DbSet<sys_version> sys_version { get; set; }
         public virtual DbSet<view_report> view_report { get; set; }
+        public virtual DbSet<record_info> record_info { get; set; }
+        public virtual DbSet<trace_info> trace_info { get; set; }
+        public virtual DbSet<wx_user> wx_user { get; set; }
+        public virtual DbSet<view_recordinfo> view_recordinfo { get; set; }
+        public virtual DbSet<view_trace_info> view_trace_info { get; set; }
     
         public virtual ObjectResult<sys_unit> showChildUnits(Nullable<int> unitId)
         {

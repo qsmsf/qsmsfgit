@@ -2,15 +2,45 @@
   <div>
     <group>
       <x-input title="案件名称" v-model="xz" text-align='right'></x-input>
+      <x-input title="案件编号" v-model="record_aj_no" text-align='right'></x-input>
+      <x-input title="接警编号" v-model="record_jj_no" text-align='right'></x-input>
+      <x-input title="现场勘验号" v-model="record_ky_no" text-align='right'></x-input>
+      <cell title="现场方位"  is-link @click.native="fetchXct" ></cell>
+      <div v-show= "showsctdiv">
+        <img src=""  id="xctImg" width="300" height="420" >
+        <canvas id="xctCanvas" width="800" height="560" style="display:none" ></canvas>
+        <flexbox>
+          <flexbox-item>
+            <x-button @click.native="xctUpload" type="primary" > 上传方位图 </x-button>
+          </flexbox-item>
+          <flexbox-item>
+            <x-button @click.native="xctCancel" type="warn" > 取消选择 </x-button>
+          </flexbox-item>
+        </flexbox>
+      </div>
+      <cell title="现场平面"  is-link @click.native="fetchPmt" ></cell>
+      <div v-show= "showpmtdiv">
+        <img src=""  id="pmtImg" width="300" height="420" >
+        <canvas id="pmtCanvas" width="800" height="560" style="display:none" ></canvas>
+        <flexbox>
+          <flexbox-item>
+            <x-button @click.native="pmtUpload" type="primary" > 上传平面图 </x-button>
+          </flexbox-item>
+          <flexbox-item>
+            <x-button @click.native="pmtCancel" type="warn" > 取消选择 </x-button>
+          </flexbox-item>
+        </flexbox>
+      </div>
+
       <x-input title="发生区域" v-model="fsqy" text-align='right'></x-input>
-      <x-input title="现场位置" v-model='xcwz' text-align='right'></x-input>
-      <cell title="现场坐标" v-bind:inline-desc="xcwzzb" is-link @click.native="fetchMapLoc" ></cell>
+      <x-input title="现场位置" v-model='xcwz' text-align='right'></x-input>      
       <popup-picker title="勘验单位" :data="unitList" v-model="kyUnit"
         @on-show="onShow" @on-hide="onHide" @on-change="onChange" show-name></popup-picker>
       <popup-picker title="接警人" :data='userList' v-model="jjr" show-name></popup-picker>
       <x-input title="其他接警人" v-model='jjrOther' text-align='right'></x-input>
       <popup-picker title="接警单位" :data="unitList" v-model="bjUnit" show-name></popup-picker>
       <datetime v-model="kyDate" title="勘验日期" confirm-text="完成" cancel-text="取消" format="YYYY-MM-DD" ></datetime>
+      <datetime v-model="afTime" title="案发时间" confirm-text="完成" cancel-text="取消" format="YYYY-MM-DD HH:mm" ></datetime>
       <datetime v-model="bjTime" title="接警时间" confirm-text="完成" cancel-text="取消" format="YYYY-MM-DD HH:mm" ></datetime>
       <datetime v-model="kyksTime" title="勘验开始时间" confirm-text="完成" cancel-text="取消" format="YYYY-MM-DD HH:mm" ></datetime>
       <datetime v-model="kyjsTime" title="勘验结束时间" placeholder="不填则默认为提交时间" confirm-text="完成" cancel-text="取消" format="YYYY-MM-DD HH:mm" ></datetime>
@@ -91,8 +121,8 @@
 </template>
 
 <script>
-import { Group, XInput, PopupPicker, Picker, Datetime, XTextarea, XAddress, ChinaAddressData, Cell, XSwitch, Checker, CheckerItem, Popup, XButton } from 'vux'
-import { SET_RECORDBASE } from '../../mutationTypes'
+import { Group, XInput, PopupPicker, Picker, Datetime, XTextarea, XAddress, ChinaAddressData, Cell, XSwitch, Checker, CheckerItem, Popup, XButton, Flexbox, FlexboxItem } from 'vux'
+import { SET_RECORDBASE, SET_XCT } from '../../mutationTypes'
 export default {
   components: {
     Group,
@@ -108,7 +138,9 @@ export default {
     Popup,
     Checker,
     CheckerItem,
-    XButton
+    XButton,
+    Flexbox,
+    FlexboxItem
   },
   computed: {
     unitList: function () {
@@ -138,9 +170,22 @@ export default {
     if (this.$store.getters.GetterEntity.light_info !== '') {
       this.lightList = this.$store.getters.GetterEntity.light_info.split('+')
     }
+    if(this.$store.getters.GetterEntity.xct_src !== '') {
+      var image1 = document.getElementById('xctImg')
+      image1.src = this.$store.getters.GetterEntity.xct_src      
+      this.showsctdiv = true
+      this.xctSrc = this.$store.getters.GetterEntity.xct_src
+    }
+    if(this.$store.getters.GetterEntity.pmt_src !== '') {
+      var image2 = document.getElementById('pmtImg')
+      image2.src = this.$store.getters.GetterEntity.pmt_src
+      this.showpmtdiv = true
+      this.pmtSrc = this.$store.getters.GetterEntity.pmt_src
+    }
+
   },
   methods: {
-    fetchMapLoc () {
+    saveInfo () {
       let lightInfo = ''
       if (this.lightList.length !== 0) {
         this.lightList.forEach(function (item) {
@@ -149,11 +194,15 @@ export default {
         lightInfo = lightInfo.substring(0, lightInfo.length - 1)
       }
       let entity = {
+        record_ky_no : this.record_ky_no,
+        record_jj_no : this.record_jj_no,
+        record_aj_no : this.record_aj_no,
         ky_unit: this.kyUnit.length === 0 ? 0 : parseInt(this.kyUnit[0]),
         jjr: this.jjr.length === 0 ? 0 : parseInt(this.jjr[0]),
         jjr_other: this.jjrOther,
         bg_unit: this.bjUnit.length === 0 ? 0 : parseInt(this.bjUnit[0]),
         ky_date: this.kyDate,
+        af_time: this.afTime,
         bj_time: this.bjTime,
         kyks_time: this.kyksTime,
         kyjs_time: this.kyjsTime,
@@ -177,7 +226,169 @@ export default {
         bd_reason: this.bdyy.length === 0 ? '' : this.bdyy[0]
       }
       this.$store.commit(SET_RECORDBASE, entity)
-      this.$router.push('/FetchMapLoc')
+      let entity6 = {
+        xct_src: this.xctSrc,
+        pmt_src: this.qmtSrc,
+      }
+      this.$store.commit(SET_XCT, entity6)   
+    },
+    fetchXct () {
+      //this.saveInfo()
+      Cordova.exec(this.onSuccessXct, this.onError, 'Interactive', 'shotMapInfo', [])
+    },
+    fetchPmt () {
+      //this.saveInfo()
+      Cordova.exec(this.onSuccessPmt, this.onError, 'Interactive', 'shotMapInfo', [])
+    },
+    xctUpload () {
+      var canvas = document.getElementById('xctCanvas')
+            
+      var imgBase64 = canvas.toDataURL('image/jpeg')
+      
+      var blob = this.convertImgDataToBlob(imgBase64)
+      
+      var fileName = this.$store.getters.GetterEntity.uuid + '_xct.jpeg'
+
+      this.uploadZT(blob, fileName)
+    },
+    pmtUpload () {
+      var canvas = document.getElementById('pmtCanvas')
+            
+      var imgBase64 = canvas.toDataURL('image/jpeg')
+      
+      var blob = this.convertImgDataToBlob(imgBase64)
+      
+      var fileName = this.$store.getters.GetterEntity.uuid + '_pmt.jpeg'
+
+      this.uploadZT(blob, fileName)
+    },
+    onSuccessXct: function (result) {
+      var res = JSON.parse(result)
+      
+      var image = document.getElementById('xctImg')
+      image.src = res.shot_picture_path
+      this.xctSrc = res.shot_picture_path
+      this.fsqy = res.address.substring(0,9)
+      this.xcwz = res.address.substring(9)
+      this.xcmzzb = res.latitude + ':'+ res.longitude
+      
+      this.showsctdiv = true
+
+      image.onload = function(){
+        //var canvas = this.convertImageToCanvas('xctCanvas',image)
+        var canvas = document.getElementById('xctCanvas')
+        canvas.getContext("2d").drawImage(this, 0, 280, 800, 560, 0, 0, 800, 560)
+        
+      }
+    },
+    xctCancel: function () {
+      this.xctSrc = ''
+      this.showsctdiv = false;
+    },
+    onSuccessPmt: function (result) {
+      var res = JSON.parse(result)
+      
+      var image = document.getElementById('pmtImg')
+      image.src = res.shot_picture_path
+      this.pmtSrc = res.shot_picture_path
+      this.showpmtdiv = true
+      image.onload = function(){
+        //var canvas = this.convertImageToCanvas('xctCanvas',image)
+        var canvas = document.getElementById('pmtCanvas')
+        canvas.getContext("2d").drawImage(this, 0, 280, 800, 560, 0, 0, 800, 560)        
+      }
+    },
+    pmtCancel: function () {
+      this.pmtSrc = ''
+      this.showpmtdiv = false;
+    },
+    onError: function (result) {
+    },
+    convertImgDataToBlob: function(base64Data) {
+        var format = "image/jpeg";
+        var base64 = base64Data;
+        var code = window.atob(base64.split(",")[1]);
+        var aBuffer = new window.ArrayBuffer(code.length);
+        var uBuffer = new window.Uint8Array(aBuffer);
+        for(var i = 0; i < code.length; i++){
+            uBuffer[i] = code.charCodeAt(i) & 0xff ;
+        }
+
+        var blob=null;
+        try{
+            blob = new Blob([uBuffer], {type : format});
+        }
+        catch(e){
+            window.BlobBuilder = window.BlobBuilder ||
+            window.WebKitBlobBuilder ||
+            window.MozBlobBuilder ||
+            window.MSBlobBuilder;
+            if(e.name == 'TypeError' && window.BlobBuilder){
+                var bb = new window.BlobBuilder();
+                bb.append(uBuffer.buffer);
+                blob = bb.getBlob("image/jpeg");
+
+            }
+            else if(e.name == "InvalidStateError"){
+                blob = new Blob([aBuffer], {type : format});
+            }
+            else{
+
+            }
+        }        
+        return blob;
+       
+    },
+    dataURItoBlob: function (base64Data) {  
+      var byteString;  
+      if (base64Data.split(',')[0].indexOf('base64') >= 0)  
+          byteString = atob(base64Data.split(',')[1])
+      else  
+          byteString = unescape(base64Data.split(',')[1])
+      var mimeString = base64Data.split(',')[0].split(':')[1].split(';')[0] 
+      var ia = new Uint8Array(byteString.length)
+      for (var i = 0; i < byteString.length; i++) {  
+          ia[i] = byteString.charCodeAt(i)
+      }  
+      return new Blob([ia], {type: mimeString})
+    },
+    convertImageToCanvas(canvasName,image){
+      var canvas = document.createElement(canvasName)
+      canvas.width = image.width;
+      canvas.height = image.height;
+      // 坐标(0,0) 表示从此处开始绘制，相当于偏移。
+      canvas.getContext("2d").drawImage(image, 0, 0)
+
+      return canvas
+    },
+    uploadZT (blob, fileName) {
+      
+      var fd = new FormData();
+      fd.append(fileName, blob);//fileData为自定义    
+      
+      this.$http({
+        url: this.$store.getters.GetterBaseUrl + 'api/Files/singleUpload',
+        method: 'POST',
+        body: fd,
+        headers: {
+          contentType: 'application/x-www-form-urlencoded',
+          token: this.$store.getters.GetterToken
+        }
+      }).then(function (res) {
+        if (res.status === 200) {
+          alert("上传成功")
+        } else {
+          this.$vux.toast.show({
+            text: res.data.message,
+            type: 'warn'
+          })          
+        }
+      }).catch(err => {
+        this.$vux.toast.show({
+          text: err,
+          type: 'warn'
+        })
+      })
     },
     onChangeBhrName (value) {
       this.bhrName = value[0]
@@ -207,11 +418,19 @@ export default {
       showBhrUnitPopup: false,
       showBhfsPopup: false,
       showBdyyPopup: false,
+      showsctdiv: false,
+      showpmtdiv: false,
       bhrPickerName: [''],
       bhrUnitPickerName: [''],
       bhfsPicker: [''],
       bdyyPicker: [''],
+      record_ky_no: this.$store.getters.GetterEntity.record_ky_no,
+      record_jj_no: this.$store.getters.GetterEntity.record_jj_no,
+      record_aj_no: this.$store.getters.GetterEntity.record_aj_no,
+      xctSrc: this.$store.getters.GetterEntity.xct_src,      
+      pmtSrc: this.$store.getters.GetterEntity.pmt_src,
       kyUnit: this.$store.getters.GetterEntity.ky_unit === 0 ? [] : [this.$store.getters.GetterEntity.ky_unit + ''],
+      afTime: this.$store.getters.GetterEntity.af_time,
       bjTime: this.$store.getters.GetterEntity.bj_time,
       bjUnit: this.$store.getters.GetterEntity.bg_unit === 0 ? [] : [this.$store.getters.GetterEntity.bg_unit + ''],
       kyksTime: this.$store.getters.GetterEntity.kyks_time,

@@ -32,121 +32,9 @@
   </div>
 </template>
 
-<style>
-  
-  .inner.draw {
-    
-  }
-  .draw h5 {
-    margin-bottom: 10px;
-  }
-  #img-box {
-    flex: 1;
-    padding-left: 10px;
-  }
-  #img-box .img-item {
-    position: relative;
-    display: inline-block;
-  }
-  #img-box .img-item .fa {
-    position: absolute;
-    cursor: pointer;
-    right: 1px;
-    top: -1px;
-    font-size: 12px;
-    font-weight: 1;
-    display: none;
-    color: #ccc;
-  }
-  #img-box .img-item:hover .fa {
-    display: block;
-  }
-  #img-box .img-item .fa:hover {
-    color: #f2849e;
-  }
-  #img-box img {
-    border: 1px #ccc solid;
-    width: 90px;
-    height: 60px;
-    margin: 5px;
-  }
-  .wrap{
-    width: 100%;
-    border: 1px #585858 solid;
-    overflow: hidden;
-  }
-  .fl{
-    float: left;
-    display: block;
-  }
-  #canvas{
-    border-right: 1px #585858 solid;
-    cursor: crosshair;
-  }
-  #control{
-    width: 130px;
-    height: 400px;
-    margin-left: 4px;
-  }
-  #control div{
-    padding: 5px;
-  }
-  #canvas-color ul{
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-  }
-  #canvas-color ul li{
-    float: left;
-    display: inherit;
-    width: 13px;
-    height: 13px;
-    border: 3px #fff solid;
-    margin: 8px;
-    cursor: pointer;
-  }
-  #canvas-color .active {
-    border: 1px solid #f2849e;
-  }
-  #canvas-brush span{
-    display: inline-block;
-    width: 20px;
-    height: 15px;
-    margin-left: 10px;
-    cursor: pointer;
-  }
-  #canvas-brush .small {
-    font-size: 12px;
-  }
-  #canvas-brush .middle {
-    font-size: 14px;
-  }
-  #canvas-brush .big {
-    font-size: 16px;
-  }
- 
-  #canvas-control span{
-    display: inline-block;
-    font-size: 14px;
-    width: 20px;
-    height: 15px;
-    margin-left: 10px;
-    cursor: pointer;
-  }
-  #canvas-control .active,
-  #canvas-brush .active {
-    color: #f2849e;
-  }
-  .drawImage {
-    width: 100px;
-    height: 30px;
-    font-size: 12px;
-    line-height: 30px;
-  }
-</style>
-
 <script>
 import { XButton, XHeader, Flexbox, FlexboxItem, Divider, Confirm } from 'vux'
+import { SET_QMBASE64 } from '../mutationTypes'
   export default {
     components: {
       XButton,
@@ -326,6 +214,8 @@ import { XButton, XHeader, Flexbox, FlexboxItem, Divider, Confirm } from 'vux'
       onConfirm () {
         const canvas = document.querySelector('#canvas')
         var src = canvas.toDataURL('image/png')
+        
+        this.$store.commit(SET_QMBASE64, src)
         var blob = this.dataURItoBlob(src)
       
         //var req = new XMLHttpRequest()
@@ -336,21 +226,7 @@ import { XButton, XHeader, Flexbox, FlexboxItem, Divider, Confirm } from 'vux'
         var fileName = this.$store.getters.GetterEntity.uuid + '.png'
         var fd = new FormData();
         fd.append(fileName, blob);//fileData为自定义    
-        //ajax上传，ajax的形式随意，JQ的写法也没有问题  
-        //需要注意的是服务端需要设定，允许跨域请求。数据接收的方式和<input type="file"/> 上传的文件没有区别  
-        /*
-        //var xmlHttp = new XMLHttpRequest();  
-        //xmlHttp.open("POST", this.$store.getters.GetterBaseUrl + 'api/Files/singleUpload');  
-        //xmlHttp.setRequestHeader("token", this.$store.getters.GetterToken);//设置请求header,按需设定，非必须  
-        //xmlHttp.send(fd);  
-        //ajax回调  
-        xmlHttp.onreadystatechange = () => { 
-          console.log(xmlHttp)
-          if(xmlHttp.readyState == 4){
-            this.$router.push({name: 'Step4',query: {isAdd: this.isAdd, curStep: 4}})
-          }
-        }
-        */
+        
         this.$http({
           url: this.$store.getters.GetterBaseUrl + 'api/Files/singleUpload',
           method: 'POST',
@@ -389,3 +265,116 @@ import { XButton, XHeader, Flexbox, FlexboxItem, Divider, Confirm } from 'vux'
     }
   }
 </script>
+
+<style>
+  
+  .inner.draw {
+    
+  }
+  .draw h5 {
+    margin-bottom: 10px;
+  }
+  #img-box {
+    flex: 1;
+    padding-left: 10px;
+  }
+  #img-box .img-item {
+    position: relative;
+    display: inline-block;
+  }
+  #img-box .img-item .fa {
+    position: absolute;
+    cursor: pointer;
+    right: 1px;
+    top: -1px;
+    font-size: 12px;
+    font-weight: 1;
+    display: none;
+    color: #ccc;
+  }
+  #img-box .img-item:hover .fa {
+    display: block;
+  }
+  #img-box .img-item .fa:hover {
+    color: #f2849e;
+  }
+  #img-box img {
+    border: 1px #ccc solid;
+    width: 90px;
+    height: 60px;
+    margin: 5px;
+  }
+  .wrap{
+    width: 100%;
+    border: 1px #585858 solid;
+    overflow: hidden;
+  }
+  .fl{
+    float: left;
+    display: block;
+  }
+  #canvas{
+    border-right: 1px #585858 solid;
+    cursor: crosshair;
+  }
+  #control{
+    width: 130px;
+    height: 400px;
+    margin-left: 4px;
+  }
+  #control div{
+    padding: 5px;
+  }
+  #canvas-color ul{
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+  #canvas-color ul li{
+    float: left;
+    display: inherit;
+    width: 13px;
+    height: 13px;
+    border: 3px #fff solid;
+    margin: 8px;
+    cursor: pointer;
+  }
+  #canvas-color .active {
+    border: 1px solid #f2849e;
+  }
+  #canvas-brush span{
+    display: inline-block;
+    width: 20px;
+    height: 15px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  #canvas-brush .small {
+    font-size: 12px;
+  }
+  #canvas-brush .middle {
+    font-size: 14px;
+  }
+  #canvas-brush .big {
+    font-size: 16px;
+  }
+ 
+  #canvas-control span{
+    display: inline-block;
+    font-size: 14px;
+    width: 20px;
+    height: 15px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  #canvas-control .active,
+  #canvas-brush .active {
+    color: #f2849e;
+  }
+  .drawImage {
+    width: 100px;
+    height: 30px;
+    font-size: 12px;
+    line-height: 30px;
+  }
+</style>

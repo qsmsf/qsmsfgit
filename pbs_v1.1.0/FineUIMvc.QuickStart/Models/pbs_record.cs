@@ -11,134 +11,78 @@ namespace FineUIMvc.QuickStart.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class pbs_record
     {
         public int record_id { get; set; }
         public string uuid { get; set; }
-        [Display(Name = "案件名称")]
         public string record_title { get; set; }
-        [Display(Name = "勘验单位")]
         public Nullable<int> ky_unit { get; set; }
-        [Display(Name = "接警单位")]
         public Nullable<int> bg_unit { get; set; }
-        [Display(Name = "勘验日期")]
         public Nullable<System.DateTime> ky_date { get; set; }
-        [Display(Name = "接警人")]
         public Nullable<int> jjr { get; set; }
-        [Display(Name = "报警时间")]
         public Nullable<System.DateTime> bj_time { get; set; }
-        [Display(Name = "报警人")]
         public string bjr { get; set; }
-        [Display(Name = "报警人性别")]
         public Nullable<int> bjr_sex { get; set; }
-        [Display(Name = "报警人身份证")]
         public string bjr_idcard { get; set; }
-        [Display(Name = "报警人电话")]
         public string bjr_phoneNo { get; set; }
-        [Display(Name = "发生区域")]
         public string fs_loc { get; set; }
-        [Display(Name = "性质")]
         public string xz { get; set; }
-        [Display(Name = "勘验开始时间")]
         public Nullable<System.DateTime> kyks_time { get; set; }
-        [Display(Name = "勘验结束时间")]
         public Nullable<System.DateTime> kyjs_time { get; set; }
-        [Display(Name = "现场位置")]
         public string xc_loc { get; set; }
-        [Display(Name = "现场坐标")]
         public string xc_locpt { get; set; }
-        [Display(Name = "是否现场保护")]
         public Nullable<sbyte> bh_flag { get; set; }
-        [Display(Name = "保护人")]
         public Nullable<int> bhr { get; set; }
-        [Display(Name = "保护人职位")]
         public string bhr_pos { get; set; }
-        [Display(Name = "保护方式")]
         public string bh_function { get; set; }
-        [Display(Name = "现场状况")]
         public string xc_info { get; set; }
-        [Display(Name = "变动原因")]
         public string bd_reason { get; set; }
-        [Display(Name = "天气情况")]
         public string weather_info { get; set; }
-        [Display(Name = "温度")]
         public string temper_info { get; set; }
-        [Display(Name = "湿度")]
         public string humidity_info { get; set; }
-        [Display(Name = "风向")]
         public string trend_info { get; set; }
-        [Display(Name = "光照")]
         public string light_info { get; set; }
-        [Display(Name = "指挥人")]
         public Nullable<int> zhr { get; set; }
-        [Display(Name = "指挥人单位")]
         public Nullable<int> zhr_unit { get; set; }
-        [Display(Name = "指挥人职务")]
         public string zhr_pos { get; set; }
-        [Display(Name = "现场描述")]
         public string xc_disp { get; set; }
-        [Display(Name = "笔录人")]
         public Nullable<int> blr { get; set; }
-        [Display(Name = "制图人")]
         public Nullable<int> ztr { get; set; }
-        [Display(Name = "照相人")]
         public Nullable<int> zxr { get; set; }
-        [Display(Name = "录像人")]
         public Nullable<int> lxr { get; set; }
-        [Display(Name = "录音人")]
         public Nullable<int> lyr { get; set; }
-        [Display(Name = "见证人")]
         public string jzr { get; set; }
-        [Display(Name = "创建人")]
         public Nullable<int> creater_id { get; set; }
-        [Display(Name = "记录状态")]
         public Nullable<int> record_state { get; set; }
-        [Display(Name = "最近更新时间")]
         public Nullable<System.DateTime> update_time { get; set; }
-        [Display(Name = "创建时间")]
         public Nullable<System.DateTime> create_time { get; set; }
-        [Display(Name = "审核备注")]
         public string check_hint { get; set; }
-        [Display(Name = "提交审核单位")]
         public Nullable<int> dest_unit { get; set; }
-		[Display(Name = "案件编号")]
         public string record_no { get; set; }
-		[Display(Name = "其他接警人")]
         public string jjr_other { get; set; }
-		[Display(Name = "保护人单位")]
         public Nullable<int> bhr_unit { get; set; }
-		[Display(Name = "勘验事由")]
         public string record_reason { get; set; }
         public string doc_url { get; set; }
-		[Display(Name = "保护人")]
         public string bhr_name { get; set; }
-		[Display(Name = "保护人单位")]
         public string bhr_unit_name { get; set; }
         public string east { get; set; }
         public string west { get; set; }
         public string south { get; set; }
         public string north { get; set; }
-		[Display(Name = "指挥人")]
         public string zhr_name { get; set; }
-		[Display(Name = "指挥人单位")]
         public string zhr_unit_name { get; set; }
-		[Display(Name = "笔录人")]
         public string blr_name { get; set; }
-		[Display(Name = "制图人")]
         public string ztr_name { get; set; }
-		[Display(Name = "照相人")]
         public string zxr_name { get; set; }
-		[Display(Name = "录像人")]
         public string lxr_name { get; set; }
-		[Display(Name = "录音人")]
         public string lyr_name { get; set; }
-		[Display(Name = "见证人性别")]
         public string jzr_sex { get; set; }
-		[Display(Name = "见证人出生")]
         public string jzr_birth { get; set; }
-		[Display(Name = "见证人地址")]
         public string jzr_address { get; set; }
+        public string record_ky_no { get; set; }
+        public string record_jj_no { get; set; }
+        public string record_aj_no { get; set; }
+        public Nullable<System.DateTime> af_time { get; set; }
     }
 }

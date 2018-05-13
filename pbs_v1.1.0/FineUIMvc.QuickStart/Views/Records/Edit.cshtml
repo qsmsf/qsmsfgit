@@ -27,21 +27,25 @@
                                 F.SimpleForm().ID("baseForm").ShowBorder(false).ShowHeader(false)
                                     .Items(
                                         F.HiddenFieldFor(m => m.record_id),
-                                        F.LabelFor(m => m.record_no),
+                                        F.LabelFor(m => m.record_no).Label("勘验流水号"),
                                         F.TextBoxFor(m => m.xz).Label("案件标题"),
-                                        F.DropDownListFor(m => m.dest_unit).AutoSelectFirstItem(false).ShowRedStar(true).Items(ViewBag.UnitList),
-                                        F.DropDownListFor(m => m.bg_unit)
+                                        F.TextBoxFor(m => m.record_aj_no).Label("案件编号"),
+                                        F.TextBoxFor(m => m.record_jj_no).Label("接警编号"),
+                                        F.TextBoxFor(m => m.record_ky_no).Label("勘验号"),
+                                        F.DropDownListFor(m => m.dest_unit).AutoSelectFirstItem(false).ShowRedStar(true).Items(ViewBag.UnitList).Label("提交审核单位"),
+                                        F.DropDownListFor(m => m.bg_unit).Label("接警单位")
                                                             .Items(ViewBag.UnitList),
-                                        F.DropDownListFor(m => m.ky_unit)
+                                        F.DropDownListFor(m => m.ky_unit).Label("勘验单位")
                                                             .Items(ViewBag.UnitList),
-                                        F.DatePickerFor(m => m.ky_date)
+                                        F.DatePickerFor(m => m.ky_date).Label("勘验日期")
                                                             .DateFormatString("yyyy-MM-dd"),
-                                        F.TextBoxFor(m => m.bj_time),
-                                        F.TextBoxFor(m => m.kyks_time),
-                                        F.TextBoxFor(m => m.kyjs_time),                                        
-                                        F.TextBoxFor(m => m.fs_loc),
-                                        F.TextBoxFor(m => m.xc_loc),
-                                        F.TextBoxFor(m => m.xc_locpt),
+                                        F.TextBoxFor(m => m.af_time).Label("案发时间"),
+                                        F.TextBoxFor(m => m.bj_time).Label("报警时间"),
+                                        F.TextBoxFor(m => m.kyks_time).Label("勘验开始时间"),
+                                        F.TextBoxFor(m => m.kyjs_time).Label("勘验结束时间"),                                        
+                                        F.TextBoxFor(m => m.fs_loc).Label("发生区域"),
+                                        F.TextBoxFor(m => m.xc_loc).Label("现场位置"),
+                                        F.TextBoxFor(m => m.xc_locpt).Label("现场坐标"),
                                         F.DropDownList().ID("weather_info").AutoSelectFirstItem(false).SelectedValue(Model.weather_info).Label("天气")
                                                 .Items(
                                                     F.ListItem().Text("晴").Value("晴"),
@@ -57,9 +61,9 @@
                                                     F.ListItem().Text("西").Value("西"),
                                                     F.ListItem().Text("北").Value("北")
                                                 ),
-                                        F.TextBoxFor(m => m.temper_info),
-                                        F.TextBoxFor(m => m.humidity_info),
-                                        F.TextBoxFor(m => m.light_info),
+                                        F.TextBoxFor(m => m.temper_info).Label("温度"),
+                                        F.TextBoxFor(m => m.humidity_info).Label("湿度"),
+                                        F.TextBoxFor(m => m.light_info).Label("光照"),
                                         F.HiddenFieldFor(m => m.bh_flag).ID("bh_flag"),
                                         F.RadioButtonList().Label("现场保护").ID("bhFlag").Listener("change", "onChangeBhFlag")
                                             .Items(
@@ -68,9 +72,9 @@
                                             ),
                                         F.Panel().ID("bh_panel").ShowHeader(false).Hidden(!ViewBag.showBhPanel)
                                             .Items(
-                                            F.TextBoxFor(m => m.bhr_name),
-                                            F.TextBoxFor(m => m.bhr_unit_name),
-                                            F.TextBoxFor(m => m.bhr_pos),
+                                            F.TextBoxFor(m => m.bhr_name).Label("保护人"),
+                                            F.TextBoxFor(m => m.bhr_unit_name).Label("保护人单位"),
+                                            F.TextBoxFor(m => m.bhr_pos).Label("保护人职位"),
                                             F.DropDownList().ID("bh_function").AutoSelectFirstItem(false).SelectedValue(Model.bh_function).Label("保护方式")
                                                 .Items(
                                                     F.ListItem().Text("专人看护现场，防止他人进入").Value("专人看护现场，防止他人进入"),
@@ -91,21 +95,21 @@
                                                     F.ListItem().Text("补勘现场").Value("补勘现场")
                                                 )
                                             ),
-                                        F.TextBoxFor(m => m.jzr),
-                                        F.TextBoxFor(m => m.jzr_sex),
-                                        F.TextBoxFor(m => m.jzr_birth),
-                                        F.TextBoxFor(m => m.jzr_address),
-                                        F.TextBoxFor(m => m.zhr_name),
-                                        F.TextBoxFor(m => m.zhr_unit_name),
-                                        F.TextBoxFor(m => m.zhr_pos),
-                                        F.TextBoxFor(m => m.blr_name),
-                                        F.TextBoxFor(m => m.ztr_name),
-                                        F.TextBoxFor(m => m.zxr_name),
-                                        F.TextBoxFor(m => m.lxr_name),
-                                        F.TextBoxFor(m => m.lyr_name),
-                                           
-                                        F.TextAreaFor(m =>m.record_reason).Height(150),
-                                        F.TextAreaFor(m => m.xc_disp).Height(300)
+                                        F.TextBoxFor(m => m.jzr).Label("见证人"),
+                                        F.TextBoxFor(m => m.jzr_sex).Label("见证人性别"),
+                                        F.TextBoxFor(m => m.jzr_birth).Label("见证人出生"),
+                                        F.TextBoxFor(m => m.jzr_address).Label("见证人地址"),
+                                        F.TextBoxFor(m => m.zhr_name).Label("指挥人"),
+                                        F.TextBoxFor(m => m.zhr_unit_name).Label("指挥人单位"),
+                                        F.TextBoxFor(m => m.zhr_pos).Label("指挥人职务"),
+                                        F.TextBoxFor(m => m.blr_name).Label("笔录人"),
+                                        F.TextBoxFor(m => m.ztr_name).Label("照相人"),
+                                        F.TextBoxFor(m => m.zxr_name).Label("制图人"),
+                                        F.TextBoxFor(m => m.lxr_name).Label("录像人"),
+                                        F.TextBoxFor(m => m.lyr_name).Label("录音人"),
+
+                                        F.TextAreaFor(m => m.record_reason).Height(150).Label("勘验事由"),
+                                        F.TextAreaFor(m => m.xc_disp).Height(300).Label("现场描述")
                                     )                                                                                             
                                 ),
                                 F.Tab().Title("制图信息").BodyPadding(5).ID("fileTab").Layout(LayoutType.Fit)

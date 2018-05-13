@@ -30,7 +30,7 @@
                     ),
                 F.Panel().ID("Panel2").Layout(LayoutType.Column).ShowHeader(false).ShowBorder(false)
                     .Items(
-                        F.TextBox().ID("qTitle").Label("案件编号").ColumnWidth("50%"),
+                        F.TextBox().ID("qTitle").Label("勘验流水号").ColumnWidth("50%"),
                         F.TextBox().ID("qTitle2").Label("案件标题").ColumnWidth("50%")
                     ),
                 
@@ -54,22 +54,25 @@
                 )
         )
         .Columns(
-            F.RenderField().HeaderText("案件编号").DataField("record_no").Width(160),
+            F.RenderField().HeaderText("勘验流水号").DataField("record_no").Width(100),
             F.RenderField().HeaderText("案件名称").DataField("record_title").ExpandUnusedSpace(true).Width(100),
-            F.RenderField().HeaderText("提交人").DataField("creater_id").RendererFunction("renderUser").Width(100),
+            F.RenderField().HeaderText("案件编号").DataField("record_aj_no").Width(50),
+            F.RenderField().HeaderText("接警编号").DataField("record_jj_no").Width(50),
+            F.RenderField().HeaderText("勘验编号").DataField("record_ky_no").Width(50),
+            F.RenderField().HeaderText("提交人").DataField("creater_id").RendererFunction("renderUser").Width(80),
             F.RenderField().HeaderText("勘验单位").DataField("ky_unit").Width(100).RendererFunction("renderUnit"),
             F.RenderField().HeaderText("勘验日期").DataField("ky_date").FieldType(FieldType.Date)
                 .Renderer(Renderer.Date).RendererArgument("yyyy-MM-dd").Width(100),
-            F.RenderField().HeaderText("状态").DataField("record_state").RendererFunction("renderState").Width(100),
-            F.RenderField().HeaderText("查看").Width(60).RendererFunction("renderDetailField")
+            F.RenderField().HeaderText("状态").DataField("record_state").RendererFunction("renderState").Width(80),
+            F.RenderField().HeaderText("查看").Width(50).RendererFunction("renderDetailField")
                 .Hidden(!ViewBag.showDetailBtn).TextAlign(TextAlign.Center).EnableHeaderMenu(false),
-            F.RenderField().HeaderText("编辑").Width(60).RendererFunction("renderEditField").DataField("record_state")
+            F.RenderField().HeaderText("编辑").Width(50).RendererFunction("renderEditField").DataField("record_state")
                 .TextAlign(TextAlign.Center).Hidden(!ViewBag.showEditBtn).EnableHeaderMenu(false),
-            F.RenderField().HeaderText("删除").Width(60).RendererFunction("renderDeleteField")
+            F.RenderField().HeaderText("删除").Width(50).RendererFunction("renderDeleteField")
                 .TextAlign(TextAlign.Center).Hidden(!ViewBag.showDeleteBtn).EnableHeaderMenu(false) ,
-            F.RenderField().HeaderText("审核").Width(60).RendererFunction("renderInvestigateField").DataField("record_state")
+            F.RenderField().HeaderText("审核").Width(50).RendererFunction("renderInvestigateField").DataField("record_state")
                 .TextAlign(TextAlign.Center).Hidden(!ViewBag.showInvestigateBtn).EnableHeaderMenu(false),
-            F.RenderField().HeaderText("反审核").Width(60).RendererFunction("renderAntiInvestField").DataField("record_state")
+            F.RenderField().HeaderText("反审核").Width(50).RendererFunction("renderAntiInvestField").DataField("record_state")
                 .TextAlign(TextAlign.Center).Hidden(!ViewBag.showAntiInvestBtn).EnableHeaderMenu(false)
         )
         .RecordCount(ViewBag.Grid1RecordCount)

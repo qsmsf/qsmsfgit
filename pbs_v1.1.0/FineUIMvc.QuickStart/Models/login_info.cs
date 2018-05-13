@@ -23,5 +23,8 @@ namespace FineUIMvc.QuickStart.Models
         public Nullable<int> user_state { get; set; }
         public Nullable<int> father_unit_id { get; set; }
         public string user_zw { get; set; }
+        public string openId { get; set; }
+        public string avatar_url { get; set; }
+        public string unit_full_name { get; set; }
     }
 }

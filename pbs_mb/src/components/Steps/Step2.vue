@@ -65,7 +65,7 @@ export default {
     generData1: function () {
       let entity = this.$store.getters.GetterEntity
       let bjTime = new Date(entity.bj_time)
-      this.recReason = this.getDateStrCH(bjTime) + ',' + this.$store.getters.GetterMe.member.unit_name + '接到事主报警：' + entity.fs_loc
+      this.recReason = this.getDateStrCH(bjTime) + ',' + this.$store.getters.GetterMe.member.unit_name + '接到报警：' + entity.fs_loc
       this.recReason += entity.xc_loc + '发生一宗' + entity.xz + '案。' + '需技术员对现场进行勘查。'
     },
     generData2: function () {

@@ -3,8 +3,11 @@
     <group>
       <x-input title="见证人" v-model='jzr' text-align='right'></x-input>
       <cell title="见证人签名"  is-link @click.native="fetchSingature" ></cell>
-      <x-input title="见证人性别" v-model='jzr_sex' text-align='right'></x-input>
-      <x-input title="见证人出生" v-model='jzr_birth' text-align='right'></x-input>
+      <img v-show="showQm" src=""  id="qmImg" width="300" height="420" >
+      <group title="见证人性别">
+        <radio :options="sexList" v-model='jzr_sex'></radio>
+      </group>
+      <datetime v-model="jzr_birth" title="见证人出生日期" min-year=1900 confirm-text="完成" cancel-text="取消" format="YYYY-MM-DD" ></datetime>
       <x-input title="见证人地址" v-model='jzr_address' text-align='right'></x-input>
       <x-input title="指挥人" v-model='zhr_name' text-align='right'>
         <x-button slot="right" type="primary" mini @click.native="showZhrPopup = true">></x-button>
@@ -90,7 +93,7 @@
 </template>
 
 <script>
-import { Group, XInput, PopupPicker, Picker, XButton, Popup, Cell } from 'vux'
+import { Group, XInput, PopupPicker, Picker, XButton, Popup, Cell, Datetime, Radio } from 'vux'
 import { SET_RECORDPERSON } from '../../mutationTypes'
 export default {
   components: {
@@ -100,10 +103,17 @@ export default {
     Picker,
     XButton,
     Popup,
-    Cell
+    Cell,
+    Datetime,
+    Radio
   },
   mounted: function () {
     this.isAdd = this.$route.query.isAdd
+    if(this.$store.getters.GetterEntity.qmBase64Data !== '') {
+      var image = document.getElementById('qmImg')
+      image.src = this.$store.getters.GetterEntity.qmBase64Data
+      this.showQm = true
+    }
   },
   computed: {
     unitList: function () {
@@ -176,6 +186,7 @@ export default {
       showZxrPopup: false,
       showLxrPopup: false,
       showLyrPopup: false,
+      showQm: false,
       zhrPickerName: [''],
       zhrUnitPickerName: [''],
       blrPickerName: [''],
@@ -183,6 +194,7 @@ export default {
       zxrPickerName: [''],
       lxrPickerName: [''],
       lyrPickerName: [''],
+      sexList: ['男','女'],
       zhr: this.$store.getters.GetterEntity.zhr === 0 ? [] : [this.$store.getters.GetterEntity.zhr + ''],
       zhr_name: this.$store.getters.GetterEntity.zhr_name,
       zhrdw: this.$store.getters.GetterEntity.zhr_unit === 0 ? [] : [this.$store.getters.GetterEntity.zhr_unit + ''],

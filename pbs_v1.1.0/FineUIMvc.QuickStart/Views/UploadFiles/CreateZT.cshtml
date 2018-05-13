@@ -67,8 +67,8 @@
                         .ButtonIcon(Icon.ImageAdd)
                         .OnFileSelected(Url.Action("filePhoto_FileSelected"), "filePhoto"),
                     
-                    F.TextBoxFor(m => m.file_hint),
-                    F.DropDownListFor(m => m.file_type)
+                    F.TextBoxFor(m => m.file_hint).Label("文件说明"),
+                    F.DropDownListFor(m => m.file_type).Label("文件类型")
                         .Items(
                             F.ListItem().Text("现场制图").Value("2004")
                         ),                    

@@ -17,41 +17,41 @@
             <PropertyRef Name="record_id" />
           </Key>
           <Property Name="record_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="record_no" Type="varchar" MaxLength="50" />
-          <Property Name="record_ky_no" Type="varchar" MaxLength="50" />
-          <Property Name="record_jj_no" Type="varchar" MaxLength="50" />
-          <Property Name="record_aj_no" Type="varchar" MaxLength="50" />
-          <Property Name="uuid" Type="varchar" MaxLength="50" />
-          <Property Name="record_title" Type="varchar" MaxLength="50" />
+          <Property Name="record_no" Type="varchar" MaxLength="255" />
+          <Property Name="record_ky_no" Type="varchar" MaxLength="255" />
+          <Property Name="record_jj_no" Type="varchar" MaxLength="255" />
+          <Property Name="record_aj_no" Type="varchar" MaxLength="255" />
+          <Property Name="uuid" Type="varchar" MaxLength="255" />
+          <Property Name="record_title" Type="varchar" MaxLength="255" />
           <Property Name="ky_unit" Type="int" />
           <Property Name="bg_unit" Type="int" />
           <Property Name="af_time" Type="datetime" Precision="0" />
           <Property Name="ky_date" Type="date" />
           <Property Name="jjr" Type="int" />
-          <Property Name="jjr_other" Type="varchar" MaxLength="50" />
+          <Property Name="jjr_other" Type="varchar" MaxLength="255" />
           <Property Name="bj_time" Type="datetime" Precision="0" />
-          <Property Name="bjr" Type="varchar" MaxLength="50" />
+          <Property Name="bjr" Type="varchar" MaxLength="255" />
           <Property Name="bjr_sex" Type="int" />
-          <Property Name="bjr_idcard" Type="varchar" MaxLength="20" />
-          <Property Name="bjr_phoneNo" Type="varchar" MaxLength="20" />
-          <Property Name="fs_loc" Type="varchar" MaxLength="50" />
-          <Property Name="xz" Type="varchar" MaxLength="50" />
+          <Property Name="bjr_idcard" Type="varchar" MaxLength="255" />
+          <Property Name="bjr_phoneNo" Type="varchar" MaxLength="255" />
+          <Property Name="fs_loc" Type="varchar" MaxLength="255" />
+          <Property Name="xz" Type="varchar" MaxLength="255" />
           <Property Name="kyks_time" Type="datetime" Precision="0" />
           <Property Name="kyjs_time" Type="datetime" Precision="0" />
-          <Property Name="xc_loc" Type="varchar" MaxLength="50" />
-          <Property Name="xc_locpt" Type="varchar" MaxLength="100" />
+          <Property Name="xc_loc" Type="varchar" MaxLength="255" />
+          <Property Name="xc_locpt" Type="varchar" MaxLength="255" />
           <Property Name="bh_flag" Type="tinyint" />
           <Property Name="bhr" Type="int" />
           <Property Name="bhr_unit" Type="int" />
-          <Property Name="bhr_pos" Type="varchar" MaxLength="50" />
-          <Property Name="bh_function" Type="varchar" MaxLength="50" />
-          <Property Name="xc_info" Type="varchar" MaxLength="50" />
-          <Property Name="bd_reason" Type="varchar" MaxLength="50" />
-          <Property Name="weather_info" Type="varchar" MaxLength="50" />
-          <Property Name="temper_info" Type="varchar" MaxLength="50" />
-          <Property Name="humidity_info" Type="varchar" MaxLength="50" />
-          <Property Name="trend_info" Type="varchar" MaxLength="50" />
-          <Property Name="light_info" Type="varchar" MaxLength="50" />
+          <Property Name="bhr_pos" Type="varchar" MaxLength="255" />
+          <Property Name="bh_function" Type="varchar" MaxLength="255" />
+          <Property Name="xc_info" Type="varchar" MaxLength="255" />
+          <Property Name="bd_reason" Type="varchar" MaxLength="255" />
+          <Property Name="weather_info" Type="varchar" MaxLength="255" />
+          <Property Name="temper_info" Type="varchar" MaxLength="255" />
+          <Property Name="humidity_info" Type="varchar" MaxLength="255" />
+          <Property Name="trend_info" Type="varchar" MaxLength="255" />
+          <Property Name="light_info" Type="varchar" MaxLength="255" />
           <Property Name="zhr_name" Type="varchar" MaxLength="255" />
           <Property Name="zhr" Type="int" />
           <Property Name="zhr_unit" Type="int" />
@@ -69,7 +69,7 @@
           <Property Name="lxr_name" Type="varchar" MaxLength="255" />
           <Property Name="lyr" Type="int" />
           <Property Name="lyr_name" Type="varchar" MaxLength="255" />
-          <Property Name="jzr" Type="varchar" MaxLength="50" />
+          <Property Name="jzr" Type="varchar" MaxLength="255" />
           <Property Name="jzr_sex" Type="varchar" MaxLength="255" />
           <Property Name="jzr_birth" Type="varchar" MaxLength="255" />
           <Property Name="jzr_address" Type="varchar" MaxLength="255" />
@@ -77,9 +77,9 @@
           <Property Name="record_state" Type="int" />
           <Property Name="update_time" Type="timestamp" Precision="0" />
           <Property Name="create_time" Type="datetime" Precision="0" />
-          <Property Name="check_hint" Type="varchar" MaxLength="200" />
+          <Property Name="check_hint" Type="varchar" MaxLength="255" />
           <Property Name="dest_unit" Type="int" />
-          <Property Name="doc_url" Type="varchar" MaxLength="200" />
+          <Property Name="doc_url" Type="varchar" MaxLength="255" />
           <Property Name="bhr_name" Type="varchar" MaxLength="255" />
           <Property Name="bhr_unit_name" Type="varchar" MaxLength="255" />
           <Property Name="east" Type="varchar" MaxLength="255" />
@@ -184,9 +184,9 @@
             <PropertyRef Name="file_id" />
           </Key>
           <Property Name="file_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="file_name" Type="varchar" MaxLength="50" />
-          <Property Name="file_hint" Type="varchar" MaxLength="100" />
-          <Property Name="file_url" Type="varchar" MaxLength="100" />
+          <Property Name="file_name" Type="varchar" MaxLength="255" />
+          <Property Name="file_hint" Type="varchar" MaxLength="255" />
+          <Property Name="file_url" Type="varchar" MaxLength="255" />
           <Property Name="file_uploader" Type="int" />
           <Property Name="file_upload_time" Type="datetime" Precision="0" />
           <Property Name="record_id" Type="int" />
@@ -300,31 +300,31 @@
           <Key>
             <PropertyRef Name="record_id" />
           </Key>
-          <Property Name="record_no" Type="varchar" MaxLength="50" />
+          <Property Name="record_no" Type="varchar" MaxLength="255" />
           <Property Name="record_id" Type="int" Nullable="false" />
           <Property Name="ky_unit_name" Type="varchar" MaxLength="255" />
           <Property Name="bg_unit_name" Type="varchar" MaxLength="50" />
           <Property Name="ky_date" Type="date" />
           <Property Name="jjr_name" Type="varchar" MaxLength="50" />
-          <Property Name="jjr_other" Type="varchar" MaxLength="50" />
+          <Property Name="jjr_other" Type="varchar" MaxLength="255" />
           <Property Name="bj_time" Type="datetime" Precision="0" />
-          <Property Name="fs_loc" Type="varchar" MaxLength="50" />
-          <Property Name="xc_loc" Type="varchar" MaxLength="50" />
-          <Property Name="xz" Type="varchar" MaxLength="50" />
+          <Property Name="fs_loc" Type="varchar" MaxLength="255" />
+          <Property Name="xc_loc" Type="varchar" MaxLength="255" />
+          <Property Name="xz" Type="varchar" MaxLength="255" />
           <Property Name="kyks_time" Type="datetime" Precision="0" />
           <Property Name="kyjs_time" Type="datetime" Precision="0" />
           <Property Name="bh_flag" Type="tinyint" />
           <Property Name="bhr_name" Type="varchar" MaxLength="255" />
           <Property Name="bhr_unit_name" Type="varchar" MaxLength="255" />
-          <Property Name="bhr_pos" Type="varchar" MaxLength="50" />
-          <Property Name="bh_function" Type="varchar" MaxLength="50" />
-          <Property Name="xc_info" Type="varchar" MaxLength="50" />
-          <Property Name="bd_reason" Type="varchar" MaxLength="50" />
-          <Property Name="weather_info" Type="varchar" MaxLength="50" />
-          <Property Name="temper_info" Type="varchar" MaxLength="50" />
-          <Property Name="humidity_info" Type="varchar" MaxLength="50" />
-          <Property Name="trend_info" Type="varchar" MaxLength="50" />
-          <Property Name="light_info" Type="varchar" MaxLength="50" />
+          <Property Name="bhr_pos" Type="varchar" MaxLength="255" />
+          <Property Name="bh_function" Type="varchar" MaxLength="255" />
+          <Property Name="xc_info" Type="varchar" MaxLength="255" />
+          <Property Name="bd_reason" Type="varchar" MaxLength="255" />
+          <Property Name="weather_info" Type="varchar" MaxLength="255" />
+          <Property Name="temper_info" Type="varchar" MaxLength="255" />
+          <Property Name="humidity_info" Type="varchar" MaxLength="255" />
+          <Property Name="trend_info" Type="varchar" MaxLength="255" />
+          <Property Name="light_info" Type="varchar" MaxLength="255" />
           <Property Name="zhr_name" Type="varchar" MaxLength="255" />
           <Property Name="zhr_unit_name" Type="varchar" MaxLength="255" />
           <Property Name="zhr_pos" Type="varchar" MaxLength="50" />
@@ -335,10 +335,10 @@
           <Property Name="zxr_name" Type="varchar" MaxLength="255" />
           <Property Name="lxr_name" Type="varchar" MaxLength="255" />
           <Property Name="lyr_name" Type="varchar" MaxLength="255" />
-          <Property Name="record_title" Type="varchar" MaxLength="50" />
-          <Property Name="uuid" Type="varchar" MaxLength="50" />
+          <Property Name="record_title" Type="varchar" MaxLength="255" />
+          <Property Name="uuid" Type="varchar" MaxLength="255" />
           <Property Name="bg_dot_name" Type="varchar" MaxLength="255" />
-          <Property Name="jzr" Type="varchar" MaxLength="50" />
+          <Property Name="jzr" Type="varchar" MaxLength="255" />
           <Property Name="jzr_sex" Type="varchar" MaxLength="255" />
           <Property Name="jzr_birth" Type="varchar" MaxLength="255" />
           <Property Name="unit_full_name" Type="varchar" MaxLength="255" />
@@ -374,31 +374,31 @@
           <Key>
             <PropertyRef Name="record_id" />
           </Key>
-          <Property Name="record_no" Type="varchar" MaxLength="50" />
+          <Property Name="record_no" Type="varchar" MaxLength="255" />
           <Property Name="record_id" Type="int" Nullable="false" />
           <Property Name="ky_unit_name" Type="varchar" MaxLength="50" />
           <Property Name="bg_unit_name" Type="varchar" MaxLength="50" />
           <Property Name="ky_date" Type="date" />
           <Property Name="jjr_name" Type="varchar" MaxLength="50" />
-          <Property Name="jjr_other" Type="varchar" MaxLength="50" />
+          <Property Name="jjr_other" Type="varchar" MaxLength="255" />
           <Property Name="bj_time" Type="datetime" Precision="0" />
-          <Property Name="fs_loc" Type="varchar" MaxLength="50" />
-          <Property Name="xc_loc" Type="varchar" MaxLength="50" />
-          <Property Name="xz" Type="varchar" MaxLength="50" />
+          <Property Name="fs_loc" Type="varchar" MaxLength="255" />
+          <Property Name="xc_loc" Type="varchar" MaxLength="255" />
+          <Property Name="xz" Type="varchar" MaxLength="255" />
           <Property Name="kyks_time" Type="datetime" Precision="0" />
           <Property Name="kyjs_time" Type="datetime" Precision="0" />
           <Property Name="bh_flag" Type="tinyint" />
           <Property Name="bhr_name" Type="varchar" MaxLength="50" />
           <Property Name="bhr_unit_name" Type="varchar" MaxLength="50" />
-          <Property Name="bhr_pos" Type="varchar" MaxLength="50" />
-          <Property Name="bh_function" Type="varchar" MaxLength="50" />
-          <Property Name="xc_info" Type="varchar" MaxLength="50" />
-          <Property Name="bd_reason" Type="varchar" MaxLength="50" />
-          <Property Name="weather_info" Type="varchar" MaxLength="50" />
-          <Property Name="temper_info" Type="varchar" MaxLength="50" />
-          <Property Name="humidity_info" Type="varchar" MaxLength="50" />
-          <Property Name="trend_info" Type="varchar" MaxLength="50" />
-          <Property Name="light_info" Type="varchar" MaxLength="50" />
+          <Property Name="bhr_pos" Type="varchar" MaxLength="255" />
+          <Property Name="bh_function" Type="varchar" MaxLength="255" />
+          <Property Name="xc_info" Type="varchar" MaxLength="255" />
+          <Property Name="bd_reason" Type="varchar" MaxLength="255" />
+          <Property Name="weather_info" Type="varchar" MaxLength="255" />
+          <Property Name="temper_info" Type="varchar" MaxLength="255" />
+          <Property Name="humidity_info" Type="varchar" MaxLength="255" />
+          <Property Name="trend_info" Type="varchar" MaxLength="255" />
+          <Property Name="light_info" Type="varchar" MaxLength="255" />
           <Property Name="zhr_name" Type="varchar" MaxLength="50" />
           <Property Name="zhr_unit_name" Type="varchar" MaxLength="50" />
           <Property Name="zhr_pos" Type="varchar" MaxLength="50" />
@@ -409,8 +409,8 @@
           <Property Name="zxr_name" Type="varchar" MaxLength="50" />
           <Property Name="lxr_name" Type="varchar" MaxLength="50" />
           <Property Name="lyr_name" Type="varchar" MaxLength="50" />
-          <Property Name="record_title" Type="varchar" MaxLength="50" />
-          <Property Name="uuid" Type="varchar" MaxLength="50" />
+          <Property Name="record_title" Type="varchar" MaxLength="255" />
+          <Property Name="uuid" Type="varchar" MaxLength="255" />
           <Property Name="ky_unit" Type="int" />
           <Property Name="bg_unit" Type="int" />
           <Property Name="creater_id" Type="int" />
@@ -634,81 +634,6 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="pbsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="pbs_record">
-          <Key>
-            <PropertyRef Name="record_id" />
-          </Key>
-          <Property Name="record_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="uuid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="record_title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ky_unit" Type="Int32" />
-          <Property Name="bg_unit" Type="Int32" />
-          <Property Name="ky_date" Type="DateTime" />
-          <Property Name="jjr" Type="Int32" />
-          <Property Name="bj_time" Type="DateTime" />
-          <Property Name="bjr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="bjr_sex" Type="Int32" />
-          <Property Name="bjr_idcard" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="bjr_phoneNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="fs_loc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="xz" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="kyks_time" Type="DateTime" />
-          <Property Name="kyjs_time" Type="DateTime" />
-          <Property Name="xc_loc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="xc_locpt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="bh_flag" Type="SByte" />
-          <Property Name="bhr" Type="Int32" />
-          <Property Name="bhr_pos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="bh_function" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="xc_info" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="bd_reason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="weather_info" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="temper_info" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="humidity_info" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="trend_info" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="light_info" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="zhr" Type="Int32" />
-          <Property Name="zhr_unit" Type="Int32" />
-          <Property Name="zhr_pos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="xc_disp" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="blr" Type="Int32" />
-          <Property Name="ztr" Type="Int32" />
-          <Property Name="zxr" Type="Int32" />
-          <Property Name="lxr" Type="Int32" />
-          <Property Name="lyr" Type="Int32" />
-          <Property Name="jzr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="creater_id" Type="Int32" />
-          <Property Name="record_state" Type="Int32" />
-          <Property Name="update_time" Type="DateTime" />
-          <Property Name="create_time" Type="DateTime" />
-          <Property Name="check_hint" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="dest_unit" Type="Int32" />
-          <Property Name="record_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="jjr_other" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="bhr_unit" Type="Int32" />
-          <Property Name="record_reason" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="doc_url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="zhr_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="zhr_unit_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="blr_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ztr_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="zxr_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="lxr_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="lyr_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="bhr_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="bhr_unit_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="east" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="west" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="south" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="north" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="jzr_sex" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="jzr_birth" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="jzr_address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="record_ky_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="record_jj_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="record_aj_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="af_time" Type="DateTime" />
-        </EntityType>
         <EntityType Name="sys_code">
           <Key>
             <PropertyRef Name="code_id" />
@@ -729,20 +654,6 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <Property Name="father_unit_id" Type="Int32" />
           <Property Name="unit_full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="bg_dot_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="sys_upload_file">
-          <Key>
-            <PropertyRef Name="file_id" />
-          </Key>
-          <Property Name="file_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="file_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="file_hint" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="file_url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="file_uploader" Type="Int32" />
-          <Property Name="file_upload_time" Type="DateTime" />
-          <Property Name="record_id" Type="Int32" />
-          <Property Name="file_type" Type="Int32" />
-          <Property Name="rec_uuid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="sys_user">
           <Key>
@@ -780,10 +691,8 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <Property Name="unit_full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="pbsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="pbs_record" EntityType="Self.pbs_record" />
           <EntitySet Name="sys_code" EntityType="Self.sys_code" />
           <EntitySet Name="sys_unit" EntityType="Self.sys_unit" />
-          <EntitySet Name="sys_upload_file" EntityType="Self.sys_upload_file" />
           <EntitySet Name="sys_user" EntityType="Self.sys_user" />
           <EntitySet Name="login_info" EntityType="Self.login_info" />
           <EntitySet Name="ticketauth" EntityType="pbsModel.ticketauth" />
@@ -803,6 +712,8 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <EntitySet Name="trace_info" EntityType="pbsModel.trace_info" />
           <EntitySet Name="view_recordinfo" EntityType="pbsModel.view_recordinfo" />
           <EntitySet Name="view_trace_info" EntityType="pbsModel.view_trace_info" />
+          <EntitySet Name="pbs_record" EntityType="pbsModel.pbs_record" />
+          <EntitySet Name="sys_upload_file" EntityType="pbsModel.sys_upload_file" />
         </EntityContainer>
         <EntityType Name="ticketauth">
           <Key>
@@ -1094,88 +1005,101 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <Property Name="creatorFullName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="avatarUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="pbs_record">
+          <Key>
+            <PropertyRef Name="record_id" />
+          </Key>
+          <Property Name="record_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="record_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="record_ky_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="record_jj_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="record_aj_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="uuid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="record_title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ky_unit" Type="Int32" />
+          <Property Name="bg_unit" Type="Int32" />
+          <Property Name="af_time" Type="DateTime" />
+          <Property Name="ky_date" Type="DateTime" />
+          <Property Name="jjr" Type="Int32" />
+          <Property Name="jjr_other" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="bj_time" Type="DateTime" />
+          <Property Name="bjr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="bjr_sex" Type="Int32" />
+          <Property Name="bjr_idcard" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="bjr_phoneNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="fs_loc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="xz" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="kyks_time" Type="DateTime" />
+          <Property Name="kyjs_time" Type="DateTime" />
+          <Property Name="xc_loc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="xc_locpt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="bh_flag" Type="SByte" />
+          <Property Name="bhr" Type="Int32" />
+          <Property Name="bhr_unit" Type="Int32" />
+          <Property Name="bhr_pos" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="bh_function" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="xc_info" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="bd_reason" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="weather_info" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="temper_info" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="humidity_info" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="trend_info" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="light_info" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="zhr_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="zhr" Type="Int32" />
+          <Property Name="zhr_unit" Type="Int32" />
+          <Property Name="zhr_unit_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="zhr_pos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="record_reason" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="xc_disp" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="blr" Type="Int32" />
+          <Property Name="blr_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ztr" Type="Int32" />
+          <Property Name="ztr_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="zxr" Type="Int32" />
+          <Property Name="zxr_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="lxr" Type="Int32" />
+          <Property Name="lxr_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="lyr" Type="Int32" />
+          <Property Name="lyr_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="jzr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="jzr_sex" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="jzr_birth" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="jzr_address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="creater_id" Type="Int32" />
+          <Property Name="record_state" Type="Int32" />
+          <Property Name="update_time" Type="DateTime" />
+          <Property Name="create_time" Type="DateTime" />
+          <Property Name="check_hint" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="dest_unit" Type="Int32" />
+          <Property Name="doc_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="bhr_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="bhr_unit_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="east" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="west" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="south" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="north" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sys_upload_file">
+          <Key>
+            <PropertyRef Name="file_id" />
+          </Key>
+          <Property Name="file_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="file_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="file_hint" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="file_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="file_uploader" Type="Int32" />
+          <Property Name="file_upload_time" Type="DateTime" />
+          <Property Name="record_id" Type="Int32" />
+          <Property Name="file_type" Type="Int32" />
+          <Property Name="rec_uuid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="pbsModelStoreContainer" CdmEntityContainer="pbsEntities">
-          <EntitySetMapping Name="pbs_record">
-            <EntityTypeMapping TypeName="pbsModel.pbs_record">
-              <MappingFragment StoreEntitySet="pbs_record">
-                <ScalarProperty Name="af_time" ColumnName="af_time" />
-                <ScalarProperty Name="record_aj_no" ColumnName="record_aj_no" />
-                <ScalarProperty Name="record_jj_no" ColumnName="record_jj_no" />
-                <ScalarProperty Name="record_ky_no" ColumnName="record_ky_no" />
-                <ScalarProperty Name="jzr_address" ColumnName="jzr_address" />
-                <ScalarProperty Name="jzr_birth" ColumnName="jzr_birth" />
-                <ScalarProperty Name="jzr_sex" ColumnName="jzr_sex" />
-                <ScalarProperty Name="north" ColumnName="north" />
-                <ScalarProperty Name="south" ColumnName="south" />
-                <ScalarProperty Name="west" ColumnName="west" />
-                <ScalarProperty Name="east" ColumnName="east" />
-                <ScalarProperty Name="bhr_unit_name" ColumnName="bhr_unit_name" />
-                <ScalarProperty Name="bhr_name" ColumnName="bhr_name" />
-                <ScalarProperty Name="lyr_name" ColumnName="lyr_name" />
-                <ScalarProperty Name="lxr_name" ColumnName="lxr_name" />
-                <ScalarProperty Name="zxr_name" ColumnName="zxr_name" />
-                <ScalarProperty Name="ztr_name" ColumnName="ztr_name" />
-                <ScalarProperty Name="blr_name" ColumnName="blr_name" />
-                <ScalarProperty Name="zhr_unit_name" ColumnName="zhr_unit_name" />
-                <ScalarProperty Name="zhr_name" ColumnName="zhr_name" />
-                <ScalarProperty Name="doc_url" ColumnName="doc_url" />
-                <ScalarProperty Name="record_reason" ColumnName="record_reason" />
-                <ScalarProperty Name="bhr_unit" ColumnName="bhr_unit" />
-                <ScalarProperty Name="jjr_other" ColumnName="jjr_other" />
-                <ScalarProperty Name="record_no" ColumnName="record_no" />
-                <ScalarProperty Name="record_id" ColumnName="record_id" />
-                <ScalarProperty Name="uuid" ColumnName="uuid" />
-                <ScalarProperty Name="record_title" ColumnName="record_title" />
-                <ScalarProperty Name="ky_unit" ColumnName="ky_unit" />
-                <ScalarProperty Name="bg_unit" ColumnName="bg_unit" />
-                <ScalarProperty Name="ky_date" ColumnName="ky_date" />
-                <ScalarProperty Name="jjr" ColumnName="jjr" />
-                <ScalarProperty Name="bj_time" ColumnName="bj_time" />
-                <ScalarProperty Name="bjr" ColumnName="bjr" />
-                <ScalarProperty Name="bjr_sex" ColumnName="bjr_sex" />
-                <ScalarProperty Name="bjr_idcard" ColumnName="bjr_idcard" />
-                <ScalarProperty Name="bjr_phoneNo" ColumnName="bjr_phoneNo" />
-                <ScalarProperty Name="fs_loc" ColumnName="fs_loc" />
-                <ScalarProperty Name="xz" ColumnName="xz" />
-                <ScalarProperty Name="kyks_time" ColumnName="kyks_time" />
-                <ScalarProperty Name="kyjs_time" ColumnName="kyjs_time" />
-                <ScalarProperty Name="xc_loc" ColumnName="xc_loc" />
-                <ScalarProperty Name="xc_locpt" ColumnName="xc_locpt" />
-                <ScalarProperty Name="bh_flag" ColumnName="bh_flag" />
-                <ScalarProperty Name="bhr" ColumnName="bhr" />
-                <ScalarProperty Name="bhr_pos" ColumnName="bhr_pos" />
-                <ScalarProperty Name="bh_function" ColumnName="bh_function" />
-                <ScalarProperty Name="xc_info" ColumnName="xc_info" />
-                <ScalarProperty Name="bd_reason" ColumnName="bd_reason" />
-                <ScalarProperty Name="weather_info" ColumnName="weather_info" />
-                <ScalarProperty Name="temper_info" ColumnName="temper_info" />
-                <ScalarProperty Name="humidity_info" ColumnName="humidity_info" />
-                <ScalarProperty Name="trend_info" ColumnName="trend_info" />
-                <ScalarProperty Name="light_info" ColumnName="light_info" />
-                <ScalarProperty Name="zhr" ColumnName="zhr" />
-                <ScalarProperty Name="zhr_unit" ColumnName="zhr_unit" />
-                <ScalarProperty Name="zhr_pos" ColumnName="zhr_pos" />
-                <ScalarProperty Name="xc_disp" ColumnName="xc_disp" />
-                <ScalarProperty Name="blr" ColumnName="blr" />
-                <ScalarProperty Name="ztr" ColumnName="ztr" />
-                <ScalarProperty Name="zxr" ColumnName="zxr" />
-                <ScalarProperty Name="lxr" ColumnName="lxr" />
-                <ScalarProperty Name="lyr" ColumnName="lyr" />
-                <ScalarProperty Name="jzr" ColumnName="jzr" />
-                <ScalarProperty Name="creater_id" ColumnName="creater_id" />
-                <ScalarProperty Name="record_state" ColumnName="record_state" />
-                <ScalarProperty Name="update_time" ColumnName="update_time" />
-                <ScalarProperty Name="create_time" ColumnName="create_time" />
-                <ScalarProperty Name="check_hint" ColumnName="check_hint" />
-                <ScalarProperty Name="dest_unit" ColumnName="dest_unit" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sys_code">
             <EntityTypeMapping TypeName="pbsModel.sys_code">
               <MappingFragment StoreEntitySet="sys_code">
@@ -1196,21 +1120,6 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
                 <ScalarProperty Name="unit_name" ColumnName="unit_name" />
                 <ScalarProperty Name="is_top" ColumnName="is_top" />
                 <ScalarProperty Name="father_unit_id" ColumnName="father_unit_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sys_upload_file">
-            <EntityTypeMapping TypeName="pbsModel.sys_upload_file">
-              <MappingFragment StoreEntitySet="sys_upload_file">
-                <ScalarProperty Name="file_id" ColumnName="file_id" />
-                <ScalarProperty Name="file_name" ColumnName="file_name" />
-                <ScalarProperty Name="file_hint" ColumnName="file_hint" />
-                <ScalarProperty Name="file_url" ColumnName="file_url" />
-                <ScalarProperty Name="file_uploader" ColumnName="file_uploader" />
-                <ScalarProperty Name="file_upload_time" ColumnName="file_upload_time" />
-                <ScalarProperty Name="record_id" ColumnName="record_id" />
-                <ScalarProperty Name="file_type" ColumnName="file_type" />
-                <ScalarProperty Name="rec_uuid" ColumnName="rec_uuid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1553,6 +1462,97 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="uuid" ColumnName="uuid" />
                 <ScalarProperty Name="sid" ColumnName="sid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pbs_record">
+            <EntityTypeMapping TypeName="pbsModel.pbs_record">
+              <MappingFragment StoreEntitySet="pbs_record">
+                <ScalarProperty Name="north" ColumnName="north" />
+                <ScalarProperty Name="south" ColumnName="south" />
+                <ScalarProperty Name="west" ColumnName="west" />
+                <ScalarProperty Name="east" ColumnName="east" />
+                <ScalarProperty Name="bhr_unit_name" ColumnName="bhr_unit_name" />
+                <ScalarProperty Name="bhr_name" ColumnName="bhr_name" />
+                <ScalarProperty Name="doc_url" ColumnName="doc_url" />
+                <ScalarProperty Name="dest_unit" ColumnName="dest_unit" />
+                <ScalarProperty Name="check_hint" ColumnName="check_hint" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="update_time" ColumnName="update_time" />
+                <ScalarProperty Name="record_state" ColumnName="record_state" />
+                <ScalarProperty Name="creater_id" ColumnName="creater_id" />
+                <ScalarProperty Name="jzr_address" ColumnName="jzr_address" />
+                <ScalarProperty Name="jzr_birth" ColumnName="jzr_birth" />
+                <ScalarProperty Name="jzr_sex" ColumnName="jzr_sex" />
+                <ScalarProperty Name="jzr" ColumnName="jzr" />
+                <ScalarProperty Name="lyr_name" ColumnName="lyr_name" />
+                <ScalarProperty Name="lyr" ColumnName="lyr" />
+                <ScalarProperty Name="lxr_name" ColumnName="lxr_name" />
+                <ScalarProperty Name="lxr" ColumnName="lxr" />
+                <ScalarProperty Name="zxr_name" ColumnName="zxr_name" />
+                <ScalarProperty Name="zxr" ColumnName="zxr" />
+                <ScalarProperty Name="ztr_name" ColumnName="ztr_name" />
+                <ScalarProperty Name="ztr" ColumnName="ztr" />
+                <ScalarProperty Name="blr_name" ColumnName="blr_name" />
+                <ScalarProperty Name="blr" ColumnName="blr" />
+                <ScalarProperty Name="xc_disp" ColumnName="xc_disp" />
+                <ScalarProperty Name="record_reason" ColumnName="record_reason" />
+                <ScalarProperty Name="zhr_pos" ColumnName="zhr_pos" />
+                <ScalarProperty Name="zhr_unit_name" ColumnName="zhr_unit_name" />
+                <ScalarProperty Name="zhr_unit" ColumnName="zhr_unit" />
+                <ScalarProperty Name="zhr" ColumnName="zhr" />
+                <ScalarProperty Name="zhr_name" ColumnName="zhr_name" />
+                <ScalarProperty Name="light_info" ColumnName="light_info" />
+                <ScalarProperty Name="trend_info" ColumnName="trend_info" />
+                <ScalarProperty Name="humidity_info" ColumnName="humidity_info" />
+                <ScalarProperty Name="temper_info" ColumnName="temper_info" />
+                <ScalarProperty Name="weather_info" ColumnName="weather_info" />
+                <ScalarProperty Name="bd_reason" ColumnName="bd_reason" />
+                <ScalarProperty Name="xc_info" ColumnName="xc_info" />
+                <ScalarProperty Name="bh_function" ColumnName="bh_function" />
+                <ScalarProperty Name="bhr_pos" ColumnName="bhr_pos" />
+                <ScalarProperty Name="bhr_unit" ColumnName="bhr_unit" />
+                <ScalarProperty Name="bhr" ColumnName="bhr" />
+                <ScalarProperty Name="bh_flag" ColumnName="bh_flag" />
+                <ScalarProperty Name="xc_locpt" ColumnName="xc_locpt" />
+                <ScalarProperty Name="xc_loc" ColumnName="xc_loc" />
+                <ScalarProperty Name="kyjs_time" ColumnName="kyjs_time" />
+                <ScalarProperty Name="kyks_time" ColumnName="kyks_time" />
+                <ScalarProperty Name="xz" ColumnName="xz" />
+                <ScalarProperty Name="fs_loc" ColumnName="fs_loc" />
+                <ScalarProperty Name="bjr_phoneNo" ColumnName="bjr_phoneNo" />
+                <ScalarProperty Name="bjr_idcard" ColumnName="bjr_idcard" />
+                <ScalarProperty Name="bjr_sex" ColumnName="bjr_sex" />
+                <ScalarProperty Name="bjr" ColumnName="bjr" />
+                <ScalarProperty Name="bj_time" ColumnName="bj_time" />
+                <ScalarProperty Name="jjr_other" ColumnName="jjr_other" />
+                <ScalarProperty Name="jjr" ColumnName="jjr" />
+                <ScalarProperty Name="ky_date" ColumnName="ky_date" />
+                <ScalarProperty Name="af_time" ColumnName="af_time" />
+                <ScalarProperty Name="bg_unit" ColumnName="bg_unit" />
+                <ScalarProperty Name="ky_unit" ColumnName="ky_unit" />
+                <ScalarProperty Name="record_title" ColumnName="record_title" />
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="record_aj_no" ColumnName="record_aj_no" />
+                <ScalarProperty Name="record_jj_no" ColumnName="record_jj_no" />
+                <ScalarProperty Name="record_ky_no" ColumnName="record_ky_no" />
+                <ScalarProperty Name="record_no" ColumnName="record_no" />
+                <ScalarProperty Name="record_id" ColumnName="record_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sys_upload_file">
+            <EntityTypeMapping TypeName="pbsModel.sys_upload_file">
+              <MappingFragment StoreEntitySet="sys_upload_file">
+                <ScalarProperty Name="rec_uuid" ColumnName="rec_uuid" />
+                <ScalarProperty Name="file_type" ColumnName="file_type" />
+                <ScalarProperty Name="record_id" ColumnName="record_id" />
+                <ScalarProperty Name="file_upload_time" ColumnName="file_upload_time" />
+                <ScalarProperty Name="file_uploader" ColumnName="file_uploader" />
+                <ScalarProperty Name="file_url" ColumnName="file_url" />
+                <ScalarProperty Name="file_hint" ColumnName="file_hint" />
+                <ScalarProperty Name="file_name" ColumnName="file_name" />
+                <ScalarProperty Name="file_id" ColumnName="file_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

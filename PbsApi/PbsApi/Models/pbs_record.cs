@@ -15,12 +15,18 @@ namespace PbsApi.Models
     public partial class pbs_record
     {
         public int record_id { get; set; }
+        public string record_no { get; set; }
+        public string record_ky_no { get; set; }
+        public string record_jj_no { get; set; }
+        public string record_aj_no { get; set; }
         public string uuid { get; set; }
         public string record_title { get; set; }
         public Nullable<int> ky_unit { get; set; }
         public Nullable<int> bg_unit { get; set; }
+        public Nullable<System.DateTime> af_time { get; set; }
         public Nullable<System.DateTime> ky_date { get; set; }
         public Nullable<int> jjr { get; set; }
+        public string jjr_other { get; set; }
         public Nullable<System.DateTime> bj_time { get; set; }
         public string bjr { get; set; }
         public Nullable<int> bjr_sex { get; set; }
@@ -34,6 +40,7 @@ namespace PbsApi.Models
         public string xc_locpt { get; set; }
         public Nullable<sbyte> bh_flag { get; set; }
         public Nullable<int> bhr { get; set; }
+        public Nullable<int> bhr_unit { get; set; }
         public string bhr_pos { get; set; }
         public string bh_function { get; set; }
         public string xc_info { get; set; }
@@ -43,46 +50,39 @@ namespace PbsApi.Models
         public string humidity_info { get; set; }
         public string trend_info { get; set; }
         public string light_info { get; set; }
+        public string zhr_name { get; set; }
         public Nullable<int> zhr { get; set; }
         public Nullable<int> zhr_unit { get; set; }
+        public string zhr_unit_name { get; set; }
         public string zhr_pos { get; set; }
+        public string record_reason { get; set; }
         public string xc_disp { get; set; }
         public Nullable<int> blr { get; set; }
+        public string blr_name { get; set; }
         public Nullable<int> ztr { get; set; }
+        public string ztr_name { get; set; }
         public Nullable<int> zxr { get; set; }
+        public string zxr_name { get; set; }
         public Nullable<int> lxr { get; set; }
+        public string lxr_name { get; set; }
         public Nullable<int> lyr { get; set; }
+        public string lyr_name { get; set; }
         public string jzr { get; set; }
+        public string jzr_sex { get; set; }
+        public string jzr_birth { get; set; }
+        public string jzr_address { get; set; }
         public Nullable<int> creater_id { get; set; }
         public Nullable<int> record_state { get; set; }
         public Nullable<System.DateTime> update_time { get; set; }
         public Nullable<System.DateTime> create_time { get; set; }
         public string check_hint { get; set; }
         public Nullable<int> dest_unit { get; set; }
-        public string record_no { get; set; }
-        public string jjr_other { get; set; }
-        public Nullable<int> bhr_unit { get; set; }
-        public string record_reason { get; set; }
         public string doc_url { get; set; }
-        public string zhr_name { get; set; }
-        public string zhr_unit_name { get; set; }
-        public string blr_name { get; set; }
-        public string ztr_name { get; set; }
-        public string zxr_name { get; set; }
-        public string lxr_name { get; set; }
-        public string lyr_name { get; set; }
         public string bhr_name { get; set; }
         public string bhr_unit_name { get; set; }
         public string east { get; set; }
         public string west { get; set; }
         public string south { get; set; }
         public string north { get; set; }
-        public string jzr_sex { get; set; }
-        public string jzr_birth { get; set; }
-        public string jzr_address { get; set; }
-        public string record_ky_no { get; set; }
-        public string record_jj_no { get; set; }
-        public string record_aj_no { get; set; }
-        public Nullable<System.DateTime> af_time { get; set; }
     }
 }

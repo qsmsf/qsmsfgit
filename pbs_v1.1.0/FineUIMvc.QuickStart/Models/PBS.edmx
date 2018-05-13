@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="pbsModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="pbsModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="investigate_info">
           <Key>
             <PropertyRef Name="investigate_id" />
@@ -17,39 +17,43 @@
             <PropertyRef Name="record_id" />
           </Key>
           <Property Name="record_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="record_no" Type="varchar" MaxLength="50" />
-          <Property Name="uuid" Type="varchar" MaxLength="50" />
-          <Property Name="record_title" Type="varchar" MaxLength="50" />
+          <Property Name="record_no" Type="varchar" MaxLength="255" />
+          <Property Name="record_ky_no" Type="varchar" MaxLength="255" />
+          <Property Name="record_jj_no" Type="varchar" MaxLength="255" />
+          <Property Name="record_aj_no" Type="varchar" MaxLength="255" />
+          <Property Name="uuid" Type="varchar" MaxLength="255" />
+          <Property Name="record_title" Type="varchar" MaxLength="255" />
           <Property Name="ky_unit" Type="int" />
           <Property Name="bg_unit" Type="int" />
+          <Property Name="af_time" Type="datetime" Precision="0" />
           <Property Name="ky_date" Type="date" />
           <Property Name="jjr" Type="int" />
-          <Property Name="jjr_other" Type="varchar" MaxLength="50" />
+          <Property Name="jjr_other" Type="varchar" MaxLength="255" />
           <Property Name="bj_time" Type="datetime" Precision="0" />
-          <Property Name="bjr" Type="varchar" MaxLength="50" />
+          <Property Name="bjr" Type="varchar" MaxLength="255" />
           <Property Name="bjr_sex" Type="int" />
-          <Property Name="bjr_idcard" Type="varchar" MaxLength="20" />
-          <Property Name="bjr_phoneNo" Type="varchar" MaxLength="20" />
-          <Property Name="fs_loc" Type="varchar" MaxLength="50" />
-          <Property Name="xz" Type="varchar" MaxLength="50" />
+          <Property Name="bjr_idcard" Type="varchar" MaxLength="255" />
+          <Property Name="bjr_phoneNo" Type="varchar" MaxLength="255" />
+          <Property Name="fs_loc" Type="varchar" MaxLength="255" />
+          <Property Name="xz" Type="varchar" MaxLength="255" />
           <Property Name="kyks_time" Type="datetime" Precision="0" />
           <Property Name="kyjs_time" Type="datetime" Precision="0" />
-          <Property Name="xc_loc" Type="varchar" MaxLength="50" />
-          <Property Name="xc_locpt" Type="varchar" MaxLength="100" />
+          <Property Name="xc_loc" Type="varchar" MaxLength="255" />
+          <Property Name="xc_locpt" Type="varchar" MaxLength="255" />
           <Property Name="bh_flag" Type="tinyint" />
           <Property Name="bhr" Type="int" />
           <Property Name="bhr_unit" Type="int" />
-          <Property Name="bhr_pos" Type="varchar" MaxLength="50" />
-          <Property Name="bh_function" Type="varchar" MaxLength="50" />
-          <Property Name="xc_info" Type="varchar" MaxLength="50" />
-          <Property Name="bd_reason" Type="varchar" MaxLength="50" />
-          <Property Name="weather_info" Type="varchar" MaxLength="50" />
-          <Property Name="temper_info" Type="varchar" MaxLength="50" />
-          <Property Name="humidity_info" Type="varchar" MaxLength="50" />
-          <Property Name="trend_info" Type="varchar" MaxLength="50" />
-          <Property Name="light_info" Type="varchar" MaxLength="50" />
-          <Property Name="zhr" Type="int" />
+          <Property Name="bhr_pos" Type="varchar" MaxLength="255" />
+          <Property Name="bh_function" Type="varchar" MaxLength="255" />
+          <Property Name="xc_info" Type="varchar" MaxLength="255" />
+          <Property Name="bd_reason" Type="varchar" MaxLength="255" />
+          <Property Name="weather_info" Type="varchar" MaxLength="255" />
+          <Property Name="temper_info" Type="varchar" MaxLength="255" />
+          <Property Name="humidity_info" Type="varchar" MaxLength="255" />
+          <Property Name="trend_info" Type="varchar" MaxLength="255" />
+          <Property Name="light_info" Type="varchar" MaxLength="255" />
           <Property Name="zhr_name" Type="varchar" MaxLength="255" />
+          <Property Name="zhr" Type="int" />
           <Property Name="zhr_unit" Type="int" />
           <Property Name="zhr_unit_name" Type="varchar" MaxLength="255" />
           <Property Name="zhr_pos" Type="varchar" MaxLength="50" />
@@ -65,7 +69,7 @@
           <Property Name="lxr_name" Type="varchar" MaxLength="255" />
           <Property Name="lyr" Type="int" />
           <Property Name="lyr_name" Type="varchar" MaxLength="255" />
-          <Property Name="jzr" Type="varchar" MaxLength="50" />
+          <Property Name="jzr" Type="varchar" MaxLength="255" />
           <Property Name="jzr_sex" Type="varchar" MaxLength="255" />
           <Property Name="jzr_birth" Type="varchar" MaxLength="255" />
           <Property Name="jzr_address" Type="varchar" MaxLength="255" />
@@ -73,9 +77,9 @@
           <Property Name="record_state" Type="int" />
           <Property Name="update_time" Type="timestamp" Precision="0" />
           <Property Name="create_time" Type="datetime" Precision="0" />
-          <Property Name="check_hint" Type="varchar" MaxLength="200" />
+          <Property Name="check_hint" Type="varchar" MaxLength="255" />
           <Property Name="dest_unit" Type="int" />
-          <Property Name="doc_url" Type="varchar" MaxLength="200" />
+          <Property Name="doc_url" Type="varchar" MaxLength="255" />
           <Property Name="bhr_name" Type="varchar" MaxLength="255" />
           <Property Name="bhr_unit_name" Type="varchar" MaxLength="255" />
           <Property Name="east" Type="varchar" MaxLength="255" />
@@ -93,6 +97,25 @@
           <Property Name="privilege_access" Type="varchar" MaxLength="20" />
           <Property Name="privilege_access_value" Type="int" />
           <Property Name="privilege_operation" Type="bit" />
+        </EntityType>
+        <EntityType Name="record_info">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uuid" Type="varchar" MaxLength="32" />
+          <Property Name="record_no" Type="varchar" MaxLength="255" />
+          <Property Name="title" Type="varchar" MaxLength="255" />
+          <Property Name="content" Type="varchar" MaxLength="255" />
+          <Property Name="creater_id" Type="int" />
+          <Property Name="create_time" Type="datetime" Precision="0" />
+          <Property Name="state" Type="int" />
+          <Property Name="type" Type="int" />
+          <Property Name="avatar_url" Type="varchar" MaxLength="255" />
+          <Property Name="record_loc" Type="varchar" MaxLength="255" />
+          <Property Name="record_type" Type="varchar" MaxLength="255" />
+          <Property Name="loc_name" Type="varchar" MaxLength="255" />
+          <Property Name="loc_disp" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="sys_button">
           <Key>
@@ -161,9 +184,9 @@
             <PropertyRef Name="file_id" />
           </Key>
           <Property Name="file_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="file_name" Type="varchar" MaxLength="50" />
-          <Property Name="file_hint" Type="varchar" MaxLength="100" />
-          <Property Name="file_url" Type="varchar" MaxLength="100" />
+          <Property Name="file_name" Type="varchar" MaxLength="255" />
+          <Property Name="file_hint" Type="varchar" MaxLength="255" />
+          <Property Name="file_url" Type="varchar" MaxLength="255" />
           <Property Name="file_uploader" Type="int" />
           <Property Name="file_upload_time" Type="datetime" Precision="0" />
           <Property Name="record_id" Type="int" />
@@ -183,6 +206,8 @@
           <Property Name="create_time" Type="datetime" Precision="0" />
           <Property Name="unit_id" Type="int" />
           <Property Name="user_zw" Type="varchar" MaxLength="50" />
+          <Property Name="openId" Type="varchar" MaxLength="255" />
+          <Property Name="avatar_url" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="sys_userrole">
           <Key>
@@ -214,6 +239,39 @@
           <Property Name="token" Type="varchar" MaxLength="50" />
           <Property Name="create_time" Type="datetime" Precision="0" />
           <Property Name="expire_time" Type="datetime" Precision="0" />
+          <Property Name="state" Type="int" />
+          <Property Name="client_ip" Type="varchar" MaxLength="255" />
+          <Property Name="user_type" Type="int" />
+        </EntityType>
+        <EntityType Name="trace_info">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uuid" Type="varchar" MaxLength="255" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="trace_type" Type="varchar" MaxLength="255" />
+          <Property Name="tqbw" Type="varchar" MaxLength="255" />
+          <Property Name="disp" Type="varchar" MaxLength="255" />
+          <Property Name="create_id" Type="int" />
+          <Property Name="image1" Type="varchar" MaxLength="255" />
+          <Property Name="create_time" Type="datetime" Precision="0" />
+          <Property Name="barcode" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="wx_user">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="wx_id" Type="varchar" MaxLength="255" />
+          <Property Name="wx_name" Type="varchar" MaxLength="255" />
+          <Property Name="real_name" Type="varchar" MaxLength="255" />
+          <Property Name="unit_id" Type="int" />
+          <Property Name="position" Type="varchar" MaxLength="255" />
+          <Property Name="state" Type="int" />
+          <Property Name="create_time" Type="datetime" Precision="0" />
+          <Property Name="avatar_url" Type="varchar" MaxLength="255" />
+          <Property Name="unit_name" Type="varchar" MaxLength="255" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“def.pbs.login_info”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -232,6 +290,9 @@
           <Property Name="user_state" Type="int" />
           <Property Name="father_unit_id" Type="int" />
           <Property Name="user_zw" Type="varchar" MaxLength="50" />
+          <Property Name="openId" Type="varchar" MaxLength="255" />
+          <Property Name="avatar_url" Type="varchar" MaxLength="255" />
+          <Property Name="unit_full_name" Type="varchar" MaxLength="255" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“def.pbs.view_record2word”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -239,31 +300,31 @@
           <Key>
             <PropertyRef Name="record_id" />
           </Key>
-          <Property Name="record_no" Type="varchar" MaxLength="50" />
+          <Property Name="record_no" Type="varchar" MaxLength="255" />
           <Property Name="record_id" Type="int" Nullable="false" />
-          <Property Name="ky_unit_name" Type="varchar" MaxLength="50" />
+          <Property Name="ky_unit_name" Type="varchar" MaxLength="255" />
           <Property Name="bg_unit_name" Type="varchar" MaxLength="50" />
           <Property Name="ky_date" Type="date" />
           <Property Name="jjr_name" Type="varchar" MaxLength="50" />
-          <Property Name="jjr_other" Type="varchar" MaxLength="50" />
+          <Property Name="jjr_other" Type="varchar" MaxLength="255" />
           <Property Name="bj_time" Type="datetime" Precision="0" />
-          <Property Name="fs_loc" Type="varchar" MaxLength="50" />
-          <Property Name="xc_loc" Type="varchar" MaxLength="50" />
-          <Property Name="xz" Type="varchar" MaxLength="50" />
+          <Property Name="fs_loc" Type="varchar" MaxLength="255" />
+          <Property Name="xc_loc" Type="varchar" MaxLength="255" />
+          <Property Name="xz" Type="varchar" MaxLength="255" />
           <Property Name="kyks_time" Type="datetime" Precision="0" />
           <Property Name="kyjs_time" Type="datetime" Precision="0" />
           <Property Name="bh_flag" Type="tinyint" />
           <Property Name="bhr_name" Type="varchar" MaxLength="255" />
           <Property Name="bhr_unit_name" Type="varchar" MaxLength="255" />
-          <Property Name="bhr_pos" Type="varchar" MaxLength="50" />
-          <Property Name="bh_function" Type="varchar" MaxLength="50" />
-          <Property Name="xc_info" Type="varchar" MaxLength="50" />
-          <Property Name="bd_reason" Type="varchar" MaxLength="50" />
-          <Property Name="weather_info" Type="varchar" MaxLength="50" />
-          <Property Name="temper_info" Type="varchar" MaxLength="50" />
-          <Property Name="humidity_info" Type="varchar" MaxLength="50" />
-          <Property Name="trend_info" Type="varchar" MaxLength="50" />
-          <Property Name="light_info" Type="varchar" MaxLength="50" />
+          <Property Name="bhr_pos" Type="varchar" MaxLength="255" />
+          <Property Name="bh_function" Type="varchar" MaxLength="255" />
+          <Property Name="xc_info" Type="varchar" MaxLength="255" />
+          <Property Name="bd_reason" Type="varchar" MaxLength="255" />
+          <Property Name="weather_info" Type="varchar" MaxLength="255" />
+          <Property Name="temper_info" Type="varchar" MaxLength="255" />
+          <Property Name="humidity_info" Type="varchar" MaxLength="255" />
+          <Property Name="trend_info" Type="varchar" MaxLength="255" />
+          <Property Name="light_info" Type="varchar" MaxLength="255" />
           <Property Name="zhr_name" Type="varchar" MaxLength="255" />
           <Property Name="zhr_unit_name" Type="varchar" MaxLength="255" />
           <Property Name="zhr_pos" Type="varchar" MaxLength="50" />
@@ -274,14 +335,39 @@
           <Property Name="zxr_name" Type="varchar" MaxLength="255" />
           <Property Name="lxr_name" Type="varchar" MaxLength="255" />
           <Property Name="lyr_name" Type="varchar" MaxLength="255" />
-          <Property Name="record_title" Type="varchar" MaxLength="50" />
-          <Property Name="uuid" Type="varchar" MaxLength="50" />
+          <Property Name="record_title" Type="varchar" MaxLength="255" />
+          <Property Name="uuid" Type="varchar" MaxLength="255" />
           <Property Name="bg_dot_name" Type="varchar" MaxLength="255" />
-          <Property Name="jzr" Type="varchar" MaxLength="50" />
+          <Property Name="jzr" Type="varchar" MaxLength="255" />
           <Property Name="jzr_sex" Type="varchar" MaxLength="255" />
           <Property Name="jzr_birth" Type="varchar" MaxLength="255" />
           <Property Name="unit_full_name" Type="varchar" MaxLength="255" />
           <Property Name="jzr_address" Type="varchar" MaxLength="255" />
+          <Property Name="af_time" Type="datetime" Precision="0" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“def.pbs.view_recordinfo”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="view_recordinfo">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="int" Nullable="false" />
+          <Property Name="uuid" Type="varchar" MaxLength="32" />
+          <Property Name="recordNo" Type="varchar" MaxLength="255" />
+          <Property Name="title" Type="varchar" MaxLength="255" />
+          <Property Name="content" Type="varchar" MaxLength="255" />
+          <Property Name="creatorId" Type="int" />
+          <Property Name="createTime" Type="datetime" Precision="0" />
+          <Property Name="state" Type="int" />
+          <Property Name="type" Type="int" />
+          <Property Name="recordLoc" Type="varchar" MaxLength="255" />
+          <Property Name="recordType" Type="varchar" MaxLength="255" />
+          <Property Name="locName" Type="varchar" MaxLength="255" />
+          <Property Name="locDisp" Type="varchar" MaxLength="255" />
+          <Property Name="openId" Type="varchar" MaxLength="255" />
+          <Property Name="creatorName" Type="varchar" MaxLength="255" />
+          <Property Name="creatorFullName" Type="varchar" MaxLength="255" />
+          <Property Name="avatarUrl" Type="varchar" MaxLength="255" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“def.pbs.view_report”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -289,31 +375,31 @@
           <Key>
             <PropertyRef Name="record_id" />
           </Key>
-          <Property Name="record_no" Type="varchar" MaxLength="50" />
+          <Property Name="record_no" Type="varchar" MaxLength="255" />
           <Property Name="record_id" Type="int" Nullable="false" />
           <Property Name="ky_unit_name" Type="varchar" MaxLength="50" />
           <Property Name="bg_unit_name" Type="varchar" MaxLength="50" />
           <Property Name="ky_date" Type="date" />
           <Property Name="jjr_name" Type="varchar" MaxLength="50" />
-          <Property Name="jjr_other" Type="varchar" MaxLength="50" />
+          <Property Name="jjr_other" Type="varchar" MaxLength="255" />
           <Property Name="bj_time" Type="datetime" Precision="0" />
-          <Property Name="fs_loc" Type="varchar" MaxLength="50" />
-          <Property Name="xc_loc" Type="varchar" MaxLength="50" />
-          <Property Name="xz" Type="varchar" MaxLength="50" />
+          <Property Name="fs_loc" Type="varchar" MaxLength="255" />
+          <Property Name="xc_loc" Type="varchar" MaxLength="255" />
+          <Property Name="xz" Type="varchar" MaxLength="255" />
           <Property Name="kyks_time" Type="datetime" Precision="0" />
           <Property Name="kyjs_time" Type="datetime" Precision="0" />
           <Property Name="bh_flag" Type="tinyint" />
           <Property Name="bhr_name" Type="varchar" MaxLength="50" />
           <Property Name="bhr_unit_name" Type="varchar" MaxLength="50" />
-          <Property Name="bhr_pos" Type="varchar" MaxLength="50" />
-          <Property Name="bh_function" Type="varchar" MaxLength="50" />
-          <Property Name="xc_info" Type="varchar" MaxLength="50" />
-          <Property Name="bd_reason" Type="varchar" MaxLength="50" />
-          <Property Name="weather_info" Type="varchar" MaxLength="50" />
-          <Property Name="temper_info" Type="varchar" MaxLength="50" />
-          <Property Name="humidity_info" Type="varchar" MaxLength="50" />
-          <Property Name="trend_info" Type="varchar" MaxLength="50" />
-          <Property Name="light_info" Type="varchar" MaxLength="50" />
+          <Property Name="bhr_pos" Type="varchar" MaxLength="255" />
+          <Property Name="bh_function" Type="varchar" MaxLength="255" />
+          <Property Name="xc_info" Type="varchar" MaxLength="255" />
+          <Property Name="bd_reason" Type="varchar" MaxLength="255" />
+          <Property Name="weather_info" Type="varchar" MaxLength="255" />
+          <Property Name="temper_info" Type="varchar" MaxLength="255" />
+          <Property Name="humidity_info" Type="varchar" MaxLength="255" />
+          <Property Name="trend_info" Type="varchar" MaxLength="255" />
+          <Property Name="light_info" Type="varchar" MaxLength="255" />
           <Property Name="zhr_name" Type="varchar" MaxLength="50" />
           <Property Name="zhr_unit_name" Type="varchar" MaxLength="50" />
           <Property Name="zhr_pos" Type="varchar" MaxLength="50" />
@@ -324,14 +410,35 @@
           <Property Name="zxr_name" Type="varchar" MaxLength="50" />
           <Property Name="lxr_name" Type="varchar" MaxLength="50" />
           <Property Name="lyr_name" Type="varchar" MaxLength="50" />
-          <Property Name="record_title" Type="varchar" MaxLength="50" />
-          <Property Name="uuid" Type="varchar" MaxLength="50" />
+          <Property Name="record_title" Type="varchar" MaxLength="255" />
+          <Property Name="uuid" Type="varchar" MaxLength="255" />
           <Property Name="ky_unit" Type="int" />
           <Property Name="bg_unit" Type="int" />
           <Property Name="creater_id" Type="int" />
           <Property Name="create_time" Type="datetime" Precision="0" />
           <Property Name="record_state" Type="int" />
           <Property Name="update_time" Type="timestamp" Precision="0" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“def.pbs.view_trace_info”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="view_trace_info">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="int" Nullable="false" />
+          <Property Name="uuid" Type="varchar" MaxLength="255" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="traceType" Type="varchar" MaxLength="255" />
+          <Property Name="tqbw" Type="varchar" MaxLength="255" />
+          <Property Name="disp" Type="varchar" MaxLength="255" />
+          <Property Name="creatorId" Type="int" />
+          <Property Name="image1" Type="varchar" MaxLength="255" />
+          <Property Name="createTime" Type="datetime" Precision="0" />
+          <Property Name="barcode" Type="varchar" MaxLength="255" />
+          <Property Name="creatorName" Type="varchar" MaxLength="255" />
+          <Property Name="openId" Type="varchar" MaxLength="255" />
+          <Property Name="creatorFullName" Type="varchar" MaxLength="255" />
+          <Property Name="avatarUrl" Type="varchar" MaxLength="255" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“def.pbs.view_userhasrole”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -353,6 +460,7 @@
           <EntitySet Name="investigate_info" EntityType="Self.investigate_info" Schema="pbs" store:Type="Tables" />
           <EntitySet Name="pbs_record" EntityType="Self.pbs_record" Schema="pbs" store:Type="Tables" />
           <EntitySet Name="privilege" EntityType="Self.privilege" Schema="pbs" store:Type="Tables" />
+          <EntitySet Name="record_info" EntityType="Self.record_info" Schema="pbs" store:Type="Tables" />
           <EntitySet Name="sys_button" EntityType="Self.sys_button" Schema="pbs" store:Type="Tables" />
           <EntitySet Name="sys_code" EntityType="Self.sys_code" Schema="pbs" store:Type="Tables" />
           <EntitySet Name="sys_data" EntityType="Self.sys_data" Schema="pbs" store:Type="Tables" />
@@ -364,6 +472,8 @@
           <EntitySet Name="sys_userrole" EntityType="Self.sys_userrole" Schema="pbs" store:Type="Tables" />
           <EntitySet Name="sys_version" EntityType="Self.sys_version" Schema="pbs" store:Type="Tables" />
           <EntitySet Name="ticketauth" EntityType="Self.ticketauth" Schema="pbs" store:Type="Tables" />
+          <EntitySet Name="trace_info" EntityType="Self.trace_info" Schema="pbs" store:Type="Tables" />
+          <EntitySet Name="wx_user" EntityType="Self.wx_user" Schema="pbs" store:Type="Tables" />
           <EntitySet Name="login_info" EntityType="Self.login_info" store:Type="Views" store:Schema="pbs">
             <DefiningQuery>SELECT
 `login_info`.`user_id`, 
@@ -374,7 +484,10 @@
 `login_info`.`user_name`, 
 `login_info`.`user_state`, 
 `login_info`.`father_unit_id`, 
-`login_info`.`user_zw`
+`login_info`.`user_zw`, 
+`login_info`.`openId`, 
+`login_info`.`avatar_url`, 
+`login_info`.`unit_full_name`
 FROM `login_info` AS `login_info`</DefiningQuery>
           </EntitySet>
           <EntitySet Name="view_record2word" EntityType="Self.view_record2word" store:Type="Views" store:Schema="pbs">
@@ -421,8 +534,30 @@ FROM `login_info` AS `login_info`</DefiningQuery>
 `view_record2word`.`jzr_sex`, 
 `view_record2word`.`jzr_birth`, 
 `view_record2word`.`unit_full_name`, 
-`view_record2word`.`jzr_address`
+`view_record2word`.`jzr_address`, 
+`view_record2word`.`af_time`
 FROM `view_record2word` AS `view_record2word`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_recordinfo" EntityType="Self.view_recordinfo" store:Type="Views" store:Schema="pbs">
+            <DefiningQuery>SELECT
+`view_recordinfo`.`sid`, 
+`view_recordinfo`.`uuid`, 
+`view_recordinfo`.`recordNo`, 
+`view_recordinfo`.`title`, 
+`view_recordinfo`.`content`, 
+`view_recordinfo`.`creatorId`, 
+`view_recordinfo`.`createTime`, 
+`view_recordinfo`.`state`, 
+`view_recordinfo`.`type`, 
+`view_recordinfo`.`recordLoc`, 
+`view_recordinfo`.`recordType`, 
+`view_recordinfo`.`locName`, 
+`view_recordinfo`.`locDisp`, 
+`view_recordinfo`.`openId`, 
+`view_recordinfo`.`creatorName`, 
+`view_recordinfo`.`creatorFullName`, 
+`view_recordinfo`.`avatarUrl`
+FROM `view_recordinfo` AS `view_recordinfo`</DefiningQuery>
           </EntitySet>
           <EntitySet Name="view_report" EntityType="Self.view_report" store:Type="Views" store:Schema="pbs">
             <DefiningQuery>SELECT
@@ -470,6 +605,24 @@ FROM `view_record2word` AS `view_record2word`</DefiningQuery>
 `view_report`.`record_state`, 
 `view_report`.`update_time`
 FROM `view_report` AS `view_report`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_trace_info" EntityType="Self.view_trace_info" store:Type="Views" store:Schema="pbs">
+            <DefiningQuery>SELECT
+`view_trace_info`.`sid`, 
+`view_trace_info`.`uuid`, 
+`view_trace_info`.`name`, 
+`view_trace_info`.`traceType`, 
+`view_trace_info`.`tqbw`, 
+`view_trace_info`.`disp`, 
+`view_trace_info`.`creatorId`, 
+`view_trace_info`.`image1`, 
+`view_trace_info`.`createTime`, 
+`view_trace_info`.`barcode`, 
+`view_trace_info`.`creatorName`, 
+`view_trace_info`.`openId`, 
+`view_trace_info`.`creatorFullName`, 
+`view_trace_info`.`avatarUrl`
+FROM `view_trace_info` AS `view_trace_info`</DefiningQuery>
           </EntitySet>
           <EntitySet Name="view_userhasrole" EntityType="Self.view_userhasrole" store:Type="Views" store:Schema="pbs">
             <DefiningQuery>SELECT
@@ -538,6 +691,8 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <Property Name="create_time" Type="DateTime" />
           <Property Name="unit_id" Type="Int32" />
           <Property Name="user_zw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="openId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="avatar_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="pbsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sys_code" EntityType="Self.sys_code" />
@@ -561,6 +716,11 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <EntitySet Name="investigate_info" EntityType="pbsModel.investigate_info" />
           <EntitySet Name="sys_version" EntityType="pbsModel.sys_version" />
           <EntitySet Name="view_report" EntityType="pbsModel.view_report" />
+          <EntitySet Name="record_info" EntityType="pbsModel.record_info" />
+          <EntitySet Name="trace_info" EntityType="pbsModel.trace_info" />
+          <EntitySet Name="wx_user" EntityType="pbsModel.wx_user" />
+          <EntitySet Name="view_recordinfo" EntityType="pbsModel.view_recordinfo" />
+          <EntitySet Name="view_trace_info" EntityType="pbsModel.view_trace_info" />
         </EntityContainer>
         <EntityType Name="pbs_record">
           <Key>
@@ -632,6 +792,10 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <Property Name="jzr_sex" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="jzr_birth" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="jzr_address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="record_ky_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="record_jj_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="record_aj_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="af_time" Type="DateTime" />
         </EntityType>
         <EntityType Name="login_info">
           <Key>
@@ -648,6 +812,9 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <Property Name="user_state" Type="Int32" />
           <Property Name="father_unit_id" Type="Int32" />
           <Property Name="user_zw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="openId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="avatar_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="unit_full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="privilege">
           <Key>
@@ -688,6 +855,9 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <Property Name="token" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="create_time" Type="DateTime" />
           <Property Name="expire_time" Type="DateTime" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="client_ip" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="user_type" Type="Int32" />
         </EntityType>
         <EntityType Name="sys_button">
           <Key>
@@ -778,6 +948,7 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <Property Name="jzr_birth" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="unit_full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="jzr_address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="af_time" Type="DateTime" />
         </EntityType>
         <ComplexType Name="sp_showChildUnits_Result" />
         <EntityType Name="investigate_info">
@@ -847,6 +1018,96 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <Property Name="record_state" Type="Int32" />
           <Property Name="update_time" Type="DateTime" />
         </EntityType>
+        <EntityType Name="record_info">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uuid" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="record_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="content" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="creater_id" Type="Int32" />
+          <Property Name="create_time" Type="DateTime" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="type" Type="Int32" />
+          <Property Name="avatar_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="record_loc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="record_type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="loc_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="loc_disp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="trace_info">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uuid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="trace_type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tqbw" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="disp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="create_id" Type="Int32" />
+          <Property Name="image1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="create_time" Type="DateTime" />
+          <Property Name="barcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="wx_user">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="wx_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="wx_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="real_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="unit_id" Type="Int32" />
+          <Property Name="position" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="create_time" Type="DateTime" />
+          <Property Name="avatar_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="unit_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="view_recordinfo">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="Int32" Nullable="false" />
+          <Property Name="uuid" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="recordNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="content" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="creatorId" Type="Int32" />
+          <Property Name="createTime" Type="DateTime" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="type" Type="Int32" />
+          <Property Name="recordLoc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="recordType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="locName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="locDisp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="openId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="creatorName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="creatorFullName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="avatarUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="view_trace_info">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="Int32" Nullable="false" />
+          <Property Name="uuid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="traceType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tqbw" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="disp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="creatorId" Type="Int32" />
+          <Property Name="image1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="createTime" Type="DateTime" />
+          <Property Name="barcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="creatorName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="openId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="creatorFullName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="avatarUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -894,6 +1155,8 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <EntitySetMapping Name="sys_user">
             <EntityTypeMapping TypeName="pbsModel.sys_user">
               <MappingFragment StoreEntitySet="sys_user">
+                <ScalarProperty Name="avatar_url" ColumnName="avatar_url" />
+                <ScalarProperty Name="openId" ColumnName="openId" />
                 <ScalarProperty Name="user_zw" ColumnName="user_zw" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="user_name" ColumnName="user_name" />
@@ -909,6 +1172,10 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <EntitySetMapping Name="pbs_record">
             <EntityTypeMapping TypeName="pbsModel.pbs_record">
               <MappingFragment StoreEntitySet="pbs_record">
+                <ScalarProperty Name="af_time" ColumnName="af_time" />
+                <ScalarProperty Name="record_aj_no" ColumnName="record_aj_no" />
+                <ScalarProperty Name="record_jj_no" ColumnName="record_jj_no" />
+                <ScalarProperty Name="record_ky_no" ColumnName="record_ky_no" />
                 <ScalarProperty Name="jzr_address" ColumnName="jzr_address" />
                 <ScalarProperty Name="jzr_birth" ColumnName="jzr_birth" />
                 <ScalarProperty Name="jzr_sex" ColumnName="jzr_sex" />
@@ -981,6 +1248,9 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <EntitySetMapping Name="login_info">
             <EntityTypeMapping TypeName="pbsModel.login_info">
               <MappingFragment StoreEntitySet="login_info">
+                <ScalarProperty Name="unit_full_name" ColumnName="unit_full_name" />
+                <ScalarProperty Name="avatar_url" ColumnName="avatar_url" />
+                <ScalarProperty Name="openId" ColumnName="openId" />
                 <ScalarProperty Name="user_zw" ColumnName="user_zw" />
                 <ScalarProperty Name="father_unit_id" ColumnName="father_unit_id" />
                 <ScalarProperty Name="user_state" ColumnName="user_state" />
@@ -1029,6 +1299,9 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <EntitySetMapping Name="ticketauth">
             <EntityTypeMapping TypeName="pbsModel.ticketauth">
               <MappingFragment StoreEntitySet="ticketauth">
+                <ScalarProperty Name="user_type" ColumnName="user_type" />
+                <ScalarProperty Name="client_ip" ColumnName="client_ip" />
+                <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="expire_time" ColumnName="expire_time" />
                 <ScalarProperty Name="create_time" ColumnName="create_time" />
                 <ScalarProperty Name="token" ColumnName="token" />
@@ -1086,6 +1359,7 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
           <EntitySetMapping Name="view_record2word">
             <EntityTypeMapping TypeName="pbsModel.view_record2word">
               <MappingFragment StoreEntitySet="view_record2word">
+                <ScalarProperty Name="af_time" ColumnName="af_time" />
                 <ScalarProperty Name="jzr_address" ColumnName="jzr_address" />
                 <ScalarProperty Name="unit_full_name" ColumnName="unit_full_name" />
                 <ScalarProperty Name="jzr_birth" ColumnName="jzr_birth" />
@@ -1200,6 +1474,101 @@ FROM `view_userhasrole` AS `view_userhasrole`</DefiningQuery>
                 <ScalarProperty Name="ky_unit_name" ColumnName="ky_unit_name" />
                 <ScalarProperty Name="record_id" ColumnName="record_id" />
                 <ScalarProperty Name="record_no" ColumnName="record_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="record_info">
+            <EntityTypeMapping TypeName="pbsModel.record_info">
+              <MappingFragment StoreEntitySet="record_info">
+                <ScalarProperty Name="loc_disp" ColumnName="loc_disp" />
+                <ScalarProperty Name="loc_name" ColumnName="loc_name" />
+                <ScalarProperty Name="record_type" ColumnName="record_type" />
+                <ScalarProperty Name="record_loc" ColumnName="record_loc" />
+                <ScalarProperty Name="avatar_url" ColumnName="avatar_url" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="creater_id" ColumnName="creater_id" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="record_no" ColumnName="record_no" />
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="sid" ColumnName="sid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trace_info">
+            <EntityTypeMapping TypeName="pbsModel.trace_info">
+              <MappingFragment StoreEntitySet="trace_info">
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="image1" ColumnName="image1" />
+                <ScalarProperty Name="create_id" ColumnName="create_id" />
+                <ScalarProperty Name="disp" ColumnName="disp" />
+                <ScalarProperty Name="tqbw" ColumnName="tqbw" />
+                <ScalarProperty Name="trace_type" ColumnName="trace_type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="sid" ColumnName="sid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wx_user">
+            <EntityTypeMapping TypeName="pbsModel.wx_user">
+              <MappingFragment StoreEntitySet="wx_user">
+                <ScalarProperty Name="unit_name" ColumnName="unit_name" />
+                <ScalarProperty Name="avatar_url" ColumnName="avatar_url" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+                <ScalarProperty Name="real_name" ColumnName="real_name" />
+                <ScalarProperty Name="wx_name" ColumnName="wx_name" />
+                <ScalarProperty Name="wx_id" ColumnName="wx_id" />
+                <ScalarProperty Name="sid" ColumnName="sid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_recordinfo">
+            <EntityTypeMapping TypeName="pbsModel.view_recordinfo">
+              <MappingFragment StoreEntitySet="view_recordinfo">
+                <ScalarProperty Name="avatarUrl" ColumnName="avatarUrl" />
+                <ScalarProperty Name="creatorFullName" ColumnName="creatorFullName" />
+                <ScalarProperty Name="creatorName" ColumnName="creatorName" />
+                <ScalarProperty Name="openId" ColumnName="openId" />
+                <ScalarProperty Name="locDisp" ColumnName="locDisp" />
+                <ScalarProperty Name="locName" ColumnName="locName" />
+                <ScalarProperty Name="recordType" ColumnName="recordType" />
+                <ScalarProperty Name="recordLoc" ColumnName="recordLoc" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="createTime" ColumnName="createTime" />
+                <ScalarProperty Name="creatorId" ColumnName="creatorId" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="recordNo" ColumnName="recordNo" />
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="sid" ColumnName="sid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_trace_info">
+            <EntityTypeMapping TypeName="pbsModel.view_trace_info">
+              <MappingFragment StoreEntitySet="view_trace_info">
+                <ScalarProperty Name="avatarUrl" ColumnName="avatarUrl" />
+                <ScalarProperty Name="creatorFullName" ColumnName="creatorFullName" />
+                <ScalarProperty Name="openId" ColumnName="openId" />
+                <ScalarProperty Name="creatorName" ColumnName="creatorName" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="createTime" ColumnName="createTime" />
+                <ScalarProperty Name="image1" ColumnName="image1" />
+                <ScalarProperty Name="creatorId" ColumnName="creatorId" />
+                <ScalarProperty Name="disp" ColumnName="disp" />
+                <ScalarProperty Name="tqbw" ColumnName="tqbw" />
+                <ScalarProperty Name="traceType" ColumnName="traceType" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="sid" ColumnName="sid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

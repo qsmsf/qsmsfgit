@@ -1,17 +1,13 @@
 <template>
   <div>
     <div v-if="~this.isAdd" v-for='oriFile in oriFiles'>
-      <x-img v-bind:src="onGetFile(oriFile.file_url)" class="preview" ></x-img>
+      <x-img v-bind:src="onGetFile(oriFile.file_url)" class="preview" :offset="1000"></x-img>
       <cell v-bind:title="onRenderFileType(oriFile.file_type)" v-bind:value="oriFile.file_hint"></cell>
     </div>
     <group>
       <cell title="本次已上传图像:  ">{{alreadyPicNum}}  张</cell>
     </group>
-    <x-hr></x-hr>
-    <group>
-      <cell title="现场图"  is-link @click.native="fetchXcT" ></cell>
-      <cell title="中心现场图"  is-link @click.native="fetchZxxcT" ></cell>
-    </group>
+    <x-hr></x-hr>    
     <vue-file-upload v-bind:url="renderUrl()" ref="vueFileUploader1" v-bind:filters = "filters" label ='选择现场方位'
     v-bind:events = 'cbEvents'
     v-bind:request-options = "reqopts" v-on:onAdd = "onAddFile1"  class='uploadbutton' ></vue-file-upload>
@@ -19,6 +15,8 @@
       <group>
         <x-img v-bind:src="onPreView(file1)" class="preview"></x-img>
         <x-button type="warn" mini @click.native="onCancelFile(file1,index,$event)" >取消该图片</x-button>
+        <x-input title="图片说明:" :debounce="500" placeholder="请填写说明" @on-change="onChangePicHint($event,file1)" text-align='right' class="input-hint"></x-input>
+        <br>
         <checker
           default-item-class="demo5-item" @on-change="onChangePicType($event,file1)"
           selected-item-class="demo5-item-selected" value="2001" >
@@ -26,7 +24,7 @@
             <checker-item value="2002" disabled >现场概貌</checker-item>
             <checker-item value="2003" disabled >重点部位</checker-item>
         </checker>
-        <x-input title="图片说明:" :debounce="500" placeholder="请填写说明" @on-change="onChangePicHint($event,file1)" text-align='right'></x-input>
+        <br>
         <x-progress v-bind:percent='file1.progress' :show-cancel="false"></x-progress>
         <cell title="" v-bind:value="onStatus(file1)"></cell>
       </group>
@@ -38,6 +36,8 @@
       <group>
         <x-img v-bind:src="onPreView(file2)" class="preview"></x-img>
         <x-button type="warn" mini @click.native="onCancelFile(file2,index,$event)" >取消该图片</x-button>
+        <x-input title="图片说明:" :debounce="500" placeholder="请填写说明" @on-change="onChangePicHint($event,file2)" text-align='right' class="input-hint"></x-input>
+        <br>
         <checker
           default-item-class="demo5-item" @on-change="onChangePicType($event,file2)"
           selected-item-class="demo5-item-selected" value="2002" >
@@ -45,7 +45,7 @@
             <checker-item value="2002"  >现场概貌</checker-item>
             <checker-item value="2003" disabled >重点部位</checker-item>
         </checker>
-        <x-input title="图片说明:" :debounce="500" placeholder="请填写说明" @on-change="onChangePicHint($event,file2)" text-align='right'></x-input>
+        <br>
         <x-progress v-bind:percent='file2.progress' :show-cancel="false"></x-progress>
         <cell title="" v-bind:value="onStatus(file2)"></cell>
       </group>
@@ -57,6 +57,8 @@
       <group>
         <x-img v-bind:src="onPreView(file3)" class="preview"></x-img>
         <x-button type="warn" mini @click.native="onCancelFile(file3,index,$event)" >取消该图片</x-button>
+        <x-input title="图片说明:" :debounce="500" placeholder="请填写说明" @on-change="onChangePicHint($event,file3)" text-align='right' class="input-hint"></x-input>
+        <br>
         <checker
           default-item-class="demo5-item" @on-change="onChangePicType($event,file3)"
           selected-item-class="demo5-item-selected" value="2003" >
@@ -64,7 +66,7 @@
             <checker-item value="2002" disabled >现场概貌</checker-item>
             <checker-item value="2003"  >重点部位</checker-item>
         </checker>
-        <x-input title="图片说明:" :debounce="500" placeholder="请填写说明" @on-change="onChangePicHint($event,file3)" text-align='right'></x-input>
+        <br>
         <x-progress v-bind:percent='file3.progress' :show-cancel="false"></x-progress>
         <cell title="" v-bind:value="onStatus(file3)"></cell>
       </group>
@@ -407,8 +409,8 @@ export default {
   .uploadbutton{
   }
   .preview {
-    width: 200px;
-    height: 200px
+    width: 300px;
+    height: 300px
   }
   .demo5-item {
     width: 100px;
@@ -423,5 +425,10 @@ export default {
   .demo5-item-selected {
     background: #ffffff url(../../assets/active.png) no-repeat right bottom;
     border-color: #ff4a00;
+  }
+  .input-hint {
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    background-color: #fff;
   }
 </style>

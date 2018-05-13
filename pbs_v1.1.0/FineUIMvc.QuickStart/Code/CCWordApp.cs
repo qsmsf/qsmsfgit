@@ -36,10 +36,24 @@ namespace FineUIMvc.QuickStart.Code
             inlineShape.Width = width; // 图片宽度   
             inlineShape.Height = height; // 图片高度
             Shape cShape = inlineShape.ConvertToShape();
-            cShape.WrapFormat.Type = WdWrapType.wdWrapBehind;
+            cShape.WrapFormat.Type = WdWrapType.wdWrapFront;
             oWordApplic.Selection.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;//居中显示图片
             //oWordApplic.Selection.InlineShapes.AddPicture(picPath, ref missing, ref missing, ref missing);
         }
+        public void InsertPictureStatic(string picPath, int width, int height)
+        {
+            object missing = System.Reflection.Missing.Value;
+            object LinkToFile = false;
+            object SaveWithDocument = true;
+            object Anchor = oWordApplic.Selection.Range;
+            InlineShape inlineShape = oWordApplic.ActiveDocument.InlineShapes.AddPicture(picPath, ref LinkToFile, ref SaveWithDocument, ref Anchor);
+            inlineShape.Width = width; // 图片宽度   
+            inlineShape.Height = height; // 图片高度
+            Shape cShape = inlineShape.ConvertToShape();
+            cShape.WrapFormat.Type = WdWrapType.wdWrapFront;
+            //oWordApplic.Selection.InlineShapes.AddPicture(picPath, ref missing, ref missing, ref missing);
+        }
+
         public void InsertPictureAndHint(string picPath, string hint,int width, int height)
         {
             object missing = System.Reflection.Missing.Value;

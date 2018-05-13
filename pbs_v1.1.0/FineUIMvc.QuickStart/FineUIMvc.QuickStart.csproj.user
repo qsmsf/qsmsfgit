@@ -13,7 +13,12 @@
     <NameOfLastUsedPublishProfile>rr</NameOfLastUsedPublishProfile>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressUseClassicPipelineMode>true</IISExpressUseClassicPipelineMode>
-    <LastActiveSolutionConfig>Release|Any CPU</LastActiveSolutionConfig>
+    <LastActiveSolutionConfig>Debug|Any CPU</LastActiveSolutionConfig>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

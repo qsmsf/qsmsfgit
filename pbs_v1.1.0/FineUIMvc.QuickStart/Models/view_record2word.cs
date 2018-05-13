@@ -57,5 +57,6 @@ namespace FineUIMvc.QuickStart.Models
         public string jzr_birth { get; set; }
         public string unit_full_name { get; set; }
         public string jzr_address { get; set; }
+        public Nullable<System.DateTime> af_time { get; set; }
     }
 }
