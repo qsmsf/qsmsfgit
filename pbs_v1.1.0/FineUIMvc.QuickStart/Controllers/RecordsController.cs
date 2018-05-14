@@ -789,6 +789,8 @@ namespace FineUIMvc.QuickStart.Controllers
                         Graphics g = Graphics.FromImage(bmp);
                         Font titlefont = new Font("宋体", 65);
                         Font contentfont = new Font("宋体", 40);
+                        Font minicontentfont = new Font("宋体", 30);
+
                         SolidBrush sbrush = new SolidBrush(Color.Black);
                         string title = record.af_time.Value.ToString("yyyyMMdd")+" "+record.fs_loc+record.xc_loc+record.xz;
                         string markHint = "";
@@ -801,13 +803,32 @@ namespace FineUIMvc.QuickStart.Controllers
                         {
                             title += "中心现场方位示意图";
                             markHint = "案发位置";
-                        }                        
-
+                        }
                         g.DrawString(title, titlefont, sbrush, new PointF(300, 200));
                         g.DrawString(markHint, titlefont, sbrush, new PointF(2600, 1300));
-                        g.DrawString(record.xc_loc, contentfont, sbrush, new PointF(2600, 1800));
+
+                        if (record.xc_loc.Length > 12)
+                        {
+                            g.DrawString(record.xc_loc.Substring(0,12), minicontentfont, sbrush, new PointF(2600, 1870));
+                            g.DrawString(record.xc_loc.Substring(12), minicontentfont, sbrush, new PointF(2600, 1830));
+                        }
+                        else
+                        {
+                            g.DrawString(record.xc_loc, titlefont, sbrush, new PointF(2600, 1800));
+                        }                       
+                        
                         g.DrawString(record.bj_time.Value.ToString("yyyy年MM月dd日 HH时mm分"), contentfont, sbrush, new PointF(2600, 1900));
-                        g.DrawString(record.unit_full_name, contentfont, sbrush, new PointF(2600, 2030));
+                        //g.DrawString(record.unit_full_name, contentfont, sbrush, new PointF(2600, 2030));
+                        if (record.unit_full_name.Length > 12)
+                        {
+                            g.DrawString(record.unit_full_name.Substring(0, 12), minicontentfont, sbrush, new PointF(2600, 2000));
+                            g.DrawString(record.unit_full_name.Substring(12), minicontentfont, sbrush, new PointF(2600, 2060));
+                        }
+                        else
+                        {
+                            g.DrawString(record.unit_full_name, titlefont, sbrush, new PointF(2600, 1800));
+                        }
+
                         g.DrawString(record.ztr_name, contentfont, sbrush, new PointF(2600, 2150));
                         g.DrawString(DateTime.Now.ToString("yyyy年MM月dd日 HH时mm分"), contentfont, sbrush, new PointF(2600, 2270));
 

@@ -135,7 +135,7 @@
             })
         }
 
-    function queryRecords() {
+        function queryRecords() {
         F.doPostBack('@Url.Action("Grid1_Query")', {
             'userId': F.ui.userId.getValue(),
             'unitId': F.ui.unitId.getValue(),
@@ -144,8 +144,8 @@
             'qKyUnit': F.ui.qKyUnit.value,
             'qCreator': F.ui.qCreator.value,
             'qKyState': F.ui.qKyState.value,
-            'qKyDate1': F.ui.qKyDate1.getValue(),
-            'qKyDate2': F.ui.qKyDate2.getValue(),
+            'qKyDate1': F.ui.qKyDate1.value,
+            'qKyDate2': F.ui.qKyDate2.value,
             'qTitle': F.ui.qTitle.getValue(),
             'qTitle2': F.ui.qTitle2.getValue()
         });

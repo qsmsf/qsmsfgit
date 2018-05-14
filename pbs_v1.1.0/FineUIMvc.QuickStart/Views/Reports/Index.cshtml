@@ -77,8 +77,8 @@
         function onMapReport(event) {
             var param = '?qKyUnit=' + F.ui.qKyUnit.value;
             param += '&qCreator=' + F.ui.qCreator.value;
-            param += '&qKyDate1=' + F.ui.qKyDate1.getValue();
-            param += '&qKyDate2=' + F.ui.qKyDate2.getValue();
+            param += '&qKyDate1=' + F.ui.qKyDate1.value;
+            param += '&qKyDate2=' + F.ui.qKyDate2.value;
             param += '&userId=' + F.ui.userId.getValue();
             param += '&unitId=' + F.ui.unitId.getValue();
             param += '&dataType=' + F.ui.dataType.getValue();
@@ -93,8 +93,8 @@
             var url = '@Url.Content("~/Reports/GetReportData")' + '?type=' + type;
             url += '&qKyUnit=' + F.ui.qKyUnit.value;
             url += '&qCreator=' + F.ui.qCreator.value;
-            url += '&qKyDate1=' + F.ui.qKyDate1.getValue();
-            url += '&qKyDate2=' + F.ui.qKyDate2.getValue();
+            url += '&qKyDate1=' + F.ui.qKyDate1.value;
+            url += '&qKyDate2=' + F.ui.qKyDate2.value;
             url += '&userId=' + F.ui.userId.getValue();
             url += '&unitId=' + F.ui.unitId.getValue();
             url += '&dataType=' + F.ui.dataType.getValue();

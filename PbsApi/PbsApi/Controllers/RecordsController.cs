@@ -282,7 +282,7 @@ namespace PbsApi.Controllers
                     File.Move(fwPicPath, path2);
                 }
 
-                string pmPicPath = path + "upload\\" + rar.entity.uuid + "_pmt.png";
+                string pmPicPath = path + "upload\\" + rar.entity.uuid + "_pmt.jpeg";
                 if (File.Exists(pmPicPath))
                 {
                     sys_upload_file tmp = db.sys_upload_file.Where(p => p.file_name.Equals(rar.entity.uuid + "_pmt.jpeg")).FirstOrDefault();
