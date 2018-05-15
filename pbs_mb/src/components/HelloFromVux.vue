@@ -1,72 +1,10 @@
 <template>
   <div >
-    <div class="header" data-fixed="top" style="background: #0082ec ;">
-      <div class="title row-box" style="background: #0082ec !important;">
-        <div class="box-left"></div>
-        <div class="span11">
-          <h1>深圳E勘察</h1>
-        </div>
-        <div class="box-right">
-          <div class="navbar">
-            <ul class="navbar-items" data-menupos="bottom" style="font-size: 22px;">
-              <li style="position: relative;">
-                <div class="btn-active "  data-role="BTButton" data-type="image" onclick="showOrHide()">
-                  <img src="../assets/menu.png" alt=""  />
-                </div>
-                <div id="my_sonmenu" style="display: none">
-                  <div class="triangle-right-black" style="margin-right: 10px;margin-top: -10px;"></div>
-                  <ul   style="width:220px;margin-top: 0px;left: -130px;background-color: #434343;">
-                    <li style="padding:10px 0 10px 10px;border: none;" onclick="openAboutInfo()" data-role="BTButton">
-                      <div style="text-align: left" >
-                        <img src="../assets/about.png" style="width: 25px;height: 25px;margin-top: -5px;">
-                        <span >关于</span>
-                        <div style="height: 1px;background-color: #626262;margin-top: 10px;width: 200px;"></div>
-                      </div>
-                    </li>
-                    <li style="padding: 5px 0 5px 10px;border: none;" onclick="runAppKnow()"data-role="BTButton">
-                      <div style="text-align: left">
-                        <img src="../assets/feedback.png" style="width: 25px;height: 25px;margin-top: -5px;" >
-                        <span>帮助文档</span>
-                        <div style="height: 1px;background-color: #626262;margin-top: 10px;width: 200px;"></div>
-                      </div>
-                    </li>
-                    <li style="padding:5px 0 5px 10px;border: none;" onclick="runAppQuestion()" data-role="BTButton">
-                      <div style="text-align: left">
-                        <img src="../assets/question.png" style="width: 25px;height: 25px;margin-top: -5px;">
-                        <span>问题反馈</span>
-                        <div style="height: 1px;background-color: #626262;margin-top: 10px;width: 200px;"></div>
-                      </div>
-                    </li>
-                    <li style="padding:5px  0 5px 10px;border: none;" onclick="openResponpolice()" data-role="BTButton"  >
-                      <div style="text-align: left">
-                        <img src="../assets/police.png" style="width: 25px;height: 25px;margin-top: -5px;">
-                        <span style="text-overflow: ellipsis; overflow: hidden;white-space: nowrap;">责任民警-曹健</span>
-                        <div style="height: 1px;background-color: #626262;margin-top: 10px;width: 200px;"></div>
-                      </div>
-                    </li>
-                    <li style="padding: 5px 0 5px 10px;border: none;" onclick="app.refresh()" data-role="BTButton" >
-                      <div style="text-align: left">
-                        <img src="../assets/refresh.png" style="width: 25px;height: 25px;margin-top: -5px;">
-                        <span>刷新</span>
-                        <div style="height: 1px;background-color: #626262;margin-top: 10px;width: 200px;"></div>
-                      </div>
-                    </li>
-                    <li style="padding: 5px 0 5px 10px;border: none;" onclick="app.exit()" data-role="BTButton">
-                      <div style="text-align: left">
-                        <img src="../assets/back.png" style="width: 25px;height: 25px;margin-top: -5px;">
-                        <span >退出</span>
-                        <div style="height: 1px;background-color: #626262;margin-top: 10px;width: 200px;"></div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-    </div>
+    <x-header title="深圳E勘查" :left-options="{showBack: false}" @on-click-more="showMenu = true" 
+      :right-options="{showMore: true}">
+      <x-icon slot="overwrite-right" type="navicon" size="35" style="fill:#fff;position:relative;top:-8px;left:-3px;" />
+    </x-header>
+    
     <div class="vux-demo">
       <img class="logo" src="../assets/gongan.png">
       <h3>深圳E勘查</h3>
@@ -79,11 +17,35 @@
       <x-switch title="记住账号" v-model="rememberFlag" ></x-switch>  
       <a href="http://182.61.43.29/webapi/api/Version/GetNewestApk" style="display:none">下载app</a>
     </group>
+    <div v-transfer-dom>
+      <popup v-model="showMenu" position="right" style="width:160px;background-color: #434343;height:300px;margin-top:45px"> 
+        <group style="background-color: #434343;margin-top: -15px">
+          <cell title="关于" class="menu-cell" link="/About" is-link>
+            <img slot="icon" width="25" class="menu-cell-img" src="../assets/about.png" >
+          </cell>
+          <cell title="帮助文档" class="menu-cell" is-link>
+            <img slot="icon" width="25" class="menu-cell-img" src="../assets/feedback.png">
+          </cell>
+          <cell title="问题反馈" class="menu-cell" is-link link="">
+            <img slot="icon" width="25" class="menu-cell-img" src="../assets/question.png">
+          </cell>
+          <cell title="责任民警-崔志刚" class="menu-cell" is-link>
+            <img slot="icon" width="25" class="menu-cell-img" src="../assets/police.png">
+          </cell>
+          <cell title="刷新" class="menu-cell" is-link @click.native="refreshPage">
+            <img slot="icon" width="25" class="menu-cell-img" src="../assets/refresh.png">
+          </cell>
+          <cell title="退出" class="menu-cell" is-link @click.native="exitPage">
+            <img slot="icon" width="25" class="menu-cell-img" src="../assets/back.png">
+          </cell>
+        </group>        
+      </popup>
+    </div>
   </div>
 </template>
 
 <script>
-import { Group, XInput, XButton, XSwitch } from 'vux'
+import { Group, XInput, XButton, XSwitch, XHeader, TransferDom, Popup, Cell } from 'vux'
 import { SET_BASEINFO, SET_SYSINFO } from '../mutationTypes'
 
   var exitFlag = false;
@@ -113,7 +75,11 @@ export default {
     Group,
     XButton,
     XInput,
-    XSwitch
+    XSwitch,
+    XHeader,
+    TransferDom,
+    Popup,    
+    Cell
   },
   mounted: function () {
     let url = 'http://182.61.43.29/webapi/'
@@ -238,6 +204,12 @@ export default {
             document.cookie = c_name + "=" + cval + ";expires=" + exp.toGMTString();
         }
     },
+    refreshPage() {
+      app.refresh()
+    },
+    exitPage() {
+      app.exit()
+    },
     //返回退出
     backFunc() {
       var isIndexPage = ui.Page.history.length <= 1 ? true : false;
@@ -258,7 +230,7 @@ export default {
     },
     //跳转到about关于页面，about页面也直接仿照写
     openAboutInfo() {
-      showOrHide();
+      alert(111)
       ui.load({
         url: "about.html",
         params: {}
@@ -274,7 +246,6 @@ export default {
     },
     //跳转到帮助文档页面即常见问题列表页面
     runAppKnow(){
-      showOrHide();//隐藏popup框
       //暂时跳这个页面,这个页面需要自己写
       ui.load({
         url: "support.html",
@@ -304,11 +275,6 @@ export default {
         appUrl:question_appUrl
       };
       app.link.runApp(params);
-    },
-    //隐藏popup框
-    showOrHide(){
-      $("#my_sonmenu").toggle();
-      event.stopPropagation();//这句是必须
     }
   },
   data () {
@@ -317,7 +283,8 @@ export default {
       disable001: false,
       loginName: '',
       password: '',
-      rememberFlag: false
+      rememberFlag: false,
+      showMenu: false
     }
   }
 }
@@ -364,5 +331,12 @@ export default {
     height: 0;
     border: 10px solid transparent;
     border-bottom: 10px solid #434343;
+  }
+  .menu-cell {
+    background-color: #434343;
+  }
+  .menu-cell-img {
+    display:block;
+    margin-right:5px;
   }
 </style>

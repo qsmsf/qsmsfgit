@@ -14,7 +14,7 @@
         <img slot="icon" src="../assets/date_magnify.png">
       </grid-item>
       
-      <grid-item label="退出登录" link="/">
+      <grid-item label="退出登录" @click.native="logout()">
         <img slot="icon" src="../assets/status_offline.png">
       </grid-item>
     </grid>
@@ -23,7 +23,7 @@
 
 <script>
 import { Group, XInput, XButton, Datetime, Grid, GridItem } from 'vux'
-import { CLR_RECORDINFO } from '../mutationTypes'
+import { CLR_RECORDINFO, SET_BASEINFO } from '../mutationTypes'
 export default {
   components: {
     Group,
@@ -44,6 +44,16 @@ export default {
     }
   },
   methods: {
+    logout() {
+      var baseInfo = {
+        code: '',
+        token: '',
+        member: null,
+        message: ''
+      }
+      this.$store.commit(SET_BASEINFO, baseInfo)
+      this.$router.push({path: '/'})
+    },
     onAddRec () {
       let date = new Date()
       let seperator1 = '-'

@@ -10,6 +10,7 @@ import OnlineDraw from 'components/OnlineDraw'
 import MainIndex from 'components/MainIndex'
 import RecordList from 'components/RecordList'
 import FetchMapLoc from 'components/Steps/FetchMapLoc'
+import About from 'components/About'
 
 export default [
   {
@@ -31,6 +32,11 @@ export default [
     path: '/MainIndex',
     name: 'MainIndex',
     component: MainIndex
+  },
+  {
+    path: '/About',
+    name: 'About',
+    component: About
   },
   {
     path: '/RecordList',
