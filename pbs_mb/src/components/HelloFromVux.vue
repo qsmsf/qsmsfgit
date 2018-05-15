@@ -1,5 +1,72 @@
 <template>
-  <div>
+  <div >
+    <div class="header" data-fixed="top" style="background: #0082ec ;">
+      <div class="title row-box" style="background: #0082ec !important;">
+        <div class="box-left"></div>
+        <div class="span11">
+          <h1>深圳E勘察</h1>
+        </div>
+        <div class="box-right">
+          <div class="navbar">
+            <ul class="navbar-items" data-menupos="bottom" style="font-size: 22px;">
+              <li style="position: relative;">
+                <div class="btn-active "  data-role="BTButton" data-type="image" onclick="showOrHide()">
+                  <img src="../assets/menu.png" alt=""  />
+                </div>
+                <div id="my_sonmenu" style="display: none">
+                  <div class="triangle-right-black" style="margin-right: 10px;margin-top: -10px;"></div>
+                  <ul   style="width:220px;margin-top: 0px;left: -130px;background-color: #434343;">
+                    <li style="padding:10px 0 10px 10px;border: none;" onclick="openAboutInfo()" data-role="BTButton">
+                      <div style="text-align: left" >
+                        <img src="../assets/about.png" style="width: 25px;height: 25px;margin-top: -5px;">
+                        <span >关于</span>
+                        <div style="height: 1px;background-color: #626262;margin-top: 10px;width: 200px;"></div>
+                      </div>
+                    </li>
+                    <li style="padding: 5px 0 5px 10px;border: none;" onclick="runAppKnow()"data-role="BTButton">
+                      <div style="text-align: left">
+                        <img src="../assets/feedback.png" style="width: 25px;height: 25px;margin-top: -5px;" >
+                        <span>帮助文档</span>
+                        <div style="height: 1px;background-color: #626262;margin-top: 10px;width: 200px;"></div>
+                      </div>
+                    </li>
+                    <li style="padding:5px 0 5px 10px;border: none;" onclick="runAppQuestion()" data-role="BTButton">
+                      <div style="text-align: left">
+                        <img src="../assets/question.png" style="width: 25px;height: 25px;margin-top: -5px;">
+                        <span>问题反馈</span>
+                        <div style="height: 1px;background-color: #626262;margin-top: 10px;width: 200px;"></div>
+                      </div>
+                    </li>
+                    <li style="padding:5px  0 5px 10px;border: none;" onclick="openResponpolice()" data-role="BTButton"  >
+                      <div style="text-align: left">
+                        <img src="../assets/police.png" style="width: 25px;height: 25px;margin-top: -5px;">
+                        <span style="text-overflow: ellipsis; overflow: hidden;white-space: nowrap;">责任民警-曹健</span>
+                        <div style="height: 1px;background-color: #626262;margin-top: 10px;width: 200px;"></div>
+                      </div>
+                    </li>
+                    <li style="padding: 5px 0 5px 10px;border: none;" onclick="app.refresh()" data-role="BTButton" >
+                      <div style="text-align: left">
+                        <img src="../assets/refresh.png" style="width: 25px;height: 25px;margin-top: -5px;">
+                        <span>刷新</span>
+                        <div style="height: 1px;background-color: #626262;margin-top: 10px;width: 200px;"></div>
+                      </div>
+                    </li>
+                    <li style="padding: 5px 0 5px 10px;border: none;" onclick="app.exit()" data-role="BTButton">
+                      <div style="text-align: left">
+                        <img src="../assets/back.png" style="width: 25px;height: 25px;margin-top: -5px;">
+                        <span >退出</span>
+                        <div style="height: 1px;background-color: #626262;margin-top: 10px;width: 200px;"></div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
     <div class="vux-demo">
       <img class="logo" src="../assets/gongan.png">
       <h3>深圳E勘查</h3>
@@ -19,6 +86,26 @@
 import { Group, XInput, XButton, XSwitch } from 'vux'
 import { SET_BASEINFO, SET_SYSINFO } from '../mutationTypes'
 
+  var exitFlag = false;
+  var appCode = "com.xinghuo.question";//问题反馈的appCode
+  var know_appUrl = "modules/question/know_info.html";//帮助文档的路径
+  var question_appUrl = "modules/question/work_order_form.html";//问题反馈的路径
+
+  var mAppName = "深云E勘察";//本项目的名称
+/*
+  app.page.onLoad = function() {
+    document.addEventListener("deviceready", function() {
+      document.addEventListener("backbutton", backFunc, false);
+    }, false);
+    ui.Menu.init({
+      sectionId: 'index_section',
+      duration: 200
+    });
+    $(document).click(function(){
+      $("#my_sonmenu").hide();
+    });
+  }
+*/
 var md5 = require('js-md5')
 
 export default {
@@ -31,7 +118,7 @@ export default {
   mounted: function () {
     let url = 'http://182.61.43.29/webapi/'
     //url = 'http://localhost/PbsApi/'
-    url = 'http://68.68.18.242/Pbs/webapi'
+    //url = 'http://68.68.18.242/Pbs/webapi'
     this.$store.commit(SET_SYSINFO, url)
     this.loadAccountInfo()
   },
@@ -151,6 +238,78 @@ export default {
             document.cookie = c_name + "=" + cval + ";expires=" + exp.toGMTString();
         }
     },
+    //返回退出
+    backFunc() {
+      var isIndexPage = ui.Page.history.length <= 1 ? true : false;
+      if(isIndexPage) {
+        if(exitFlag) {
+          app.exit();
+        } else {
+          exitFlag = true;
+          app.hint("再次点击返回退出应用");
+          setTimeout("exitFlag = false;", 3000);
+        }
+      } else {
+        //单页后退，多页不处理
+        if(ui.settings.appType == 'single') {
+          ui.Page.back();
+        }
+      }
+    },
+    //跳转到about关于页面，about页面也直接仿照写
+    openAboutInfo() {
+      showOrHide();
+      ui.load({
+        url: "about.html",
+        params: {}
+      });
+    },
+
+    //跳转到责任民警页面
+    openResponpolice() {
+      showOrHide();//隐藏popup框
+      //先去问责任民警的警号，再找曹工获取这个userId.
+      app.link.startUserCard("3caf2cf4-25f0-4dc8-8a8c-09bf4cc61644");//在应用市场搜索 框架3-->Link API示例-->通讯录-->找到这个民警-->即可看到userId
+
+    },
+    //跳转到帮助文档页面即常见问题列表页面
+    runAppKnow(){
+      showOrHide();//隐藏popup框
+      //暂时跳这个页面,这个页面需要自己写
+      ui.load({
+        url: "support.html",
+        params: {}
+      });
+      //以后跳下个页面
+//        var params = {
+//          appCode: appCode,
+//          data: {
+//            APP_NAME: APP_NAME
+//          },
+//          appUrl: know_appUrl
+//        };
+//        app.link.runApp(params);
+    },
+    //跳转到问题反馈页面，只需要把url.js，改了之后，下面代码直接复制
+    runAppQuestion(){
+      showOrHide();//隐藏popup框
+      var params = {
+        appCode: appCode,
+        data:{
+          isPages:"1",
+          systemId:"GACLOUD",
+          app_code: APP_NAME,
+          appName:mAppName
+        },
+        appUrl:question_appUrl
+      };
+      app.link.runApp(params);
+    },
+    //隐藏popup框
+    showOrHide(){
+      $("#my_sonmenu").toggle();
+      event.stopPropagation();//这句是必须
+    }
   },
   data () {
     return {
@@ -165,11 +324,45 @@ export default {
 </script>
 
 <style>
-.vux-demo {
-  text-align: center;
-}
-.logo {
-  width: 100px;
-  height: 100px
-}
+  .vux-demo {
+    text-align: center;
+  }
+  .logo {
+    width: 100px;
+    height: 100px
+  }
+  .header .title .navbar li [data-role="BTButton"].btn-active {
+    background-color: transparent !important;
+    border: 0;
+  }
+
+  .header .title .navbar {
+    width: 80px;
+    padding-top: 0;
+    text-align: right;
+  }
+
+  .navbar ul[data-menupos="bottom"] .angle {
+    bottom: -11px;
+    left: 42%;
+  }
+
+  .angle {
+    background: #434343;
+  }
+  .navbar [data-role="BTButton"] .btn-text{
+    line-height: 30px;
+    padding-left: 0;
+    font-weight: normal;
+    text-shadow: none;
+  }
+  .header .title .navbar li [data-role="BTButton"].btn-active{
+    color: #FFFFff;
+  }
+  .triangle-right-black {
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-bottom: 10px solid #434343;
+  }
 </style>

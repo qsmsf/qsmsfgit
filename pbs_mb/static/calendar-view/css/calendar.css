@@ -1,0 +1,41 @@
+.calendar-title-line {
+    background: lightblue;
+}
+.calendar-title-line tr td {
+    text-align: center;
+}
+.calendar-switch-left {
+    display: block;
+    background: url("../images/left.png") center no-repeat;
+    width: 80px;
+    height: 50px;
+}
+.calendar-switch-right {
+    display: block;
+    background: url("../images/right.png") center no-repeat;
+    width: 80px;
+    height: 50px;
+}
+.calendar-title-content {
+    width: 70%;
+    font-size: 30px;
+    /*border: 1px solid red;*/
+}
+.calendar-week-index {
+    background: lightcoral;
+}
+.calendar-week-index tr td {
+    width: 14%;
+    text-align: center;
+}
+.calendar-dates tr td {
+    width: 14%;
+    text-align: center;
+    font-size: 25px;
+}
+.calendar-bottom-bar {
+    background: lightgrey;
+}
+.calendar-bottom-bar tr td {
+    /*text-align: center;*/
+}
