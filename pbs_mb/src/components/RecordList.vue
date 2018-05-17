@@ -42,6 +42,7 @@ export default {
   },
   methods: {
     loadList () {
+      /*
       this.$http({
         url: this.$store.getters.GetterBaseUrl + 'api/Records/GetRecordList',
         method: 'GET',
@@ -74,6 +75,40 @@ export default {
         })
         this.$refs.recordScroller.donePulldown()
       })
+      */
+      let headers = {
+        token: this.$store.getters.GetterToken
+      }
+      let headerdata = JSON.stringify(headers)
+      let body = {
+        jsonbean: ""
+      }
+      let bodydata = JSON.stringify(body)
+      xh.get(door_url,
+        {
+          headerParameter: headerdata,
+          APP_URL: _url + 'api/Records/GetRecordList'，
+          bodyEntity: bodydata
+        },
+        function(res){
+          if (res.data.code === 100) {
+            this.recList = res.data.resultList
+            this.$refs.recordScroller.donePulldown()
+          } else {
+            this.$vux.toast.show({
+              text: res.data.message,
+              type: 'warn'
+            })
+            this.$refs.recordScroller.donePulldown()
+          }
+        }, 
+        function (res) {
+          this.$vux.toast.show({
+            text: err,
+            type: 'warn'
+          })
+          this.$refs.recordScroller.donePulldown()
+        })
     },
     showName (i) {
       return i + ''

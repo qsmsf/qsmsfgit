@@ -1,6 +1,6 @@
 
 //全局变量，端口是否转发
-isProxy = false;
+isProxy = true;
 var debug = false;
 var test =false;
 
@@ -11,6 +11,10 @@ url = app.getUrl(url);
 //服务器真实地址
 var _url = "http://10.42.0.235:9000";
 //全局变量，app名称和版本信息
-APP_NAME = "JWYSTANDARD";
+APP_NAME = "PBS";
 
-APP_VERSION = "v1.05.20180402";
+APP_VERSION = "v1.00";
+
+isUsingNativeGetAndPost = false;
+
+SERVER_CHARSET = "GBK";

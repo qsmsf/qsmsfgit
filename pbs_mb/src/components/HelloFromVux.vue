@@ -17,8 +17,8 @@
       <x-switch title="记住账号" v-model="rememberFlag" ></x-switch>  
       <a href="http://182.61.43.29/webapi/api/Version/GetNewestApk" style="display:none">下载app</a>
     </group>
-    <div v-transfer-dom>
-      <popup v-model="showMenu" position="right" style="width:160px;background-color: #434343;height:300px;margin-top:45px"> 
+    <div v-transfer-dom >
+      <popup v-model="showMenu" position="right" style="width:160px;background-color: #434343;height:340px;margin-top:45px"> 
         <group style="background-color: #434343;margin-top: -15px">
           <cell title="关于" class="menu-cell" link="/About" is-link>
             <img slot="icon" width="25" class="menu-cell-img" src="../assets/about.png" >
@@ -29,7 +29,7 @@
           <cell title="问题反馈" class="menu-cell" is-link link="">
             <img slot="icon" width="25" class="menu-cell-img" src="../assets/question.png">
           </cell>
-          <cell title="责任民警-崔志刚" class="menu-cell" is-link>
+          <cell title="责任民警-崔志岗" class="menu-cell" is-link>
             <img slot="icon" width="25" class="menu-cell-img" src="../assets/police.png">
           </cell>
           <cell title="刷新" class="menu-cell" is-link @click.native="refreshPage">
@@ -54,8 +54,54 @@ import { SET_BASEINFO, SET_SYSINFO } from '../mutationTypes'
   var question_appUrl = "modules/question/work_order_form.html";//问题反馈的路径
 
   var mAppName = "深云E勘察";//本项目的名称
-/*
+  //Dom结构加载完成后执行
+  
+  app.page.onReady = function() {
+      //to do
+  }
+
+  app.page.onError = function(err) {
+      alert(JSON.stringify(err));
+  }
+  //页面所有元素加载完成后执行，deviceRready
   app.page.onLoad = function() {
+      //后退键
+      var flag = 0;
+      
+      document.addEventListener("backbutton", function() {
+          var isIndexPage = ui.Page.history.length <= 1 ? true : false;
+
+          //已在首页
+          if (isIndexPage) {
+              if (flag == 0) {
+                  app.hint("再按一次就退出应用了!");
+                  flag = flag + 1;
+                  //5s后重新设置回去
+                  setTimeout(function() {
+                      flag = 0;
+                  }, 5000);
+              } else if (flag == 1) {
+                  app.exit();
+              }
+          } else{
+              //单页后退，多页不处理
+              if(ui.settings.appType == 'single'){
+                  ui.Page.back();
+              }
+          }
+
+
+      }, false);
+      
+      //初始化
+      //initViews();
+      //获取下载文件存储路径
+      //getSavepath();
+  }
+  
+  
+  app.page.onLoad = function() {
+    /*
     document.addEventListener("deviceready", function() {
       document.addEventListener("backbutton", backFunc, false);
     }, false);
@@ -66,18 +112,21 @@ import { SET_BASEINFO, SET_SYSINFO } from '../mutationTypes'
     $(document).click(function(){
       $("#my_sonmenu").hide();
     });
+    */
   }
-*/
+
 var md5 = require('js-md5')
 
 export default {
+  directives: {
+    TransferDom
+  },
   components: {
     Group,
     XButton,
     XInput,
     XSwitch,
     XHeader,
-    TransferDom,
     Popup,    
     Cell
   },
@@ -95,6 +144,7 @@ export default {
         text: '登陆中'
       })
       var loginInfo = 'username=' + this.loginName + '&password=' + md5(this.password)
+      /*
       this.$http({
         url: this.$store.getters.GetterBaseUrl + 'Auth/Login?' + loginInfo,
         method: 'Get',
@@ -124,6 +174,34 @@ export default {
         })
         this.disable001 = false
       })
+      */
+
+      xh.get(door_url,
+        {
+          APP_URL: _url + "Auth/Login?" + loginInfo
+        },
+        function(res){
+          if (res.data.code === 100) {
+            this.$store.commit(SET_BASEINFO, res.data)
+            this.$vux.loading.hide()
+            this.success()
+          } else {
+            this.$vux.loading.hide()
+            this.$vux.toast.show({
+              text: res.data.message,
+              type: 'warn'
+            })
+            this.disable001 = false
+          }
+        }, 
+        function (res) {
+          this.$vux.loading.hide()
+          this.$vux.toast.show({
+            text: res,
+            type: 'warn'
+          })
+          this.disable001 = false
+        })
     },
     success () {
       var mySelf = this

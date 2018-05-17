@@ -138,41 +138,5 @@
     app.szgaplugin.decodeBase64toPic=function(values, successCallback, failCallback){
         Cordova.exec(successCallback, failCallback, "SzgaPlugin", "base64ToBitmap", [values]);
     }
-    //获取海拔值
-    app.szgaplugin.getAltitude=function(values, successCallback, failCallback){
-        Cordova.exec(successCallback, failCallback, "SzgaPlugin", "getAltitude", [values]);
-    }
-    //图片压缩
-    app.szgaplugin.getPicCompress=function(values, successCallback, failCallback){
-        Cordova.exec(successCallback, failCallback, "SzgaPlugin", "picCompress", [values]);
-    }
-    //文字转语音
-    app.szgaplugin.wordToVoice=function(values, successCallback, failCallback){
-        Cordova.exec(successCallback, failCallback, "SzgaPlugin", "wordToVoice", [values]);
-    }
-    //说话转文字
-    app.szgaplugin.speakToWord=function(values, successCallback, failCallback){
-        Cordova.exec(successCallback, failCallback, "SzgaPlugin", "speakToWord", [values]);
-    }
-    //录音文件转文字
-    app.szgaplugin.voiceToWord=function(values, successCallback, failCallback){
-        Cordova.exec(successCallback, failCallback, "SzgaPlugin", "voiceToWord", [values]);
-    }
-    //开始播放音频文件
-    app.szgaplugin.startMedia=function(values, successCallback, failCallback){
-        Cordova.exec(successCallback, failCallback, "SzgaPlugin", "startMedia", [values]);
-    }
-    //暂停播放音频文件
-    app.szgaplugin.pauseMedia=function(values, successCallback, failCallback){
-        Cordova.exec(successCallback, failCallback, "SzgaPlugin", "stopMedia", [values]);
-    }
-    //继续播放音频文件
-    app.szgaplugin.resumeMedia=function(values, successCallback, failCallback){
-        Cordova.exec(successCallback, failCallback, "SzgaPlugin", "resumeMedia", [values]);
-    }
-    //复制文本到剪贴板
-    app.szgaplugin.copyClipboard=function(values, successCallback, failCallback){
-        Cordova.exec(successCallback, failCallback, "SzgaPlugin", "copyClipboard", [values]);
-    }
 
 })(window);

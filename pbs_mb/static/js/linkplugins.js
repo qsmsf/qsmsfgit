@@ -7,24 +7,6 @@
     window.app.link = window.app.link || {};
 
     /**
-     该接口用于分享到link
-     @param   var params =  {"type":"website","title":"xxx","content":"xx","icon":"xxx"}
-     @example  app.link.share(params)
-     */
-    app.link.share= function (params) {
-        Cordova.exec(null, null, "LinkPlugin", "share", [params]);
-    }
-
-    /**
-     该接口用于分享到link
-     @param   var params =  {"type":"website","title":"xxx","content":"xx","icon":"xxx"}
-     @example  app.link.shareToBlog(params)
-     */
-    app.link.shareToBlog = function (params) {
-        Cordova.exec(null, null, "LinkPlugin", "shareToBlog", [params]);
-    }
-
-    /**
      只适用于v4.1.3或以上版本
      @method:重新打开页面，目前只适用于首页
      */

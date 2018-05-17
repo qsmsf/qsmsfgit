@@ -11,24 +11,6 @@
     */
     window.app.link = window.app.link || {};
 
-    /**打开二维码扫码(可设置直接返回扫码内容，不自行解析)
-    PS:该接口Link版本要求：4.2.1或以上版本，否则可能导致程序奔溃。*/
-    app.link.ScanCodeHandle = function(success, fail, options){
-        Cordova.exec(success, fail, "LinkPlugin", "scanCode", [options]);
-    }
-
-    /**
-     *
-     * 手机link扫一扫登录web版link
-     */
-    app.link.ScanCode=function(){
-        var params={
-            code:"OpenBuiltIn",
-            key:"ScanCode"
-        };
-        Cordova.exec(null, null, "LinkPlugin", "launchLinkServiceWithDictionary", [params]);
-    }
-
     /**
      打开不确定的页面
      @method app.link.openLinkPage
@@ -880,7 +862,7 @@
     app.link.runApp=function(params){
         var dataStr="";
         if(params.data)
-        {
+            {
             for (var key in params.data) {
                 dataStr+=("\n"+key+"="+params.data[key]);
             };    
