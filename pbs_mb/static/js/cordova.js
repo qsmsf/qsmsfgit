@@ -6773,7 +6773,7 @@ window.cordova = require('cordova');
                 finishPluginLoading();
             }
         };
-        xhr.open('GET', './static/js/cordova_plugins.json', true); // Async
+        xhr.open('GET', 'cordova_plugins.json', true); // Async
         xhr.send();
     }
     catch(err) {

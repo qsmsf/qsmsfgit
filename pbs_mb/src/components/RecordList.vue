@@ -42,55 +42,61 @@ export default {
   },
   methods: {
     loadList () {
-      /*
-      this.$http({
-        url: this.$store.getters.GetterBaseUrl + 'api/Records/GetRecordList',
-        method: 'GET',
-        emulateJSON: true,
-        params: {
-          userId: this.$store.getters.GetterMe.member.user_id,
-          bgState: 0,
-          sdate: '',
-          edate: ''
-        },
-        headers: {
-          contentType: 'application/x-www-form-urlencoded',
+      if(isProxy){
+        let headers = {
           token: this.$store.getters.GetterToken
         }
-      }).then(function (res) {
-        if (res.data.code === 100) {
-          this.recList = res.data.resultList
-          this.$refs.recordScroller.donePulldown()
-        } else {
-          this.$vux.toast.show({
-            text: res.data.message,
-            type: 'warn'
-          })
-          this.$refs.recordScroller.donePulldown()
+        let headerdata = JSON.stringify(headers)
+        let body = {
+          jsonbean: ""
         }
-      }).catch(err => {
-        this.$vux.toast.show({
-          text: err,
-          type: 'warn'
-        })
-        this.$refs.recordScroller.donePulldown()
-      })
-      */
-      let headers = {
-        token: this.$store.getters.GetterToken
-      }
-      let headerdata = JSON.stringify(headers)
-      let body = {
-        jsonbean: ""
-      }
-      let bodydata = JSON.stringify(body)
-      xh.get(door_url,
-        {
-          headerParameter: headerdata,
-          APP_URL: _url + 'api/Records/GetRecordList'，
-          bodyEntity: bodydata
-        },
-        function(res){
+        let bodydata = JSON.stringify(body)
+        console.log(bodydata)
+        xh.get(_url + '/api/Records/GetRecordList',
+          {
+            userId: this.$store.getters.GetterMe.member.user_id,
+            bgState: 0,
+            sdate: '',
+            edate: '',
+            headerParameter: headerdata,
+            bodyEntity: bodydata
+          },
+          function(res){
+            var ret = eval("(" + res + ")")
+            if (ret.returnValue.code === 100) {
+              this.recList = ret.returnValue.resultList
+              this.$refs.recordScroller.donePulldown()
+            } else {
+              this.$vux.toast.show({
+                text: ret.returnValue.message,
+                type: 'warn'
+              })
+              this.$refs.recordScroller.donePulldown()
+            }
+          }, 
+          function (err) {
+            this.$vux.toast.show({
+              text: err,
+              type: 'warn'
+            })
+            this.$refs.recordScroller.donePulldown()
+          })
+      }else{
+        this.$http({
+          url: this.$store.getters.GetterBaseUrl + 'api/Records/GetRecordList',
+          method: 'GET',
+          emulateJSON: true,
+          params: {
+            userId: this.$store.getters.GetterMe.member.user_id,
+            bgState: 0,
+            sdate: '',
+            edate: ''
+          },
+          headers: {
+            contentType: 'application/x-www-form-urlencoded',
+            token: this.$store.getters.GetterToken
+          }
+        }).then(function (res) {
           if (res.data.code === 100) {
             this.recList = res.data.resultList
             this.$refs.recordScroller.donePulldown()
@@ -101,14 +107,14 @@ export default {
             })
             this.$refs.recordScroller.donePulldown()
           }
-        }, 
-        function (res) {
+        }).catch(err => {
           this.$vux.toast.show({
             text: err,
             type: 'warn'
           })
           this.$refs.recordScroller.donePulldown()
         })
+      }     
     },
     showName (i) {
       return i + ''

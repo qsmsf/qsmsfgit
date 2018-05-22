@@ -87,7 +87,6 @@ var ui = {
     }
 }
 
-
 /*
  * javascript垃圾回收
  * */
@@ -3180,11 +3179,12 @@ $.uiwidget.register(function ( target) {
 
     	var url = options.url,
     	    params = options.params;
-
-        if(ui.settings.showPageLoading){
-            if(typeof Cordova == 'undefined') ui.showMask(ui.settings.showPageLoadingText, ui.settings.showPageLoadingIcon); 
-            else app.progress.start('',ui.settings.showPageLoadingText); 
-        }
+			
+//2018年-03月-08日 dengzanqiang 注释此ui.load()跳转时，弹出(加载中...)窗不关闭的bug；
+       // if(ui.settings.showPageLoading){
+            //if(typeof Cordova == 'undefined') ui.showMask(ui.settings.showPageLoadingText, ui.settings.showPageLoadingIcon);
+            //else app.progress.start('',ui.settings.showPageLoadingText);
+      //  }
 
         loadContent(url,params,function(html){
 
@@ -3819,6 +3819,8 @@ isroll组件
  /**
 弹出框组件
  @class ui.Popup
+  更新记录：
+  wuzhifeng 2017-05-11 添加actionsheet2方法，弹出选择菜单项被点击时，回调函数可以获取到数组下标
 */
 ;ui.Popup = (function($){
 
@@ -4162,6 +4164,54 @@ isroll组件
         });
     }
 
+    /**
+     星火定制actionsheet组件 wuzhifeng 2017-05-11
+     @method   ui.Popup.actionsheet2(buttons)
+     @param buttons {Array}  按钮集合
+     [{color:'red',text:'btn',handler:function(index){}},{color:'red',text:'btn',handler:function(index){}}]
+     @example
+     ui.Popup.actionsheet([{
+                color : "#27AE60",
+                text : '第一个菜单项',
+                handler : function(index){
+                    app.alert("这是第" + index + "个菜单项);
+                }
+            },{
+                color : "#27AE60",
+                text : '第二个菜单项',
+                handler : function(index){
+                    app.alert("这是第" + index + "个菜单项);
+                }
+            }
+     ]);
+     */
+    var actionsheet2 = function(buttons){
+        var markup = '<div class="actionsheet">';
+        $.each(buttons,function(i,n){
+            //markup += '<button style="background-color: '+ n.color +' !important;">'+ n.text +'</button>';
+
+            markup += '<div data-role="BTButton" style="background-color:'+ n.color +'" data-status="1"><span class="btn-text">'+ n.text +'</span></div>';
+        });
+        markup += '<div data-role="BTButton" data-theme="d" data-status="1"><span class="btn-text">取消</span></div>';
+        markup += '</div>';
+        show({
+            html : markup,
+            pos : 'bottom',
+            showCloseBtn : false,
+            onShow : function(){
+                $(this).find('[data-role="BTButton"]').each(function(i,button){
+                    $(button).on('tap',function(){
+                        if(buttons[i] && buttons[i].handler){
+                            //buttons[i].handler.call(button);
+                            buttons[i].handler(i);
+                        }
+                        hide();
+                    });
+                });
+            }
+        });
+    }
+
     $(function(){
         _init();
     });
@@ -4174,7 +4224,11 @@ isroll组件
         confirm : confirm,
         popover : popover,
         loading : loading,
-        actionsheet : actionsheet
+        actionsheet : actionsheet,
+        /*
+        添加星火定制的菜单选择控件 wuzhifeng 2017-05-11
+         */
+        actionsheet2: actionsheet2
     }
 })(Zepto);
 /**

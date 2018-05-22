@@ -87,72 +87,145 @@ export default {
     onConfirm () {
       this.saveCurrentStep(this.currentStep)
       this.$store.commit(SET_QMBASE64, '')
-      if (this.isAdd === '1') {
-        
+      if (this.isAdd === '1') {        
         let data = JSON.stringify(this.$store.getters.GetterRecord)
-        console.log(data)
-        this.$http({
-          url: this.$store.getters.GetterBaseUrl + 'api/Records/AddRecordDetail',
-          method: 'POST',
-          emulateJSON: true,
-          body: {
-            jsonBean: data
-          },
-          headers: {
-            contentType: 'application/x-www-form-urlencoded',
+        if(isProxy){
+          let headers = {
             token: this.$store.getters.GetterToken
           }
-        }).then(function (res) {
-          console.log(res)
-          if (res.data.code === 100) {
-            this.recordNo = res.data.recNo
-            this.success()
-          } else {
+          let headerdata = JSON.stringify(headers)
+          let body = {
+            jsonbean: data
+          }
+          let bodydata = JSON.stringify(body)
+          xh.get(_url + '/api/Records/AddRecordDetail',
+            {
+              headerParameter: headerdata,
+              bodyEntity: bodydata
+            },
+            function(res){
+              let ret = eval("(" + res + ")")
+              if (ret.returnValue.code === 100) {
+                this.recordNo = ret.returnValue.recNo
+                this.success()
+              } else {
+                this.$vux.toast.show({
+                  text: ret.returnValue.message,
+                  type: 'warn'
+                })
+                this.disableSub = false
+              }
+            }, 
+            function (err) {
+              console.log(err)
+              this.$vux.toast.show({
+                text: err,
+                type: 'warn'
+              })
+              this.disableSub = false
+            })
+        }else{
+          this.$http({
+            url: this.$store.getters.GetterBaseUrl + 'api/Records/AddRecordDetail',
+            method: 'POST',
+            emulateJSON: true,
+            body: {
+              jsonBean: data
+            },
+            headers: {
+              contentType: 'application/x-www-form-urlencoded',
+              token: this.$store.getters.GetterToken
+            }
+          }).then(function (res) {
+            console.log(res)
+            if (res.data.code === 100) {
+              this.recordNo = res.data.recNo
+              this.success()
+            } else {
+              this.$vux.toast.show({
+                text: res.data.message,
+                type: 'warn'
+              })
+              this.disableSub = false
+            }
+          }).catch(err => {
+            console.log(err)
             this.$vux.toast.show({
-              text: res.data.message,
+              text: err,
               type: 'warn'
             })
             this.disableSub = false
-          }
-        }).catch(err => {
-          console.log(err)
-          this.$vux.toast.show({
-            text: err,
-            type: 'warn'
           })
-          this.disableSub = false
-        })
+        }
+        
       } else {
         let data = JSON.stringify(this.$store.getters.GetterRecord)
-        this.$http({
-          url: this.$store.getters.GetterBaseUrl + 'api/Records/UpdateRecordDetail',
-          method: 'PUT',
-          emulateJSON: true,
-          body: {
-            jsonBean: data
-          },
-          headers: {
-            contentType: 'application/x-www-form-urlencoded',
+        if(isProxy){
+          let headers = {
             token: this.$store.getters.GetterToken
           }
-        }).then(function (res) {
-          if (res.data.code === 100) {
-            this.recordNo = res.data.recNo
-            this.success()
-          } else {
+          let headerdata = JSON.stringify(headers)
+          let body = {
+            jsonbean: data
+          }
+          let bodydata = JSON.stringify(body)
+          xh.get(_url + '/api/Records/UpdateRecordDetail',
+            {
+              headerParameter: headerdata,
+              bodyEntity: bodydata
+            },
+            function(res){
+              let ret = eval("(" + res + ")")
+              if (ret.returnValue.code === 100) {
+                this.recordNo = ret.returnValue.recNo
+                this.success()
+              } else {
+                this.$vux.toast.show({
+                  text: ret.returnValue.message,
+                  type: 'warn'
+                })
+                this.disableSub = false
+              }
+            }, 
+            function (err) {
+              console.log(err)
+              this.$vux.toast.show({
+                text: err,
+                type: 'warn'
+              })
+              this.disableSub = false
+            })
+        }else{
+          this.$http({
+            url: this.$store.getters.GetterBaseUrl + 'api/Records/UpdateRecordDetail',
+            method: 'POST',
+            emulateJSON: true,
+            body: {
+              jsonBean: data
+            },
+            headers: {
+              contentType: 'application/x-www-form-urlencoded',
+              token: this.$store.getters.GetterToken
+            }
+          }).then(function (res) {
+            if (res.data.code === 100) {
+              this.recordNo = res.data.recNo
+              this.success()
+            } else {
+              this.$vux.toast.show({
+                text: res.data.message,
+                type: 'warn'
+              })
+              this.disableSub = false
+            }
+          }).catch(err => {
             this.$vux.toast.show({
-              text: res.data.message,
+              text: err,
               type: 'warn'
             })
             this.disableSub = false
-          }
-        }).catch(err => {
-          this.$vux.toast.show({
-            text: err,
-            type: 'warn'
           })
-          this.disableSub = false
-        })
+        }
       }
     },
     success () {
@@ -226,14 +299,10 @@ export default {
           this.$store.commit(SET_LOC, loc)
           break
         case 3:
-          let fileList = []
-          this.$refs.chiledContent.completeNames.forEach(function (item) {
-            if (item.file_url !== '') {
-              let tmp = item
-              fileList.push(tmp)
-            }
-          })
-          this.$store.commit(SET_RECORDFILES, fileList)
+          // let fileList = []
+          
+          //alert(JSON.stringify(this.$refs.chiledContent.uploaderFiles))
+          this.$store.commit(SET_RECORDFILES, this.$refs.chiledContent.uploaderFiles)
           break
         case 4:
           let entity4 = {
@@ -269,6 +338,7 @@ export default {
       this.currentStep = n
       this.$router.push({name: 'Step' + n, query: {isAdd: this.isAdd}})
     }
+
   },
   data () {
     return {

@@ -4,86 +4,38 @@
       <x-img v-bind:src="onGetFile(oriFile.file_url)" class="preview" :offset="1000"></x-img>
       <cell v-bind:title="onRenderFileType(oriFile.file_type)" v-bind:value="oriFile.file_hint"></cell>
     </div>
-    <group>
-      <cell title="本次已上传图像:  ">{{alreadyPicNum}}  张</cell>
-    </group>
-    <x-hr></x-hr>    
-    <vue-file-upload v-bind:url="renderUrl()" ref="vueFileUploader1" v-bind:filters = "filters" label ='选择现场方位'
-    v-bind:events = 'cbEvents'
-    v-bind:request-options = "reqopts" v-on:onAdd = "onAddFile1"  class='uploadbutton' ></vue-file-upload>
-    <div v-for='(file1,index) in files1'>
+    <img class="preview" src="" id="test"/>
+    <x-hr></x-hr>
+    <x-button type="primary" @click.native="showSelection = true" >增加照片</x-button>
+    <div v-for='(file, index) in uploaderFiles'>
       <group>
-        <x-img v-bind:src="onPreView(file1)" class="preview"></x-img>
-        <x-button type="warn" mini @click.native="onCancelFile(file1,index,$event)" >取消该图片</x-button>
-        <x-input title="图片说明:" :debounce="500" placeholder="请填写说明" @on-change="onChangePicHint($event,file1)" text-align='right' class="input-hint"></x-input>
+        <img class="preview" :src="file.file_path"/>
+        <x-img v-bind:src="file.file_path" class="preview"></x-img>
+        <x-button type="warn" mini @click.native="onCancelFile(index,$event)" >取消该图片</x-button>
+        <x-input title="图片说明:" :debounce="500" placeholder="请填写说明" @on-change="onChangePicHint($event,index)" text-align='right' v-bind:value="file.file_hint" class="input-hint"></x-input>
         <br>
         <checker
-          default-item-class="demo5-item" @on-change="onChangePicType($event,file1)"
-          selected-item-class="demo5-item-selected" value="2001" >
+          default-item-class="demo5-item" @on-change="onChangePicType($event,index)"
+          selected-item-class="demo5-item-selected" v-bind:value="file.file_type" >
             <checker-item value="2001">现场方位</checker-item>
-            <checker-item value="2002" disabled >现场概貌</checker-item>
-            <checker-item value="2003" disabled >重点部位</checker-item>
+            <checker-item value="2002" >现场概貌</checker-item>
+            <checker-item value="2003" >重点部位</checker-item>
         </checker>
-        <br>
-        <x-progress v-bind:percent='file1.progress' :show-cancel="false"></x-progress>
-        <cell title="" v-bind:value="onStatus(file1)"></cell>
       </group>
     </div>
-    <x-hr></x-hr>
-    <vue-file-upload v-bind:url="renderUrl()" ref="vueFileUploader2" v-bind:filters = "filters" label ='选择现场概貌'
-    v-bind:events = 'cbEvents' v-bind:request-options = "reqopts" v-on:onAdd = "onAddFile2" class='uploadbutton' ></vue-file-upload>
-    <div v-for='(file2,index) in files2'>
-      <group>
-        <x-img v-bind:src="onPreView(file2)" class="preview"></x-img>
-        <x-button type="warn" mini @click.native="onCancelFile(file2,index,$event)" >取消该图片</x-button>
-        <x-input title="图片说明:" :debounce="500" placeholder="请填写说明" @on-change="onChangePicHint($event,file2)" text-align='right' class="input-hint"></x-input>
-        <br>
-        <checker
-          default-item-class="demo5-item" @on-change="onChangePicType($event,file2)"
-          selected-item-class="demo5-item-selected" value="2002" >
-            <checker-item value="2001" disabled>现场方位</checker-item>
-            <checker-item value="2002"  >现场概貌</checker-item>
-            <checker-item value="2003" disabled >重点部位</checker-item>
-        </checker>
-        <br>
-        <x-progress v-bind:percent='file2.progress' :show-cancel="false"></x-progress>
-        <cell title="" v-bind:value="onStatus(file2)"></cell>
-      </group>
-    </div>
-    <x-hr></x-hr>
-    <vue-file-upload v-bind:url="renderUrl()" ref="vueFileUploader3" v-bind:filters = "filters" label ='选择重点部位'
-    v-bind:events = 'cbEvents' v-bind:request-options = "reqopts" v-on:onAdd = "onAddFile3" class='uploadbutton' ></vue-file-upload>
-    <div v-for='(file3,index) in files3'>
-      <group>
-        <x-img v-bind:src="onPreView(file3)" class="preview"></x-img>
-        <x-button type="warn" mini @click.native="onCancelFile(file3,index,$event)" >取消该图片</x-button>
-        <x-input title="图片说明:" :debounce="500" placeholder="请填写说明" @on-change="onChangePicHint($event,file3)" text-align='right' class="input-hint"></x-input>
-        <br>
-        <checker
-          default-item-class="demo5-item" @on-change="onChangePicType($event,file3)"
-          selected-item-class="demo5-item-selected" value="2003" >
-            <checker-item value="2001" disabled>现场方位</checker-item>
-            <checker-item value="2002" disabled >现场概貌</checker-item>
-            <checker-item value="2003"  >重点部位</checker-item>
-        </checker>
-        <br>
-        <x-progress v-bind:percent='file3.progress' :show-cancel="false"></x-progress>
-        <cell title="" v-bind:value="onStatus(file3)"></cell>
-      </group>
-    </div>
+    <actionsheet v-model="showSelection" :menus="menusForChooseFile" @on-click-menu="getFile" show-cancel></actionsheet>
+    
   </div>
 </template>
 
 <script>
-import { Group, XInput, XSwitch, PopupPicker, XHr, XButton, Flexbox, FlexboxItem, XProgress, Cell, XImg, Checker, CheckerItem } from 'vux'
-import VueFileUpload from 'vue-file-upload'
+import { Group, XInput, XSwitch, PopupPicker, XHr, XButton, Flexbox, FlexboxItem, XProgress, Cell, XImg, Checker, CheckerItem, Actionsheet } from 'vux'
 
 export default {
   components: {
     Group,
     XInput,
-    PopupPicker,
-    VueFileUpload,
+    PopupPicker,    
     XHr,
     XButton,
     Flexbox,
@@ -93,137 +45,239 @@ export default {
     Cell,
     Checker,
     CheckerItem,
-    XSwitch
+    XSwitch,
+    Actionsheet
   },
-  computed: {
-    alreadyPicNum: function () {
-      var num = 0
-      this.completeNames.forEach(function (item) {
-        if (item.file_url !== '') {
-          num++
-        }
-      })
-      return num
-    }
+  computed: {    
   },
   mounted: function () {
     this.isAdd = this.$route.query.isAdd
-    if (~(this.isAdd)) {
+    if ((this.isAdd)) {
       this.$vux.loading.show({
         text: '读取文件列表'
       })
       this.getOriFiles()
     }
-    let tmp = []
-    if (this.$store.getters.GetterFileList.length !== 0) {
-      this.$store.getters.GetterFileList.forEach(function (item) {
-        let tt = item
-        tmp.push(tt)
-      })
-    }
-    this.completeNames = tmp
-    this.files1 = []
-    this.files2 = []
-    this.files3 = []
+    this.uploaderFiles = this.$store.getters.GetterFileList
+    var saveDirectory = "PBSFiles"
+    this.getSavePath(saveDirectory)
   },
   methods: {
-    fetchXcT () {
-      //Cordova.exec(this.onSuccess, this.onError, 'Interactive', 'shotMapInfo', [])
-      
+//     getFile()
+//     {
+//         navigator.camera.getPicture(function(imageURI) {
+//                     window.resolveLocalFileSystemURI(imageURI, function(fileEntry) {
+//                         fileEntry.file(function(fileObj) {
+//                             uploadTest(fileObj);
+//                         });
+//                     });
+//                 },
+//                 function(message) {
+// //                    alert('get picture failed');
+//                 },
+//                 {
+//                     quality: 50,
+//                     targetWidth: 400,
+//                     targetHeight: 500,
+//                     destinationType: navigator.camera.DestinationType.FILE_URI,
+//                     sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+//                 }
+//         );
+//     },
+    getSavePath (saveDirectory) {
+        app.getAppDirectoryEntry(function(res){
+        //区分平台，并将相应的目录保存到全局,方便下面下载的时候使用
+    //            alert(JSON.stringify(res));     //wangxi
+            if(window.devicePlatform=="android"){
+                this.savePath = res.sdcard + "/" + saveDirectory;
+            }
+        });
     },
-    fetchZxxcT () {
-      //Cordova.exec(this.onSuccess, this.onError, 'Interactive', 'shotMapInfo', [])
-    },
-    onXctSuccess: function (result) {
-      alert('ok:' + result)
-      console.log(result.shot_picture_path)
-      
-      //var fileName = this.$store.getters.GetterEntity.uuid + '.png'
-      //var fd = new FormData()
-      //fd.append(fileName, blob)
-      //uploadFile(fd)
-    },
-    onXctError: function (result) {
-      alert('error' + result)
-    },
-    uploadFile(file) {
-      this.$http({
-          url: this.$store.getters.GetterBaseUrl + 'api/Files/singleUpload',
-          method: 'POST',
-          body: file,
-          headers: {
-            contentType: 'application/x-www-form-urlencoded',
-            token: this.$store.getters.GetterToken
-          }
-        }).then(function (res) {
-          if (res.status === 200) {
+    getFile (type) {
+      console.log(type)
+      if(type === 'fromPhotos'){
 
-            this.$router.push({name: 'Step4',query: {isAdd: this.isAdd, curStep: 4}})
-            //this.success()
-          } else {
-            this.$vux.toast.show({
-              text: res.data.message,
-              type: 'warn'
-            })
-            this.disableSave = false
-          }
-        }).catch(err => {
-          this.$vux.toast.show({
-            text: err,
-            type: 'warn'
-          })
-          this.disableSave = false
+        // var params = {"action" : "choice_file_activity"}
+        // //var params2 = {"action" : "xinghuo_back_camera_activity"}
+
+        // app.szgaplugin.startActivityForResult(params, this.addFile, function (err) {
+        //     //alert(JSON.stringify(err));
+        // })
+        navigator.camera.getPicture(addFile, getFileError, {
+            quality: 100,
+            //targetWidth: 600,
+            //targetHeight: 1000,
+            destinationType: navigator.camera.DestinationType.FILE_URI,
+            sourceType: 0,
+            encodingType: navigator.camera.EncodingType.JPEG
         })
-    },
-    renderUrl () {
-      return this.$store.getters.GetterBaseUrl + 'api/Files/singleUpload'
-    },
-    onStatus (file) {
-      if (file.isSuccess) {
-        return '上传成功'
-      } else if (file.isError) {
-        return '上传失败'
-      } else if (file.isUploading) {
-        return '正在上传'
-      } else {
-        return '待上传'
+      }else if(type === 'takePhotos') {
+        navigator.camera.getPicture(addFile, getFileError, {
+            quality: 100,
+            //targetWidth: 600,
+            //targetHeight: 1000,
+            destinationType: navigator.camera.DestinationType.FILE_URI,
+            sourceType: navigator.camera.PictureSourceType.CAMERA,
+            encodingType: navigator.camera.EncodingType.JPEG
+        })    
       }
+    },
+    addFile (res) {
+      //var ret = eval("(" + res + ")")
+        //getPlateInfo(ret)
+        var arr = res.split('/')
+        var file = {
+          file_name : arr[arr.length-1],
+          file_path : res,
+          file_url: '',
+          file_hint : 'fsdfsdf',
+          file_type : '2001'
+        }
+      //测试图像显示
+      var image = document.getElementById('test')
+      image.src = res
+      alert(ret.file_path)
+
+      this.uploaderFiles.push(file)
+      var options = new FileUploadOptions();
+      options.fileKey = file.file_name;     //用于设置参数，服务端的Request字串
+      options.fileName = file.file_name;    //希望文件存储到服务器所用的文件名
+      options.mimeType = "image/jpeg";  //图片格式
+
+      var uri = encodeURI(_url + '/api/Files/MutilUpload')
+      this.$vux.loading.show({
+        text: '文件上传中'
+      })
+      xh.uploadFile(fileEntry.fullPath,uri,uploadOK,onFail,options)        
+        
+    },
+    getFileError (err) {
+        //alert(JSON.stringify(err));
+    },
+    uploadOK (msg) {
+        alert(JSON.stringify(msg))
+        app.hint("上传图片成功!")
+        var data = eval("(" + msg.response + ")")
+
+        // var Pfname = data.obj[0].pfname
+        // imgName = Pfname.substr(Pfname.lastIndexOf('/') + 1)
+        // this.uploaderFiles[this.uploaderFiles.length-1].file_url = imgName
+
+        //mediaFiles.substr(mediaFiles.lastIndexOf('/') + 1)
+        this.$vux.loading.hide()
+    },
+    onFail(err) {
+        app.hint("上传图片失败!");
+        alert(JSON.stringify(err));
+        this.$vux.loading.hide()
     },
     getOriFiles () {
       let uuid = this.$store.getters.GetterEntity.uuid
-      this.$http({
-        url: this.$store.getters.GetterBaseUrl + 'api/Files/GetFileList',
-        method: 'GET',
-        emulateJSON: true,
-        params: {
-          uuid: uuid
-        },
-        headers: {
-          contentType: 'application/x-www-form-urlencoded',
-          token: this.$store.getters.GetterToken
-        }
-      }).then(function (res) {
-        if (res.data.code === 100) {
-          this.oriFiles = res.data.resultList
-          this.$vux.loading.hide()
-        } else {
-          this.$vux.loading.hide()
-          this.$vux.toast.show({
-            text: res.data.message,
-            type: 'warn'
+      if(isProxy){
+          let headers = {
+            token: this.$store.getters.GetterToken
+          }
+          let headerdata = JSON.stringify(headers)
+          
+          xh.get(_url + '/api/Files/GetFileList',
+            {
+              uuid: uuid,
+              headerParameter: headerdata
+            },
+            function(res){
+              let ret = eval("(" + res + ")")
+              if (ret.returnValue.code === 100) {
+                this.oriFiles = ret.returnValue.resultList
+                this.$vux.loading.hide()
+              } else {
+                this.$vux.loading.hide()
+                this.$vux.toast.show({
+                  text: ret.returnValue.message,
+                  type: 'warn'
+                })
+              }
+            }, 
+            function (err) {
+              this.$vux.loading.hide()
+              this.$vux.toast.show({
+                text: err,
+                type: 'warn'
+              })
+            })
+        }else{
+          this.$http({
+            url: this.$store.getters.GetterBaseUrl + 'api/Files/GetFileList',
+            method: 'GET',
+            emulateJSON: true,
+            params: {
+              uuid: uuid
+            },
+            headers: {
+              contentType: 'application/x-www-form-urlencoded',
+              token: this.$store.getters.GetterToken
+            }
+          }).then(function (res) {
+            if (res.data.code === 100) {
+              this.oriFiles = res.data.resultList
+              this.$vux.loading.hide()
+            } else {
+              this.$vux.loading.hide()
+              this.$vux.toast.show({
+                text: res.data.message,
+                type: 'warn'
+              })
+            }
+          }).catch(err => {
+            this.$vux.loading.hide()
+            this.$vux.toast.show({
+              text: err,
+              type: 'warn'
+            })
           })
         }
-      }).catch(err => {
-        this.$vux.loading.hide()
-        this.$vux.toast.show({
-          text: err,
-          type: 'warn'
-        })
-      })
+    },
+    uploadTest(filePath){
+        var options = new FileUploadOptions();
+        options.fileKey = "uploadFile";     //用于设置参数，服务端的Request字串
+        options.fileName = "testPicture2.jpg";    //希望文件存储到服务器所用的文件名
+        options.mimeType = "image/jpeg";  //图片格式
+        // + "?APP_URL=" + "http://10.42.0.235:9001/myProject/myServlet" + "?"
+      //  var uri = encodeURI("http://10.42.0.235:9001/myProject/myServlet"); //接收上传图片的地址
+        var uri = encodeURI(_url + '/api/Files/MutilUpload')
+            options.chunkedMode = false;  //如果上传的文件大小未知时，必须带上此参数，否则后台无法获取文件流
+//            var uri = encodeURI("http://172.28.0.56:9001/myProject/myServlet" + "?loginId=123&APP_URL=" + _url + "/testApp/uploadTest");  //接收上传图片的地址
+
+        var params = new Object();    //通过HTTP请求发送到服务器的一系列可选键/值对。（对象类型）
+//        params.APP_URL = "http://10.42.0.235:9001/myProject/myServlet?loginId=123&id=222";    //自定义参数
+        options.params = params;
+
+        app.hint("上传 : " + fileEntry.fullPath);
+//            app.hint("上传" + uri);
+        
+        xh.uploadFile(fileEntry.fullPath,uri,uploadOK,onFail,options);
+        function uploadOK(msg){
+            alert(JSON.stringify(msg));
+            app.hint("上传图片成功!");
+            var data = eval("(" + msg.response + ")");
+            var Pfname = data.obj[0].pfname
+            imgName = Pfname.substr(Pfname.lastIndexOf('/') + 1);
+            //mediaFiles.substr(mediaFiles.lastIndexOf('/') + 1)
+        }
+        function onFail(err) {
+            app.hint("上传图片失败!");
+            alert(JSON.stringify(err));
+        }
+
     },
     onGetFile (fileUrl) {
       let picUrl = this.$store.getters.GetterBaseUrl + 'api/GetFile?fileName=' + fileUrl + '&uuid=' + this.$store.getters.GetterEntity.uuid
-      return picUrl
+      //xh.get()
+      if(isProxy){
+
+      }else{
+        
+        return picUrl
+      }      
     },
     onRenderFileType (type) {
       switch (type) {
@@ -239,110 +293,24 @@ export default {
           return '其他'
       }
     },
-    onBtnStatus (file) {
-      if (file.isSuccess) {
-        return true
-      } else if (file.isUploading) {
-        return true
-      } else {
-        return false
-      }
+    onChangePicHint (val, index) {
+      this.uploaderFiles[index].file_hint = val        
     },
-    onPreView (file) {
-      let src = window.URL.createObjectURL(file.file)
-      return src
+    onChangePicType (val, index) {
+      this.uploaderFiles[index].file_type = val
     },
-    onCancelFile (file, index, event) {
-      event.target.parentElement.parentElement.style.display = 'none'
-      let cplnIndex = 0
-      for (let i = 0; i < this.completeNames.length; i++) {
-        if (this.completeNames[i] === file.file.name) {
-          cplnIndex = i
-          break
-        }
-      }
-      this.completeNames.splice(cplnIndex, 1)
-      file.remove()
-    },
-    onAddFile1 (files) {
-      this.completeNames.forEach(function (item) {
-        if (item.file_name === files[files.length - 1].file.name) {
-          item.file_type = 2001
-        }
-      })
-      this.files1.push(files[files.length - 1])
-    },
-    onAddFile2 (files) {
-      this.completeNames.forEach(function (item) {
-        if (item.file_name === files[files.length - 1].file.name) {
-          item.file_type = 2002
-        }
-      })
-      this.files2.push(files[files.length - 1])
-    },
-    onAddFile3 (files) {
-      this.completeNames.forEach(function (item) {
-        if (item.file_name === files[files.length - 1].file.name) {
-          item.file_type = 2003
-        }
-      })
-      this.files3.push(files[files.length - 1])
-    },
-    uploadItem (file) {
-      // 单个文件上传
-      file.upload()
-    },
-    deleteItem (file) {
-      file.remove()
-    },
-    onChangePicHint (val, file) {
-      this.completeNames.forEach(function (item) {
-        if (item.file_name === file.file.name) {
-          item.file_hint = val
-        }
-      })
-    },
-    onChangePicType (val, file) {
-      this.completeNames.forEach(function (item) {
-        if (item.file_name === file.file.name) {
-          item.file_type = val[0]
-        }
-      })
-    },
-    updateResponseInfo (file, fileUrl) {
-      /*
-      this.completeNames.forEach(function (item) {
-        if (item.file_name === file.file.name) {
-          item.file_url = fileUrl
-        }
-      })
-      */
-      this.completeNames.every(function (item) {
-        if (item.file_name === file.file.name && item.file_url === '') {
-          item.file_url = fileUrl
-          return false
-        } else {
-          return true
-        }
-      })
-    },
-    onUploadFiles () {
-      // 上传所有文件
-      this.$refs.vueFileUploader1.uploadAll()
-      // this.$refs.vueFileUploader2.uploadAll()
-      // this.$refs.vueFileUploader3.uploadAll()
-    }
   },
   data () {
     return {
-      testName: 'TTT',
       isAdd: true,
-      btnstate: false,
-      completeNames: [],
-      oriFiles: [],
-      files1: [],
-      files2: [],
-      files3: [],
+      uploaderFiles: [],      
+      oriFiles: [],     
+      showSelection: false,
+      menusForChooseFile: {
+        fromPhotos: '从相册选择',
+        takePhotos: '拍照'
+      },
+      savePath: '',
       typeList: [[{
         value: '2001',
         name: '现场方位'
@@ -362,44 +330,7 @@ export default {
       {
         value: '2005',
         name: '其他'
-      }]],
-      // 文件过滤器，只能上传图片
-      filters: [
-        {
-          name: 'imageFilter',
-          fn (file) {
-            var type = '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|'
-            return '|jpg|png|jpeg|bmp|gif|tif|'.indexOf(type) !== -1
-          }
-        }
-      ],
-      cbEvents: {
-        onCompleteUpload: (file, response, status, header) => {
-          if (status === 200) {
-            this.updateResponseInfo(file, response.file)
-          }
-        },
-        onAddFileSuccess: (file) => {
-          let fileName = file.file.name
-          this.completeNames.push({
-            file_name: fileName,
-            file_url: '',
-            file_hint: '',
-            file_type: 0
-          })
-          this.testName += file.file.name
-          this.onUploadFiles()
-        }
-      },
-      // xhr请求附带参数
-      reqopts: {
-        headers: {
-          token: this.$store.getters.GetterToken
-          // token: '6a8a77de-4e2d-449b-9b98-7d4e7b4fab5a'
-        },
-        responseType: 'json',
-        withCredentials: false
-      }
+      }]]      
     }
   }
 }

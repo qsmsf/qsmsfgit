@@ -225,35 +225,68 @@ import { SET_QMBASE64 } from '../mutationTypes'
         //req.send(form)
         var fileName = this.$store.getters.GetterEntity.uuid + '.png'
         var fd = new FormData();
+
         fd.append(fileName, blob);//fileData为自定义    
-        
-        this.$http({
-          url: this.$store.getters.GetterBaseUrl + 'api/Files/singleUpload',
-          method: 'POST',
-          body: fd,
-          headers: {
-            contentType: 'application/x-www-form-urlencoded',
+        console.log(blob)
+        if(isProxy){
+          let headers = {
             token: this.$store.getters.GetterToken
           }
-        }).then(function (res) {
-          if (res.status === 200) {
-
-            this.$router.push({name: 'Step4',query: {isAdd: this.isAdd, curStep: 4}})
-            //this.success()
-          } else {
+          let headerdata = JSON.stringify(headers)
+          
+          xh.postFile(_url + '/api/Files/singleUpload',
+          {
+            headerParameter: headerdata,
+            bodyEntity: fd
+          },
+          function(res){
+            if (res.data.code === 100) {
+              this.recList = res.data.resultList
+              this.$refs.recordScroller.donePulldown()
+            } else {
+              this.$vux.toast.show({
+                text: res.data.message,
+                type: 'warn'
+              })
+              this.$refs.recordScroller.donePulldown()
+            }
+          }, 
+          function (res) {
             this.$vux.toast.show({
-              text: res.data.message,
+              text: err,
+              type: 'warn'
+            })
+            this.$refs.recordScroller.donePulldown()
+          })        
+        }else{
+          this.$http({
+            url: this.$store.getters.GetterBaseUrl + 'api/Files/singleUpload',
+            method: 'POST',
+            body: fd,
+            headers: {
+              contentType: 'application/x-www-form-urlencoded',
+              token: this.$store.getters.GetterToken
+            }
+          }).then(function (res) {
+            if (res.status === 200) {
+
+              this.$router.push({name: 'Step4',query: {isAdd: this.isAdd, curStep: 4}})
+              //this.success()
+            } else {
+              this.$vux.toast.show({
+                text: res.data.message,
+                type: 'warn'
+              })
+              this.disableSave = false
+            }
+          }).catch(err => {
+            this.$vux.toast.show({
+              text: err,
               type: 'warn'
             })
             this.disableSave = false
-          }
-        }).catch(err => {
-          this.$vux.toast.show({
-            text: err,
-            type: 'warn'
           })
-          this.disableSave = false
-        })
+        }
       },
       // 设置绘画配置
       setCanvasStyle () {

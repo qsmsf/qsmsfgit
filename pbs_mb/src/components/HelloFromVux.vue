@@ -61,7 +61,7 @@ import { SET_BASEINFO, SET_SYSINFO } from '../mutationTypes'
   }
 
   app.page.onError = function(err) {
-      alert(JSON.stringify(err));
+      //alert(JSON.stringify(err));
   }
   //页面所有元素加载完成后执行，deviceRready
   app.page.onLoad = function() {
@@ -91,29 +91,8 @@ import { SET_BASEINFO, SET_SYSINFO } from '../mutationTypes'
           }
 
 
-      }, false);
-      
-      //初始化
-      //initViews();
-      //获取下载文件存储路径
-      //getSavepath();
-  }
-  
-  
-  app.page.onLoad = function() {
-    /*
-    document.addEventListener("deviceready", function() {
-      document.addEventListener("backbutton", backFunc, false);
-    }, false);
-    ui.Menu.init({
-      sectionId: 'index_section',
-      duration: 200
-    });
-    $(document).click(function(){
-      $("#my_sonmenu").hide();
-    });
-    */
-  }
+      }, false)      
+  }  
 
 var md5 = require('js-md5')
 
@@ -144,64 +123,70 @@ export default {
         text: '登陆中'
       })
       var loginInfo = 'username=' + this.loginName + '&password=' + md5(this.password)
-      /*
-      this.$http({
-        url: this.$store.getters.GetterBaseUrl + 'Auth/Login?' + loginInfo,
-        method: 'Get',
-        emulateJSON: true,
-        headers: {
-          contentType: 'application/x-www-form-urlencoded'
-        }
-      }).then(function (res) {
-        // let data = JSON.parse(res.data)
-        if (res.data.code === 100) {
-          this.$store.commit(SET_BASEINFO, res.data)
-          this.$vux.loading.hide()
-          this.success()
-        } else {
-          this.$vux.loading.hide()
-          this.$vux.toast.show({
-            text: res.data.message,
-            type: 'warn'
-          })
-          this.disable001 = false
-        }
-      }).catch(err => {
-        this.$vux.loading.hide()
-        this.$vux.toast.show({
-          text: err,
-          type: 'warn'
-        })
-        this.disable001 = false
-      })
-      */
-
-      xh.get(door_url,
+      if(isProxy){
+      	xh.get(_url + "/Auth/Login", //+ loginInfo,
         {
-          APP_URL: _url + "Auth/Login?" + loginInfo
+          username: this.loginName,
+          password: md5(this.password)
         },
         function(res){
-          if (res.data.code === 100) {
-            this.$store.commit(SET_BASEINFO, res.data)
+          alert(JSON.stringify(res))
+          var ret = eval("(" + res + ")")
+
+          if (ret.returnValue.code === 100) {
+            this.$store.commit(SET_BASEINFO, ret.returnValue)
             this.$vux.loading.hide()
             this.success()
           } else {
             this.$vux.loading.hide()
             this.$vux.toast.show({
-              text: res.data.message,
+              text: ret.returnValue.message,
               type: 'warn'
             })
             this.disable001 = false
           }
         }, 
         function (res) {
+          alert(JSON.stringify(res))
           this.$vux.loading.hide()
           this.$vux.toast.show({
             text: res,
             type: 'warn'
-          })
+          })          
           this.disable001 = false
         })
+      }else{
+      	this.$http({
+	        url: this.$store.getters.GetterBaseUrl + 'Auth/Login?' + loginInfo,
+	        method: 'Get',
+	        emulateJSON: true,
+	        headers: {
+	          contentType: 'application/x-www-form-urlencoded'
+	        }
+	      }).then(function (res) {
+	        // let data = JSON.parse(res.data)
+	        if (res.data.code === 100) {
+	          this.$store.commit(SET_BASEINFO, res.data)
+	          this.$vux.loading.hide()
+	          this.success()
+	        } else {
+	          this.$vux.loading.hide()
+	          this.$vux.toast.show({
+	            text: res.data.message,
+	            type: 'warn'
+	          })
+	          this.disable001 = false
+	        }
+	      }).catch(err => {
+	        this.$vux.loading.hide()
+	        this.$vux.toast.show({
+	          text: err,
+	          type: 'warn'
+	        })
+	        this.disable001 = false
+	      })
+      }     
+      
     },
     success () {
       var mySelf = this

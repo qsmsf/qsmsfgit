@@ -365,30 +365,62 @@ export default {
       
       var fd = new FormData();
       fd.append(fileName, blob);//fileData为自定义    
-      
-      this.$http({
-        url: this.$store.getters.GetterBaseUrl + 'api/Files/singleUpload',
-        method: 'POST',
-        body: fd,
-        headers: {
-          contentType: 'application/x-www-form-urlencoded',
+      if(isProxy){
+        let headers = {
           token: this.$store.getters.GetterToken
         }
-      }).then(function (res) {
-        if (res.status === 200) {
-          alert("上传成功")
-        } else {
+        let headerdata = JSON.stringify(headers)
+        
+        xh.postFile(_url + '/api/Files/singleUpload',
+        {
+          headerParameter: headerdata,
+          bodyEntity: fd
+        },
+        function(res){
+          let ret = eval("(" + res + ")")
+          if (ret.returnValue.code === 100) {
+            this.recList = ret.returnValue.resultList
+            this.$refs.recordScroller.donePulldown()
+          } else {
+            this.$vux.toast.show({
+              text: ret.returnValue.message,
+              type: 'warn'
+            })
+            this.$refs.recordScroller.donePulldown()
+          }
+        }, 
+        function (err) {
           this.$vux.toast.show({
-            text: res.data.message,
+            text: err,
             type: 'warn'
-          })          
-        }
-      }).catch(err => {
-        this.$vux.toast.show({
-          text: err,
-          type: 'warn'
+          })
+          this.$refs.recordScroller.donePulldown()
+        })        
+      }else{
+        this.$http({
+          url: this.$store.getters.GetterBaseUrl + 'api/Files/singleUpload',
+          method: 'POST',
+          body: fd,
+          headers: {
+            contentType: 'application/x-www-form-urlencoded',
+            token: this.$store.getters.GetterToken
+          }
+        }).then(function (res) {
+          if (res.status === 200) {
+            alert("上传成功")
+          } else {
+            this.$vux.toast.show({
+              text: res.data.message,
+              type: 'warn'
+            })          
+          }
+        }).catch(err => {
+          this.$vux.toast.show({
+            text: err,
+            type: 'warn'
+          })
         })
-      })
+      }
     },
     onChangeBhrName (value) {
       this.bhrName = value[0]

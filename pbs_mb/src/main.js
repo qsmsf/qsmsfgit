@@ -31,8 +31,12 @@ Vue.use(LocalePlugin)
 FastClick.attach(document.body)
 
 /* eslint-disable no-new */
+document.addEventListener('deviceready', function() {
+
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app-box')
+window.navigator.splashscreen.hide()
+}, false);

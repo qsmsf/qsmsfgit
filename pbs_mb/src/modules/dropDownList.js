@@ -63,51 +63,94 @@ const mutations = {
 
 const actions = {
   'fetchUserList': function (store, params) {
-    Vue.http({
-      url: params.baseUrl + 'api/Users/GetUserList',
-      method: 'Get',
-      emulateJSON: true,
-      params: {
-        myUnitId: params.myUnitId
+    if(isProxy) {
+      let headers = {
+        token: this.$store.getters.GetterToken
+      }
+      xh.get(_url + '/api/Users/GetUserList?myUnitId='+params.myUnitId,
+      {
+        headerParameter: headerdata
       },
-      headers: {
-        contentType: 'application/x-www-form-urlencoded',
-        token: params.token
-      }
-    }).then(function (res) {
-      // console.log(res.data)
-      // let data = JSON.parse(res.data)
-      if (res.data.code === 100) {
-        store.commit(SET_USERLIST, res.data.resultList)
-      } else {
-        console.log(res.data.message)
-      }
-    }).catch(err => {
-      console.log(err)
-    })
+      function(res){
+        if (res.data.code === 100) {
+          store.commit(SET_USERLIST, res.data.resultList)
+        } else {
+          alert(JSON.stringify(res.data.message))
+        }
+      }, 
+      function (res) {
+        alert(JSON.stringify(res))
+        console.log(res)
+      })      
+    }else {
+      Vue.http({
+        url: params.baseUrl + 'api/Users/GetUserList',
+        method: 'Get',
+        emulateJSON: true,
+        params: {
+          myUnitId: params.myUnitId
+        },
+        headers: {
+          contentType: 'application/x-www-form-urlencoded',
+          token: params.token
+        }
+      }).then(function (res) {
+        // console.log(res.data)
+        // let data = JSON.parse(res.data)
+        if (res.data.code === 100) {
+          store.commit(SET_USERLIST, res.data.resultList)
+        } else {
+          console.log(res.data.message)
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    }
   },
   'fetchUnitList': function (store, params) {
-    Vue.http({
-      url: params.baseUrl + 'api/Unit/GetUnitList',
-      method: 'Get',
-      emulateJSON: true,
-      params: {
-        myUnitId: params.myUnitId
+    if(isProxy) {
+      let headers = {
+        token: this.$store.getters.GetterToken
+      }
+      xh.get(_url + '/api/Unit/GetUnitList?myUnitId='+params.myUnitId,
+      {
+        headerParameter: headerdata
       },
-      headers: {
-        contentType: 'application/x-www-form-urlencoded',
-        token: params.token
-      }
-    }).then(function (res) {
-      // let data = JSON.parse(res.data)
-      if (res.data.code === 100) {
-        store.commit(SET_UNITLIST, res.data.resultList)
-      } else {
-        console.log(res.data.message)
-      }
-    }).catch(err => {
-      console.log(err)
-    })
+      function(res){
+        if (res.data.code === 100) {
+          store.commit(SET_USERLIST, res.data.resultList)
+        } else {
+          alert(JSON.stringify(res.data.message))
+        }
+      }, 
+      function (res) {
+        alert(JSON.stringify(res))
+        console.log(res)
+      })
+    }else{
+      Vue.http({
+        url: params.baseUrl + 'api/Unit/GetUnitList',
+        method: 'Get',
+        emulateJSON: true,
+        params: {
+          myUnitId: params.myUnitId
+        },
+        headers: {
+          contentType: 'application/x-www-form-urlencoded',
+          token: params.token
+        }
+      }).then(function (res) {
+        // let data = JSON.parse(res.data)
+        if (res.data.code === 100) {
+          store.commit(SET_UNITLIST, res.data.resultList)
+        } else {
+          console.log(res.data.message)
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+    
   },
   'clearList': function (store) {
     store.commit(CLR_LIST)
