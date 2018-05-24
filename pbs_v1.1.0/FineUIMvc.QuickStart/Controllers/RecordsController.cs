@@ -331,7 +331,7 @@ namespace FineUIMvc.QuickStart.Controllers
                 //record.uuid = Guid.NewGuid().ToString();
                 record.create_time = DateTime.Now;
                 record.creater_id = Global.loginInfo.user_id;
-                record.record_state = 1002;
+                record.record_state = 1004;
                 record.record_title = record.fs_loc + record.xc_loc + "-" + record.xz;
                 db.pbs_record.Add(record);
                 db.SaveChanges();
@@ -518,7 +518,7 @@ namespace FineUIMvc.QuickStart.Controllers
                 {
                     reason = "";
                 }
-                reason = reason.PadRight(340);
+                reason = reason.PadRight(340-reason.ToCharArray().Length);
                 
                 word.InsertText(reason);
 
@@ -555,7 +555,7 @@ namespace FineUIMvc.QuickStart.Controllers
                 {
                     loc = record.fs_loc + record.xc_loc;
                 }
-                loc = loc.PadRight(182);
+                loc = loc.PadRight(190-loc.ToCharArray().Length);
                 
                 word.InsertText(loc);
 
@@ -694,7 +694,7 @@ namespace FineUIMvc.QuickStart.Controllers
                 word.InsertText(record.zhr_pos);
 
                 word.GotoBookMark("xc_disp");             
-                word.InsertText(record.xc_disp.PadRight(1330));
+                word.InsertText(record.xc_disp.PadRight(1400));
                                 
                 word.GotoBookMark("blr");
                 string blr = record.blr_name;
@@ -804,17 +804,18 @@ namespace FineUIMvc.QuickStart.Controllers
                             title += "中心现场方位示意图";
                             markHint = "案发位置";
                         }
+
                         g.DrawString(title, titlefont, sbrush, new PointF(300, 200));
-                        g.DrawString(markHint, titlefont, sbrush, new PointF(2600, 1300));
+                        g.DrawString(markHint, titlefont, sbrush, new PointF(2600, 1150));
 
                         if (record.xc_loc.Length > 12)
                         {
-                            g.DrawString(record.xc_loc.Substring(0,12), minicontentfont, sbrush, new PointF(2600, 1870));
+                            g.DrawString(record.xc_loc.Substring(0,12), minicontentfont, sbrush, new PointF(2600, 1770));
                             g.DrawString(record.xc_loc.Substring(12), minicontentfont, sbrush, new PointF(2600, 1830));
                         }
                         else
                         {
-                            g.DrawString(record.xc_loc, titlefont, sbrush, new PointF(2600, 1800));
+                            g.DrawString(record.xc_loc, contentfont, sbrush, new PointF(2600, 1800));
                         }                       
                         
                         g.DrawString(record.bj_time.Value.ToString("yyyy年MM月dd日 HH时mm分"), contentfont, sbrush, new PointF(2600, 1900));
@@ -826,7 +827,7 @@ namespace FineUIMvc.QuickStart.Controllers
                         }
                         else
                         {
-                            g.DrawString(record.unit_full_name, titlefont, sbrush, new PointF(2600, 1800));
+                            g.DrawString(record.unit_full_name, contentfont, sbrush, new PointF(2600, 2030));
                         }
 
                         g.DrawString(record.ztr_name, contentfont, sbrush, new PointF(2600, 2150));
@@ -989,7 +990,7 @@ namespace FineUIMvc.QuickStart.Controllers
 
             if (ModelState.IsValid)
             {
-                record.record_state = 1002;
+                record.record_state = 1004;
                 record.record_title = record.fs_loc + record.xc_loc + "-" + record.xz;
                 db.pbs_record.Attach(record);
                 var stateEntity = ((IObjectContextAdapter)db).ObjectContext.ObjectStateManager.GetObjectStateEntry(record);
